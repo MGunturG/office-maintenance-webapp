@@ -132,7 +132,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 											<div class="form-group">
 												<label>Barang Bermasalah</label>
 												<select name="ticket_itemid" class="choices form-select" required>
-													<option>-- pilih barang --</option>
+													<option value="">--- Pilih Barang ---</option>
 													<?php foreach ($data_item as $item): ?>
 														<?php
 														$location = $_Area->AreaDetail($item['item_master_area_id']);

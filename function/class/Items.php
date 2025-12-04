@@ -50,5 +50,12 @@ class Items {
 			"SELECT * FROM item_master WHERE item_master_area_id = '$area_id'"
 		);
 	}
+
+
+	function ItemGetAllCategory() {
+		return get_data(
+			"SELECT * FROM code_master WHERE code_master_category = 'item_category'"
+		);
+	}
 }
 ?>

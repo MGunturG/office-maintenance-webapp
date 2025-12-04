@@ -19,6 +19,9 @@ $data_item = $_Item->ItemGetAll();
 // get all area data
 $data_area = $_Area->AreaGetAll();
 
+// get all item category
+$data_item_category = $_Item->ItemGetAllCategory();
+
 // insert new item to db table
 if (isset($_POST['create_item_Submit'])) {
 	$submit_data = $_Item->ItemCreate(
@@ -139,7 +142,7 @@ if (isset($_POST['create_item_Submit'])) {
 											<div class="form-group">
 												<label>lokasi</label>
 												<select name="item_area_id" class="choices form-select">
-													<option value="">-- pilih lokasi --</option>
+													<option value="">-- Pilih Lokasi --</option>
 													<?php foreach ($data_area as $area): ?>
 														<option value="<?php echo htmlspecialchars($area['area_master_id']); ?>"><?php echo htmlspecialchars($area['area_master_name'] . " - " . "Lantai " . $area['area_master_floor']); ?></option>
 													<?php endforeach ?>
@@ -149,19 +152,20 @@ if (isset($_POST['create_item_Submit'])) {
 											<div class="form-group">
 												<label>kategori</label>
 												<select name="item_category" class="choices form-select">
-													<option value="">-- pilih kategori --</option>
-													<option value="listrik">kelistrikan</option>
-													<option value="plumbing">plumbing</option>
+													<option value="">--- Pilih Kategori ---</option>
+													<?php foreach ($data_item_category as $category): ?>
+														<option value="<?= $category['code_master_code'] ?>"><?= $category['code_master_label'] ?></option>
+													<?php endforeach ?>
 												</select>
 											</div>
 
 											<div class="form-group"	>
 												<label>status</label>
 												<select name="item_status" class="choices form-select">
-													<option value="">-- pilih status ---</option>
-													<option value="1" selected>aktif</option>
-													<option value="0">non-aktif</option>
-													<option value="2">dispose</option>
+													<option value="">--- Pilih Status ---</option>
+													<option value="1" selected>Aktif</option>
+													<option value="0">Non-aktif</option>
+													<option value="2">Dispose</option>
 												</select>
 											</div>
 										</div>

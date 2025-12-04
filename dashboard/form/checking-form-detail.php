@@ -11,6 +11,10 @@ if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
 }
 
+if (!$_GET['id']) {
+	header("location:checking-form-page.php");
+}
+
 $_Area = new Areas;
 $_Item = new Items;
 $_Form = new Forms;
