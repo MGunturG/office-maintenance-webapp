@@ -34,6 +34,28 @@ class Tickets {
 	}
 
 
+	function TicketDetail($ticket_id) {
+		return get_single_data(
+			"SELECT * FROM ticket_master WHERE ticket_master_id = '$ticket_id'"
+		);
+	}
+
+
+	function TicketAddComment($ticket_id, $comment_content, $comment_by) {
+		run_query(
+			"INSERT INTO ticket_detail (ticket_detail_master_id, ticket_detail_comment, ticket_detail_commentby) ".
+			"VALUES ('$ticket_id', '$comment_content', '$comment_by')"
+		);
+	}
+
+
+	function TicketGetComment($ticket_id) {
+		return get_data(
+			"SELECT ticket_detail_comment, ticket_detail_commentby, ticket_detail_commenttime FROM ticket_detail WHERE ticket_detail_master_id = '$ticket_id' ORDER BY ticket_detail_commenttime DESC"
+		);
+	}
+
+
 	function TicketGetAll() {
 		return get_data(
 			"SELECT * FROM ticket_master"

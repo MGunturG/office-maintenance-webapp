@@ -36,6 +36,9 @@ if (isset($_POST['create_ticket_Submit'])) {
 
 	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
 
+	// create initial comment
+	$_Ticket->TicketAddComment($insert_id, "Created new ticket!", $_SESSION['user_uname']);
+
 	echo "<script>document.location.href = 'ticket-detail.php?id=$insert_id';</script>"; exit;
 }
 ?>

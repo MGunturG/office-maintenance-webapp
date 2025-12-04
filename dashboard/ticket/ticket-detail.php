@@ -3,17 +3,39 @@ session_start();
 
 require '../../config.php';
 include '../../function/db-query.php';
+include_once '../../function/class/Tickets.php';
+include_once '../../function/class/Users.php';
+include_once '../../function/class/Items.php';
+include_once '../../function/class/Areas.php';
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
 }
 
+// redirect if no id given
 if (!$_GET['id']) {
 	header("location:ticket-page.php");
 }
 
+$_Item = new Items;
+$_User = new Users;
+$_Area = new Areas;
+$_Ticket = new Tickets;
+
+$data_user = $_User->UserGetAll();
+$data_ticket = $_Ticket->TicketDetail($_GET['id']);
+$data_item = $_Item->ItemDetail($data_ticket['ticket_master_item_id']);
+$data_comment = $_Ticket->TicketGetComment($_GET['id']);
+
+
+$location = $_Area->AreaDetail($data_item['item_master_area_id']);
+$location = $location['area_master_name'] . " - " . "Lantai " . $location['area_master_floor'];
+
+
+// comment submit
 if (isset($_POST['comment_Submit'])) {
-	echo ($_POST['comment_content']);
+	$_Ticket->TicketAddComment($_GET['id'], $_POST['comment_content'], $_SESSION['user_uname']);
+	header("location:ticket-detail.php?id=".$_GET['id']);
 }
 
 ?>
@@ -57,40 +79,46 @@ if (isset($_POST['comment_Submit'])) {
 												<div class="form-group">
 													<label>User</label>
 													<select class="form-control">
-														<option value=""></option>
-														<option value=""></option>
+														<option value="">--- Pilih User ---</option>
+														<?php foreach ($data_user as $user): ?>
+															<option value="<?= $user['user_master_uname'] ?>" 
+																<?php echo ($data_ticket['ticket_master_currentholder'] == $user['user_master_uname']) ? "selected":""; ?>
+																><?= $user['user_master_uname'] ?></option>
+														<?php endforeach ?>
 													</select>
 												</div>
 
 												<div class="form-group">
 													<label>Status</label>
 													<select class="form-control">
-														<option value="0">Open</option>
-														<option value="1">Closed</option>
+														<option value="">--- Status Tiket ---</option>
+														<option value="0" <?php echo ($data_ticket['ticket_master_status'] == '0') ? "selected":""; ?>>Open</option>
+														<option value="1" <?php echo ($data_ticket['ticket_master_status'] == '1') ? "selected":""; ?>>Closed</option>
 													</select>
 												</div>
 
 												<div class="form-group">
 													<label>Nama Barang</label>
-													<input type="text" class="form-control" value="xxx"readonly="readonly">
+													<input type="text" class="form-control" value="<?= $data_item['item_master_name']." [".$location."]" ?>"readonly="readonly">
 												</div>
 
 												<div class="form-group">
 													<label>Permasalahan</label>
-													<input type="text" class="form-control" value="xxx"readonly="readonly">
+													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_topic'] ?>"readonly="readonly">
 												</div>
 
 												<div class="form-group">
 													<label>Deskripsi</label>
-													<textarea class="form-control" readonly="readonly"></textarea>
+													<textarea class="form-control" readonly="readonly" rows="10"><?= $data_ticket['ticket_master_description'] ?></textarea>
 												</div>
 
 												<div class="form-group">
 													<label>Tanggal Efektif</label>
-													<input type="text" class="form-control" value="xxx"readonly="readonly">
+													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_effdate'] ?>"readonly="readonly">
 												</div>
-
+												<?php if ($data_ticket['ticket_master_status'] == '0'): ?>
 												<button type="submit" name="create_item_Submit" class="btn btn-primary me-1 mb-1">Simpan</button>
+												<?php endif ?>
 											</div>
 										</div>
 									</div>
@@ -101,9 +129,10 @@ if (isset($_POST['comment_Submit'])) {
 						<div class="col-12 col-lg-9">
 							<div class="card">
 								<div class="card-header">
-									<h4>Tambah Komentar</h4>
+									<h4>Komentar</h4>
 								</div>
 
+								<?php if ($data_ticket['ticket_master_status'] == '0'): ?>
 								<div class="card-body">
 									<div class="form-body">
 										<div class="row">
@@ -114,54 +143,32 @@ if (isset($_POST['comment_Submit'])) {
 														<div id="comment_editor">
 										                </div>
 													</div>
-
-													<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1">Simpan</button>
+													<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1">Tambah Komentar</button>
 												</form>
 											</div>
 										</div>
 									</div>
 								</div>
+								<?php endif ?>
 
 								<!-- loop comment di sini -->
+								<?php foreach ($data_comment as $comment): ?>
+									
 								<div class="card-body">
 									<div class="form-body">
 										<div class="row">
 											<div class="col">
 												<!-- isi comment di sini -->
 												<div class="divider divider-left">
-						                            <div class="divider-text">USER commented on xx/xx/xxxx</div>
+						                            <div class="divider-text"><?php echo $comment['ticket_detail_commentby']." memberikan komentar pada ".$comment['ticket_detail_commenttime'] ?></div>
 						                        </div>
-						                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						                        <?= $comment['ticket_detail_comment'] ?>
 						                        <hr>
 											</div>
 										</div>
 									</div>
 								</div>
-
-								<div class="card-body">
-									<div class="form-body">
-										<div class="row">
-											<div class="col">
-												<!-- isi comment di sini -->
-												<div class="divider divider-left">
-						                            <div class="divider-text">USER commented on xx/xx/xxxx</div>
-						                        </div>
-						                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						                        <hr>
-											</div>
-										</div>
-									</div>
-								</div>
+								<?php endforeach ?>
 
 							</div>
 						</div>
