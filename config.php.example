@@ -1,0 +1,15 @@
+<?php
+// database config
+define('DB_SERVER', 'db_ipaddress');
+define('DB_UNAME', 'db_username');
+define('DB_PASSW', 'db_password');
+define('DB_NAME', 'db_name');
+
+$db_connection = mysqli_connect(DB_SERVER, DB_UNAME, DB_PASSW, DB_NAME);
+if (!$db_connection) {
+        die("db connect failed: ") . mysqli_connect_error();
+}
+
+// file path config
+define('BASE_URL', '/root_folder_name');
+?>

@@ -1,0 +1,1 @@
+<script src="<?php echo BASE_URL; ?>/assets/static/js/initTheme.js"></script>
