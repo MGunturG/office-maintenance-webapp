@@ -145,16 +145,17 @@ if (isset($_POST['form_redraft_Submit'])) {
 													</tr>
 												</thead>
 												<tbody>
+													<?php $i = 1; ?>
 													<?php foreach ($data_item_form as $item_form): ?>
 														<?php $item_detail = $_Item->ItemDetail($item_form['checkingform_detail_item_id']) ?>
 														<tr>
-															<td>1</td>
+															<td><?= $i ?></td>
 															<td><?= $item_detail['item_master_name'] ?></td>
 															<?php if ($form_status != 1): ?>
 																<td><a href="checking-form-detail-rm.php?item_id=<?= $item_detail['item_master_id']?>&&form_id=<?= $form_master_id ?>">Hapus</a></td>
 															<?php endif ?>
 														</tr>
-													<?php endforeach ?>
+													<?php $i++; endforeach ?>
 												</tbody>
 											</table>
 											<?php if ($form_status != 1): ?>
@@ -175,7 +176,7 @@ if (isset($_POST['form_redraft_Submit'])) {
             <!-- modal form pengecekan -->
             <form method="POST">
 				<div class="modal fade text-left" id="modal_add_form_item" tabindex="-1" role="dialog">
-	                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+	                <div class="modal-dialog modal-dialog-scrollable" role="document">
 	                    <div class="modal-content">
 	                        <div class="modal-header">
 	                            <h5 class="modal-title">Tambah Barang</h5>
