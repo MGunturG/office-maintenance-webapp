@@ -38,6 +38,13 @@ class Items {
 	}
 
 
+	function ItemUpdateStatus($item_id, $item_status) {
+		run_query(
+			"UPDATE item_master SET item_master_status = '$item_status' WHERE item_master_id = '$item_id'"
+		);
+	}
+
+
 	function ItemGetAll() {
 		return get_data(
 			"SELECT * FROM item_master"
@@ -45,9 +52,19 @@ class Items {
 	}
 
 
-	function ItemGetAllByAreaId($area_id) {
+	function ItemGetAllByAreaId($area_id, $item_status = 1) {
+		/* default for variable for $item_status is 1
+		 * meaning, this function by default will 
+		 * query all item that has status 1 (active)
+		 * unless, $item_status overide by another value
+		 *
+		 * 0 = inactive
+		 * 1 = active
+		 * 2 = dispose
+		 * 3 = maintenance 
+		 */
 		return get_data(
-			"SELECT * FROM item_master WHERE item_master_area_id = '$area_id'"
+			"SELECT * FROM item_master WHERE item_master_area_id = '$area_id' AND item_master_status = '$item_status'"
 		);
 	}
 
