@@ -26,7 +26,11 @@ $data_ticket = $_Ticket->TicketGetAll();
 
 $current_date = date('Y-m-d');
 
+// ticket submit
 if (isset($_POST['create_ticket_Submit'])) {
+	// set selected item status to maintenance
+	$_Item->ItemUpdateStatus($_POST['ticket_itemid'], 3);
+
 	$_Ticket->TicketCreate(
 		$_POST['ticket_topic'],
 		$_POST['ticket_description'],
@@ -34,12 +38,9 @@ if (isset($_POST['create_ticket_Submit'])) {
 		$_POST['ticket_effdate']
 	);
 
-	// set selected item status to maintenance
-	$_Item->ItemUpdateStatus($_POST['ticket_itemid'], 3);
-
 	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
 
-	echo "<script>document.location.href = 'ticket-detail.php?id=$insert_id';</script>"; exit;
+	header("location:ticket-detail.php?id=".$insert_id);
 }
 ?>
 <!DOCTYPE html>
@@ -119,7 +120,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 			<!-- modal create new ticket -->
 			<form method="POST">
 				<div class="modal fade text-left" id="modal_add_area" tabindex="-1" role="dialog">
-	                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+	                <div class="modal-dialog modal-dialog-scrollable" role="document">
 	                    <div class="modal-content">
 	                        <div class="modal-header">
 	                            <h5 class="modal-title">Buat Tiket Maintenance</h5>
