@@ -195,6 +195,10 @@ if (isset($_POST['create_ticket_Submit'])) {
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#tickets_table", {
+			responsive: true,
+			rowReorder: {
+				selector: 'td:nth-child(3)'
+			},
 			order: [
 				[4, 'desc'],
 				[1, 'desc'],

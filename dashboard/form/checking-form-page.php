@@ -80,6 +80,7 @@ if (isset($_POST['create_form_Submit'])) {
 										<table id="forms_table" class="table table-striped">
 											<thead>
 												<tr>
+													<!-- <th>No.</th> -->
 													<th>From ID</th>
 													<th>Tanggal</th>
 													<th>Area</th>
@@ -89,9 +90,11 @@ if (isset($_POST['create_form_Submit'])) {
 												</tr>
 											</thead>
 											<tbody>
+												<!-- <?php $i=1; ?> -->
 												<?php foreach ($data_form as $form): ?>
 													<?php $location = $_Area->AreaDetail($form['checkingform_master_area_id']); ?>
 												<tr>
+													<!-- <td><?= $i ?></td> -->
 													<td><a href="<?php echo htmlspecialchars("checking-form-detail.php?id=".$form['checkingform_master_id']) ?>">CHECKFORM<?= $form['checkingform_master_id'] ?></a></td>
 													<td><?php echo htmlspecialchars($form['checkingform_master_effdate']) ?></td>
 													<td><?php echo htmlspecialchars('Lantai '.$location['area_master_floor']. ' - ' .$location['area_master_name']) ?></td>
@@ -103,7 +106,7 @@ if (isset($_POST['create_form_Submit'])) {
 														<td><span class="badge bg-warning">Draft</span></td>
 													<?php endif ?>
 												</tr>
-												<?php endforeach ?>
+												<?php $i++; endforeach ?>
 											</tbody>
 										</table>
 									</div>
@@ -186,6 +189,10 @@ if (isset($_POST['create_form_Submit'])) {
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#forms_table", {
+			responsive: true,
+			rowReorder: {
+				selector: 'td:nth-child(3)'
+			},
 			order: [
 				[5, 'asc'],
 				[1, 'desc'],

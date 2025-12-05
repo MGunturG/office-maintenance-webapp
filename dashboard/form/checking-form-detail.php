@@ -151,9 +151,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 														<tr>
 															<td><?= $i ?></td>
 															<td><?= $item_detail['item_master_name'] ?></td>
-															<?php if ($form_status != 1): ?>
-																<td><a href="checking-form-detail-rm.php?item_id=<?= $item_detail['item_master_id']?>&&form_id=<?= $form_master_id ?>">Hapus</a></td>
-															<?php endif ?>
+															<td><a href="checking-form-detail-rm.php?item_id=<?= $item_detail['item_master_id']?>&&form_id=<?= $form_master_id ?>"><?php echo ($form_status!=1) ? "Hapus" : "" ?></a></td>
 														</tr>
 													<?php $i++; endforeach ?>
 												</tbody>
@@ -236,7 +234,7 @@ if (isset($_POST['form_redraft_Submit'])) {
         </div>
     </div>
 
-	<script>
+	<!-- <script>
 		let dataTable = new simpleDatatables.DataTable(
 			  document.getElementById("forms_table"),
 			  {
@@ -252,6 +250,24 @@ if (isset($_POST['form_redraft_Submit'])) {
 			  	paging: false,
 			  }
 			);
+	</script> -->
+
+	<script>
+		let dataTable_1 = new DataTable("#forms_table", {
+			responsive: true,
+			language: {
+				lengthMenu: " _MENU_ per halaman",
+				search: "Cari: ",
+			}
+		});
+
+		let dataTable_2 = new DataTable("#forms_item", {
+			responsive: true,
+			language: {
+				lengthMenu: " _MENU_ per halaman",
+				search: "Cari: ",
+			}
+		});
 	</script>
 
 	<!-- js -->

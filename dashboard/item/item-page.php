@@ -201,6 +201,10 @@ if (isset($_POST['create_item_Submit'])) {
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#items_table", {
+			responsive: true,
+			rowReorder: {
+				selector: 'td:nth-child(3)'
+			},
 			language: {
 				lengthMenu: " _MENU_ per halaman"
 			}

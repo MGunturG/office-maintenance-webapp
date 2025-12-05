@@ -143,6 +143,10 @@ if (isset($_POST['create_new_user_Submit'])) {
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#users_table", {
+			responsive: true,
+			rowReorder: {
+				selector: 'td:nth-child(3)'
+			},
 			language: {
 				lengthMenu: " _MENU_ per halaman"
 			}
