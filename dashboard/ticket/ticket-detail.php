@@ -160,7 +160,7 @@ if (isset($_POST['comment_Submit'])) {
 											<div class="col">
 												<!-- isi comment di sini -->
 												<div class="divider divider-left">
-						                            <div class="divider-text"><?php echo $comment['ticket_detail_commentby']." memberikan komentar pada ".$comment['ticket_detail_commenttime'] ?></div>
+						                            <div class="divider-text"><?php echo "<b>".$comment['ticket_detail_commentby']."</b>"." memberikan komentar pada ".$comment['ticket_detail_commenttime'] ?></div>
 						                        </div>
 						                        <?= $comment['ticket_detail_comment'] ?>
 						                        <hr>

@@ -103,7 +103,7 @@ if (isset($_POST['create_new_user_Submit'])) {
 								</div>
 								<div class="card-content">
 									<div class="card-body">
-										<table id="users_table" class="table table-hover">
+										<table id="users_table" class="table table-striped">
 											<thead>
 												<tr>
 													<th>User ID</th>
@@ -134,10 +134,19 @@ if (isset($_POST['create_new_user_Submit'])) {
 		</div>
 	</div>
 
-	<script>
+	<!-- <script>
 		let dataTable = new simpleDatatables.DataTable(
 			  document.getElementById("users_table")
 			);
+	</script> -->
+
+	<!-- datatables -->
+	<script>
+		let dataTable = new DataTable("#users_table", {
+			language: {
+				lengthMenu: " _MENU_ per halaman"
+			}
+		});
 	</script>
 	<!-- js -->
 	<?php include("../../../layout/javascript.php") ?>

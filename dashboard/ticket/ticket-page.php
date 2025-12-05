@@ -34,10 +34,10 @@ if (isset($_POST['create_ticket_Submit'])) {
 		$_POST['ticket_effdate']
 	);
 
-	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
+	// set selected item status to maintenance
+	$_Item->ItemUpdateStatus($_POST['ticket_itemid'], 3);
 
-	// create initial comment
-	$_Ticket->TicketAddComment($insert_id, "Created new ticket!", $_SESSION['user_uname']);
+	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
 
 	echo "<script>document.location.href = 'ticket-detail.php?id=$insert_id';</script>"; exit;
 }
@@ -81,7 +81,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 								<!-- tabel -->
 								<div class="card-content">
 									<div class="card-body">
-										<table id="tickets_table" class="table table-hover">
+										<table id="tickets_table" class="table table-striped">
 											<thead>
 												<tr>
 													<!-- <th>No</th> -->
@@ -183,13 +183,27 @@ if (isset($_POST['create_ticket_Submit'])) {
 		</div>
 	</div>
 
-	<script>
+	<<!-- script>
 		let dataTable = new simpleDatatables.DataTable(
 			  document.getElementById("tickets_table") ,{
 			  	searchable: false,
 			  	paging: false,
 			  }
 			);
+	</script> -->
+
+	<!-- datatables -->
+	<script>
+		let dataTable = new DataTable("#tickets_table", {
+			order: [
+				[4, 'desc'],
+				[1, 'desc'],
+			],
+
+			language: {
+				lengthMenu: " _MENU_ per halaman"
+			}
+		});
 	</script>
 
 	<!-- js -->

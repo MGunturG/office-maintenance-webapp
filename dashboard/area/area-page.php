@@ -67,7 +67,7 @@ if (isset($_POST['create_area_Submit'])) {
 								<!-- tabel -->
 								<div class="card-content">
 									<div class="card-body">
-										<table id="areas_table" class="table table-hover">
+										<table id="areas_table" class="table table-striped">
 											<thead>
 												<tr>
 													<!-- <th>No</th> -->
@@ -145,10 +145,19 @@ if (isset($_POST['create_area_Submit'])) {
 		</div>
 	</div>
 
-	<script>
+	<!-- <script>
 		let dataTable = new simpleDatatables.DataTable(
 			  document.getElementById("areas_table")
 			);
+	</script> -->
+
+	<!-- datatables -->
+	<script>
+		let dataTable = new DataTable("#areas_table", {
+			language: {
+				lengthMenu: " _MENU_ per halaman"
+			}
+		});
 	</script>
 
 	<!-- js -->

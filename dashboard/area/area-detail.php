@@ -205,10 +205,20 @@ if (isset($_POST['create_item_Submit'])) {
         </div>
     </div>
 
-    <script>
+    <<!-- script>
 		let dataTable = new simpleDatatables.DataTable(
 			  document.getElementById("items_table")
 			);
+	</script> -->
+
+	<!-- datatables -->
+	<script>
+		let dataTable = new DataTable("#items_table", {
+			language: {
+				lengthMenu: " _MENU_ per halaman",
+				search: "Cari: ",
+			}
+		});
 	</script>
     <!-- javascript -->
     <?php include("../../layout/javascript.php"); ?>

@@ -77,7 +77,7 @@ if (isset($_POST['create_form_Submit'])) {
 								<!-- tabel -->
 								<div class="card-content">
 									<div class="card-body">
-										<table id="forms_table" class="table table-hover">
+										<table id="forms_table" class="table table-striped">
 											<thead>
 												<tr>
 													<th>From ID</th>
@@ -170,10 +170,31 @@ if (isset($_POST['create_form_Submit'])) {
         </div>
     </div>
 
-	<script>
+    <!-- for simple datatables -->
+	<!-- <script>
 		let dataTable = new simpleDatatables.DataTable(
-			  document.getElementById("forms_table")
+			  document.getElementById("forms_table"), {
+			  	columns: [
+			  		{select: 5, sort: "asc"},
+			  		{select: 1, type: "date"},
+			  		{select: 3, sortable: false}
+			  	]
+			  }
 			);
+	</script> -->
+
+	<!-- datatables -->
+	<script>
+		let dataTable = new DataTable("#forms_table", {
+			order: [
+				[5, 'asc'],
+				[1, 'desc'],
+			],
+
+			language: {
+				lengthMenu: " _MENU_ per halaman"
+			}
+		});
 	</script>
 
 	<!-- js -->

@@ -78,7 +78,7 @@ if (isset($_POST['create_item_Submit'])) {
 								<!-- tabel -->
 								<div class="card-content">
 									<div class="card-body">
-										<table id="items_table" class="table table-hover">
+										<table id="items_table" class="table table-striped">
 											<thead>
 												<tr>
 													<th>Nama Barang</th>
@@ -103,7 +103,9 @@ if (isset($_POST['create_item_Submit'])) {
 														<?php elseif ($item['item_master_status'] == "0"): ?>
 															<td><span class="badge bg-danger">Inactive</span></td>
 														<?php elseif ($item['item_master_status'] == "2"): ?>
-															<td><span class="badge bg-warning">Disposed</span></td>
+															<td><span class="badge bg-secondary">Disposed</span></td>
+														<?php elseif ($item['item_master_status'] == "3"): ?>
+															<td><span class="badge bg-warning">Maintenance</span></td>
 														<?php endif ?>
 													</tr>
 												<?php endforeach ?>
@@ -190,10 +192,19 @@ if (isset($_POST['create_item_Submit'])) {
 	</div>
 
 	<!-- custom js -->
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		let dataTable = new simpleDatatables.DataTable(
 			  document.getElementById("items_table")
 			);
+	</script> -->
+
+	<!-- datatables -->
+	<script>
+		let dataTable = new DataTable("#items_table", {
+			language: {
+				lengthMenu: " _MENU_ per halaman"
+			}
+		});
 	</script>
 
 	<!-- js -->
