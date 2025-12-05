@@ -38,9 +38,14 @@ if (isset($_POST['create_ticket_Submit'])) {
 		$_POST['ticket_effdate']
 	);
 
-	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
+	// get last insert table id on last query 
+	// to database, the last query was creating
+	// ticket. sooooo, if running update item status
+	// after creating new ticket, the last id will be
+	// from table item status, not the ticket table
+	$ticket_id_that_just_created = mysqli_insert_id($db_connection); 
 
-	header("location:ticket-detail.php?id=".$insert_id);
+	header("location:ticket-detail.php?id=".$ticket_id_that_just_created);
 }
 ?>
 <!DOCTYPE html>
