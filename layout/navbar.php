@@ -13,7 +13,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-lg-0">
-                    <li class="nav-item dropdown me-1">
+                    <!-- <li class="nav-item dropdown me-1">
                         <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class='bi bi-envelope bi-sub fs-4'></i>
@@ -24,7 +24,8 @@
                             </li>
                             <li><a class="dropdown-item" href="#">No new mail</a></li>
                         </ul>
-                    </li>
+                    </li> -->
+                    
                     <li class="nav-item dropdown me-3">
                         <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                             <i class='bi bi-bell bi-sub fs-4'></i>
@@ -82,10 +83,10 @@
                         </li>
                         <li><a class="dropdown-item" href="<?= BASE_URL ?>/dashboard/admin/user/user-detail.php?id=<?= $_SESSION['user_id'] ?>"><i class="icon-mid bi bi-person me-2"></i> My
                                 Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                                Wallet</a></li>
+                        <!-- <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i> -->
+                                <!-- Settings</a></li> -->
+                        <!-- <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i> -->
+                                <!-- Wallet</a></li> -->
                         <li>
                             <hr class="dropdown-divider">
                         </li>

@@ -111,7 +111,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 											<div class="col">
 												<div class="form-group">
 													<label>PIC (Person-in-Charge)</label>
-													<select class="form-control">
+													<select class="form-control" disabled>
 														<option value="">--- Pilih PIC ---</option>
 														<?php foreach ($data_user as $user): ?>
 															<option value="<?= $user['user_master_uname'] ?>" 
@@ -123,7 +123,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 
 												<div class="form-group">
 													<label>Status</label>
-													<select class="form-control">
+													<select class="form-control" disabled>
 														<option value="">--- Status Tiket ---</option>
 														<option value="0" <?php echo ($data_ticket['ticket_master_status'] == '0') ? "selected":""; ?>>Open</option>
 														<option value="1" <?php echo ($data_ticket['ticket_master_status'] == '1') ? "selected":""; ?>>In Progress</option>
