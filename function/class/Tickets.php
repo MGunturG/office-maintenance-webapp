@@ -41,6 +41,13 @@ class Tickets {
 	}
 
 
+	function TicketUpdateStatus($ticket_id, $status_code) {
+		return run_query(
+			"UPDATE ticket_master SET ticket_master_status = '$status_code' WHERE ticket_master_id = '$ticket_id'"
+		);
+	}
+
+
 	function TicketAddComment($ticket_id, $comment_content, $comment_by) {
 		run_query(
 			"INSERT INTO ticket_detail (ticket_detail_master_id, ticket_detail_comment, ticket_detail_commentby) ".

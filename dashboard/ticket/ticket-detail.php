@@ -61,12 +61,12 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 	$status = get_single_data("SELECT code_master_label FROM code_master WHERE code_master_category = 'ticket_status' AND code_master_code = {$_POST['ticket_status_progress']}");
 	$status = $status['code_master_label'];
 	if ($_POST['ticket_status_progress'] == "4") { // 4 means ticket will be closed
-		// function to update ticket status
-		$_Ticket->TicketAddComment($_GET['id'], "Tiket <b>Closed</b> dengan remak: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']);
+		$_Ticket->TicketAddComment($_GET['id'], "Tiket <b>Closed</b> dengan remaks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	} else {
-		// function to update ticket status
-		$_Ticket->TicketAddComment($_GET['id'], ucfirst($_SESSION['user_uname'])." mengubah status tiket menjadi <b>$status</b> dengan remark: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']);
+		$_Ticket->TicketAddComment($_GET['id'], ucfirst($_SESSION['user_uname'])." mengubah status tiket menjadi <b>$status</b> dengan remarks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	}
 }
@@ -77,7 +77,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Tiket Pelaporan #</title>
+	<title>Tiket Pelaporan #TICKET<?= $_GET['id'] ?></title>
 
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/extensions/quill/quill.snow.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/extensions/quill/quill.bubble.css">

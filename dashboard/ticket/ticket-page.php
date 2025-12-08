@@ -113,7 +113,13 @@ if (isset($_POST['create_ticket_Submit'])) {
 													<td><?= $ticket['ticket_master_createby'] ?></td>
 													<?php if ($ticket['ticket_master_status'] == 0): ?>
 														<td><span class="badge bg-success">Open</span></td>
-													<?php else: ?>
+													<?php elseif ($ticket['ticket_master_status'] == 1): ?>
+														<td><span class="badge bg-info">In Progress</span></td>
+													<?php elseif ($ticket['ticket_master_status'] == 2): ?>
+														<td><span class="badge bg-warning">On Hold</span></td>
+													<?php elseif ($ticket['ticket_master_status'] == 3): ?>
+														<td><span class="badge bg-primary">Resolved</span></td>
+													<?php elseif ($ticket['ticket_master_status'] == 4): ?>
 														<td><span class="badge bg-primary">Closed</span></td>
 													<?php endif ?>
 												</tr>
