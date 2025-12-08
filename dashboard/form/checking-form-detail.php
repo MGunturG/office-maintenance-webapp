@@ -254,7 +254,11 @@ if (isset($_POST['form_redraft_Submit'])) {
 
 	<script>
 		let dataTable_1 = new DataTable("#forms_table", {
-			responsive: true,
+			responsive: {
+				details: {
+					display: DataTable.Responsive.display.childRowImmediate
+				}
+			},
 			language: {
 				lengthMenu: " _MENU_ per halaman",
 				search: "Cari: ",

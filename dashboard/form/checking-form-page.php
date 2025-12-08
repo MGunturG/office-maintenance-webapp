@@ -189,7 +189,11 @@ if (isset($_POST['create_form_Submit'])) {
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#forms_table", {
-			responsive: true,
+			responsive: {
+				details: {
+					display: DataTable.Responsive.display.childRowImmediate
+				}
+			},
 			rowReorder: {
 				selector: 'td:nth-child(3)'
 			},

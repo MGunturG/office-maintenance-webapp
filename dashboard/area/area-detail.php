@@ -214,7 +214,11 @@ if (isset($_POST['create_item_Submit'])) {
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#items_table", {
-			responsive: true,
+			responsive: {
+				details: {
+					display: DataTable.Responsive.display.childRowImmediate
+				}
+			},
 			rowReorder: {
 				selector: 'td:nth-child(3)'
 			},

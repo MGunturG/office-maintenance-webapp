@@ -154,7 +154,11 @@ if (isset($_POST['create_area_Submit'])) {
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#areas_table", {
-			responsive: true,
+			responsive: {
+				details: {
+					display: DataTable.Responsive.display.childRowImmediate
+				}
+			},
 			language: {
 				lengthMenu: " _MENU_ per halaman"
 			}
