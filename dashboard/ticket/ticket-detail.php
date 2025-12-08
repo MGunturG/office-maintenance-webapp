@@ -17,6 +17,24 @@ if (!$_GET['id']) {
 	header("location:ticket-page.php");
 }
 
+function name_monograph(string $name) {
+	$name = strtoupper($name);
+	if (strlen($name) <= 3) {
+		return ($name[0].$name[1]);
+	} else {
+		$name = explode(" ", $name);
+		if (count($name) < 2) {
+			return ($name[0][0].$name[0][1]);
+		} else {
+			$temp='';
+			for ($i=0; $i < count($name) ; $i++) {
+				$temp = $temp.$name[$i][0];
+			}
+			return $temp;
+		}
+	}
+}
+
 $_Item = new Items;
 $_User = new Users;
 $_Area = new Areas;
@@ -36,6 +54,21 @@ $location = $location['area_master_name'] . " - " . "Lantai " . $location['area_
 if (isset($_POST['comment_Submit'])) {
 	$_Ticket->TicketAddComment($_GET['id'], $_POST['comment_content'], $_SESSION['user_uname']);
 	header("location:ticket-detail.php?id=".$_GET['id']);
+}
+
+// update ticket status
+if (isset($_POST['update_ticket_progress_Submit'])) {
+	$status = get_single_data("SELECT code_master_label FROM code_master WHERE code_master_category = 'ticket_status' AND code_master_code = {$_POST['ticket_status_progress']}");
+	$status = $status['code_master_label'];
+	if ($_POST['ticket_status_progress'] == "4") { // 4 means ticket will be closed
+		// function to update ticket status
+		$_Ticket->TicketAddComment($_GET['id'], "Tiket <b>Closed</b> dengan remak: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		header("location:ticket-detail.php?id=".$_GET['id']);
+	} else {
+		// function to update ticket status
+		$_Ticket->TicketAddComment($_GET['id'], ucfirst($_SESSION['user_uname'])." mengubah status tiket menjadi <b>$status</b> dengan remark: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		header("location:ticket-detail.php?id=".$_GET['id']);
+	}
 }
 
 ?>
@@ -77,9 +110,9 @@ if (isset($_POST['comment_Submit'])) {
 										<div class="row">
 											<div class="col">
 												<div class="form-group">
-													<label>User</label>
+													<label>PIC (Person-in-Charge)</label>
 													<select class="form-control">
-														<option value="">--- Pilih User ---</option>
+														<option value="">--- Pilih PIC ---</option>
 														<?php foreach ($data_user as $user): ?>
 															<option value="<?= $user['user_master_uname'] ?>" 
 																<?php echo ($data_ticket['ticket_master_currentholder'] == $user['user_master_uname']) ? "selected":""; ?>
@@ -93,7 +126,10 @@ if (isset($_POST['comment_Submit'])) {
 													<select class="form-control">
 														<option value="">--- Status Tiket ---</option>
 														<option value="0" <?php echo ($data_ticket['ticket_master_status'] == '0') ? "selected":""; ?>>Open</option>
-														<option value="1" <?php echo ($data_ticket['ticket_master_status'] == '1') ? "selected":""; ?>>Closed</option>
+														<option value="1" <?php echo ($data_ticket['ticket_master_status'] == '1') ? "selected":""; ?>>In Progress</option>
+														<option value="2" <?php echo ($data_ticket['ticket_master_status'] == '2') ? "selected":""; ?>>On Hold</option>
+														<option value="3" <?php echo ($data_ticket['ticket_master_status'] == '3') ? "selected":""; ?>>Resolved</option>
+														<option value="4" <?php echo ($data_ticket['ticket_master_status'] == '4') ? "selected":""; ?>>Closed</option>
 													</select>
 												</div>
 
@@ -109,15 +145,15 @@ if (isset($_POST['comment_Submit'])) {
 
 												<div class="form-group">
 													<label>Deskripsi</label>
-													<textarea class="form-control" readonly="readonly" rows="10"><?= $data_ticket['ticket_master_description'] ?></textarea>
+													<textarea class="form-control" readonly="readonly" rows="5"><?= $data_ticket['ticket_master_description'] ?></textarea>
 												</div>
 
 												<div class="form-group">
 													<label>Tanggal Efektif</label>
 													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_effdate'] ?>"readonly="readonly">
 												</div>
-												<?php if ($data_ticket['ticket_master_status'] == '0'): ?>
-												<button type="submit" name="create_item_Submit" class="btn btn-primary me-1 mb-1">Simpan</button>
+												<?php if ($data_ticket['ticket_master_status'] != '4'): ?>
+												<button type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress">Update Status Tiket</button>
 												<?php endif ?>
 											</div>
 										</div>
@@ -132,7 +168,7 @@ if (isset($_POST['comment_Submit'])) {
 									<h4>Komentar</h4>
 								</div>
 
-								<?php if ($data_ticket['ticket_master_status'] == '0'): ?>
+								<?php if ($data_ticket['ticket_master_status'] != '4'): ?>
 								<div class="card-body">
 									<div class="form-body">
 										<div class="row">
@@ -160,7 +196,12 @@ if (isset($_POST['comment_Submit'])) {
 											<div class="col">
 												<!-- isi comment di sini -->
 												<div class="divider divider-left">
-						                            <div class="divider-text"><?php echo "<b>".$comment['ticket_detail_commentby']."</b>"." memberikan komentar pada ".$comment['ticket_detail_commenttime'] ?></div>
+						                            <div class="divider-text">
+						                            	<div class="avatar bg-warning me-3">
+							                            	<span class="avatar-content"><?= name_monograph($comment['ticket_detail_commentby']) ?></span>
+							                            </div>
+						                            	<?php echo "<b>".ucfirst($comment['ticket_detail_commentby'])."</b> ".$comment['ticket_detail_commenttime'] ?>
+						                            </div>
 						                        </div>
 						                        <?= $comment['ticket_detail_comment'] ?>
 						                        <hr>
@@ -175,6 +216,53 @@ if (isset($_POST['comment_Submit'])) {
 					</div>
 				</section>
             </div>
+
+            <!-- modal update ticket status -->
+			<form method="POST">
+				<div class="modal fade text-left" id="modal_update_ticket_progress" tabindex="-1" role="dialog">
+	                <div class="modal-dialog modal-dialog-scrollable" role="document">
+	                    <div class="modal-content">
+	                        <div class="modal-header">
+	                            <h5 class="modal-title">Update Status #TIKET<?= $_GET['id'] ?></h5>
+	                            <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+	                                aria-label="Close">
+	                                <i data-feather="x"></i>
+	                            </button>
+	                        </div>
+	                        <div class="modal-body">
+	                        	<div class="form-body">
+	                        		<div class="row">
+	                        			<div class="col">
+											<div class="form-group">
+												<label>Progress Tiket</label>
+												<select class="form-control" name="ticket_status_progress" required>
+													<option value="">--- Pilih Status Progress ---</option>
+													<option value="1">In Progress</option>
+													<option value="2">On Hold</option>
+													<option value="3">Resolved</option>
+													<option value="4">Closed</option>
+												</select>
+											</div>
+
+											<div class="form-group">
+												<label>Remarks</label>
+												<textarea name="ticket_status_comment" class="form-control" rows="5" required></textarea>
+											</div>
+
+										</div>
+									</div>
+	                        	</div>
+	                        </div>
+	                        <div class="modal-footer">
+	                        	<button type="submit" name="update_ticket_progress_Submit" class="btn btn-success me-1 mb-1">Update</button>
+	                            <button type="button" class="btn" data-bs-dismiss="modal">
+	                                Tutup
+	                            </button>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </form>
 
 
             <!-- footer -->

@@ -6,11 +6,13 @@ include '../../function/db-query.php';
 include_once "../../function/class/Tickets.php";
 include_once "../../function/class/Items.php";
 include_once "../../function/class/Areas.php";
+include_once "../../function/class/Users.php";
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
 }
 
+$_User = new Users;
 $_Ticket = new Tickets;
 $_Item = new Items;
 $_Area = new Areas;
@@ -24,6 +26,9 @@ $data_area = $_Area->AreaGetAll();
 // get all ticket data
 $data_ticket = $_Ticket->TicketGetAll();
 
+// get all users data
+$data_user = $_User->UserGetAll();
+
 $current_date = date('Y-m-d');
 
 // ticket submit
@@ -35,7 +40,8 @@ if (isset($_POST['create_ticket_Submit'])) {
 		$_POST['ticket_topic'],
 		$_POST['ticket_description'],
 		$_POST['ticket_itemid'],
-		$_POST['ticket_effdate']
+		$_POST['ticket_effdate'],
+		$_POST['ticket_pic']
 	);
 
 	// get last insert table id on last query 
@@ -162,6 +168,16 @@ if (isset($_POST['create_ticket_Submit'])) {
 												<label>Detail Masalah</label>
 												<textarea class="form-control" name="ticket_description" 
 												placeholder="Alasan detail mengapa perlu dibuatkan tiket maintenance untuk barang tersebut" required></textarea>
+											</div>
+
+											<div class="form-group">
+												<label>Penanggung Jawab</label>
+												<select name="ticket_pic" class="choices form-select" required>
+													<option value="">--- Pilih PIC ---</option>
+													<?php foreach ($data_user as $user): ?>
+														<option value="<?= $user['user_master_uname'] ?>"><?= $user['user_master_uname'] ?></option>
+													<?php endforeach ?>
+												</select>
 											</div>
 
 											<div class="form-group">

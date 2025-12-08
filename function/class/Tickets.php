@@ -1,7 +1,7 @@
 <?php
 
 class Tickets {
-	function TicketCreate($topic, $description, $item_id, $effective_date) {
+	function TicketCreate($topic, $description, $item_id, $effective_date, $pic) {
 		$create_by = $_SESSION['user_uname'];
 		$create_time = date('Y-m-d H:i:s');
 
@@ -22,7 +22,7 @@ class Tickets {
 				"ticket_master_currentholder, ".
 				"ticket_master_createby, ".
 				"ticket_master_createtime ".
-			") VALUES ('$topic', '$description', '$item_id', '$effective_date', '$status', '$create_by', '$create_by', '$create_time')"
+			") VALUES ('$topic', '$description', '$item_id', '$effective_date', '$status', '$pic', '$create_by', '$create_time')"
 		);
 
 		// sweetalert
