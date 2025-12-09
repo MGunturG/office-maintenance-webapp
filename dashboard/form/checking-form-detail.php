@@ -220,7 +220,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 		                        <div class="modal-footer">
 		                        	<button type="submit" name="form_add_item_Submit" class="btn btn-primary me-1 mb-1">Tambah</button>
 		                            <button type="button" class="btn me-1 mb-1" data-bs-dismiss="modal">
-		                                Batal
+		                                Tutup
 		                            </button>
 		                        </div>
 	                       </form>
