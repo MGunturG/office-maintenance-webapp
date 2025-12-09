@@ -157,9 +157,9 @@ if (isset($_POST['form_redraft_Submit'])) {
 												</tbody>
 											</table>
 											<?php if ($form_status != 1): ?>
-												<input type="submit" name="form_Submit" value="Simpan Form">
+												<input type="submit" name="form_Submit" value="Simpan Form" class="btn btn-primary">
 												<?php else: ?>
-												<input type="submit" name="form_redraft_Submit" value="Redraft Form">
+												<input type="submit" name="form_redraft_Submit" value="Redraft Form" class="btn btn-warning">
 											<?php endif ?>
 										</form>
 									</div>
