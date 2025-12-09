@@ -59,9 +59,14 @@ if (isset($_POST['comment_Submit'])) {
 // update ticket status
 if (isset($_POST['update_ticket_progress_Submit'])) {
 	$status = get_single_data("SELECT code_master_label FROM code_master WHERE code_master_category = 'ticket_status' AND code_master_code = {$_POST['ticket_status_progress']}");
+
 	$status = $status['code_master_label'];
+	
 	if ($_POST['ticket_status_progress'] == "4") { // 4 means ticket will be closed
-		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']);
+		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']); // set ticket status to close
+
+		$_Item->ItemUpdateStatus($data_item['item_master_id'], "1"); // update item status to active again
+
 		$_Ticket->TicketAddComment($_GET['id'], "Tiket <b>Closed</b> dengan remaks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	} else {
