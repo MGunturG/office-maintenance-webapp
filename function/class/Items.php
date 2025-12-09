@@ -38,6 +38,25 @@ class Items {
 	}
 
 
+	function ItemUpdateData($item_id, $item_name, $area_id, $item_category, $item_status) {
+		run_query(
+			"UPDATE item_master SET ".
+			"item_master_name = '$item_name', ".
+			"item_master_area_id = '$area_id', ".
+			"item_master_category = '$item_category', ".
+			"item_master_status = '$item_status' ".
+			"WHERE item_master_id = '$item_id'"
+		);
+
+		// sweetalert
+		$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
+		$_SESSION['alert_title'] = "Mantap!";
+		$_SESSION['alert_text'] = "Data Barang Berhasil Diperbarui";
+		$_SESSION['alert_icon'] = "success"; // success, question, error, warning, info
+		$_SESSION['alert_button_text'] = "OK";
+	}
+
+
 	function ItemUpdateStatus($item_id, $item_status) {
 		run_query(
 			"UPDATE item_master SET item_master_status = '$item_status' WHERE item_master_id = '$item_id'"
@@ -69,9 +88,22 @@ class Items {
 	}
 
 
+	function ItemGetById($item_id) {
+		return get_single_data(
+			"SELECT * FROM item_master WHERE item_master_id = '$item_id'"
+		);
+	}
+
+
 	function ItemGetAllCategory() {
 		return get_data(
 			"SELECT * FROM code_master WHERE code_master_category = 'item_category'"
+		);
+	}
+
+	function ItemGetAllStatus() {
+		return get_data(
+			"SELECT * FROM code_master WHERE code_master_category = 'item_status'"
 		);
 	}
 }

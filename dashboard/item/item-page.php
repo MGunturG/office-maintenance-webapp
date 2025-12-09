@@ -95,7 +95,7 @@ if (isset($_POST['create_item_Submit'])) {
 													$location = $location['area_master_name'] . " - " . "Lantai " . $location['area_master_floor'];
 													?>
 													<tr>
-														<td><?php echo htmlspecialchars($item['item_master_name']); ?></td>
+														<td><a href="<?php echo htmlspecialchars("item-detail.php?id=".$item['item_master_id']) ?>"><?= $item['item_master_name'] ?></a></td>
 														<td><?php echo htmlspecialchars($location); ?></td>
 														<td><?php echo htmlspecialchars($item['item_master_category']); ?></td>
 														<?php if ($item['item_master_status'] == "1"): ?>
