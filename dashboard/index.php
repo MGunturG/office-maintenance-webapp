@@ -2,6 +2,7 @@
 session_start();
 
 require "../config.php"; // every page need to load config.php
+include '../function/db-query.php';
 
 if (!$_SESSION['user_login_status']) {
     header("location:".BASE_URL."/login.php?status=not_login");

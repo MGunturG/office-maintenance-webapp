@@ -1,3 +1,6 @@
+<?php
+$open_ticket = get_data("SELECT * FROM ticket_master WHERE ticket_master_status = '0'");
+?>
 <header>
     <nav class="navbar navbar-expand navbar-light navbar-top">
         <div class="container-fluid">
@@ -30,37 +33,27 @@
                         <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                             <i class='bi bi-bell bi-sub fs-4'></i>
                             <!-- notification count -->
-                            <span class="badge badge-notification bg-danger">2</span>
+                            <span class="badge badge-notification bg-danger"><?= count($open_ticket) ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-center  dropdown-menu-sm-end notification-dropdown" aria-labelledby="dropdownMenuButton">
                             <li class="dropdown-header">
                                 <h6>Notifications</h6>
                             </li>
-                            <!-- item notif 1 -->
+                            <!-- item notif -->
+                            <?php foreach ($open_ticket as $ticket): ?>    
                             <li class="dropdown-item notification-item">
-                                <a class="d-flex align-items-center" href="#">
-                                    <div class="notification-icon bg-primary">
-                                        <i class="bi bi-cart-check"></i>
+                                <a class="d-flex align-items-center" href="<?= BASE_URL.'/dashboard/ticket/ticket-detail.php?id='.$ticket['ticket_master_id']."" ?>">
+                                    <div class="notification-icon bg-warning">
+                                        <i class="bi bi-clipboard-check"></i>
                                     </div>
                                     <div class="notification-text ms-4">
-                                        <p class="notification-title font-bold">Successfully check out</p>
-                                        <p class="notification-subtitle font-thin text-sm">Order ID #256</p>
+                                        <p class="notification-title font-bold">Tiket maintenance baru</p>
+                                        <p class="notification-subtitle font-thin text-sm">Tiket ID #<?= $ticket['ticket_master_id'] ?></p>
                                     </div>
                                 </a>
                             </li>
+                            <?php endforeach ?>
 
-                            <!-- item notif 2 -->
-                            <li class="dropdown-item notification-item">
-                                <a class="d-flex align-items-center" href="#">
-                                    <div class="notification-icon bg-success">
-                                        <i class="bi bi-file-earmark-check"></i>
-                                    </div>
-                                    <div class="notification-text ms-4">
-                                        <p class="notification-title font-bold">Homework submitted</p>
-                                        <p class="notification-subtitle font-thin text-sm">Algebra math homework</p>
-                                    </div>
-                                </a>
-                            </li>
                             <li>
                                 <p class="text-center py-2 mb-0"><a href="<?php echo BASE_URL; ?>/dashboard/notification.php">See all notification</a></p>
                             </li>

@@ -158,7 +158,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_effdate'] ?>"readonly="readonly">
 												</div>
 												<?php if ($data_ticket['ticket_master_status'] != '4'): ?>
-												<button type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress">Update Status Tiket</button>
+												<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress">Update Status Tiket</button>
 												<?php endif ?>
 											</div>
 										</div>
@@ -274,6 +274,21 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
             <?php include("../../layout/footer.php"); ?>
         </div>
     </div>
+
+    <?php
+	if ($_GET['action']=="respond") {
+		echo "<script>
+		        document.addEventListener('DOMContentLoaded', function() {
+		            var button = document.getElementById('update_ticket_button');
+		            if (button) {
+		                button.click();
+		            } else {
+		                console.error('Button not found');
+		            }
+		        });
+		    </script>";
+	}
+	?>
 
     <script src="<?php echo BASE_URL; ?>/assets/extensions/quill/quill.min.js"></script>
     <script>
