@@ -44,7 +44,7 @@ if (isset($_POST['create_item_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Master Data - Item</title>
+	<title>Pusat Data - Barang</title>
 
 	<!-- styling -->
     <?php include("../../layout/styling.php"); ?>

@@ -46,7 +46,7 @@ if (isset($_POST['update_item_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Detail Barang</title>
+	<title>Pusat Data - Detail Barang</title>
 
 	<!-- styling -->
 	<?php include("../../layout/styling.php") ?>

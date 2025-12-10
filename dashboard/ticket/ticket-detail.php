@@ -64,9 +64,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 	
 	if ($_POST['ticket_status_progress'] == "4") { // 4 means ticket will be closed
 		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']); // set ticket status to close
-
 		$_Item->ItemUpdateStatus($data_item['item_master_id'], "1"); // update item status to active again
-
 		$_Ticket->TicketAddComment($_GET['id'], "Tiket <b>Closed</b> dengan remaks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	} else {
@@ -82,7 +80,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Tiket Pelaporan #TICKET<?= $_GET['id'] ?></title>
+	<title>Tiket Maintenance : #TICKET<?= $_GET['id'] ?></title>
 
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/extensions/quill/quill.snow.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/extensions/quill/quill.bubble.css">

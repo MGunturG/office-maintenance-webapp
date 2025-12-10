@@ -94,8 +94,8 @@
                 </li>
                 
                 <!-- Menu -->
-                <li
-                    class="sidebar-item  has-sub">
+                <?php if ($_SESSION['user_role'] == "admin"): ?>
+                <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-android"></i>
                         <!-- Menu Name -->
@@ -112,6 +112,7 @@
                         
                     </ul>
                 </li>
+                <?php endif ?>
                 
                 
             </ul>

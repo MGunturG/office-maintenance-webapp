@@ -35,7 +35,7 @@ if (isset($_POST['user_Update'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admin Page - Lihat Detail User</title>
+	<title>Admin Page - Detail User</title>
 
 	<!-- styling -->
 	<?php include("../../../layout/styling.php") ?>

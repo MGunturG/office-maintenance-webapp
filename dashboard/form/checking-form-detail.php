@@ -82,7 +82,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>checking form - view form</title>
+	<title>Form Pengecekan : CHECKFORM<?= $form_master_id ?></title>
 
 	<!-- styling -->
     <?php include("../../layout/styling.php"); ?>

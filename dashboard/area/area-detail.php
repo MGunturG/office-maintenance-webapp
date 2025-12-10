@@ -53,7 +53,7 @@ if (isset($_POST['create_item_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Master Data - View Area</title>
+	<title>Pusat Data - Detail Area</title>
 
 	<!-- styling -->
     <?php include("../../layout/styling.php"); ?>

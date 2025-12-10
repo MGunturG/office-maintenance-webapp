@@ -33,7 +33,7 @@ if (isset($_POST['create_area_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Master Data - Area</title>
+	<title>Pusat Data - Area</title>
 
 	<!-- styling -->
     <?php include("../../layout/styling.php"); ?>

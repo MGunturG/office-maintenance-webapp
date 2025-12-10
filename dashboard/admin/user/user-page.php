@@ -24,7 +24,7 @@ if (isset($_POST['create_new_user_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admin Page - Buat User Baru</title>
+	<title>Admin Page - User</title>
 
 	<!-- styling -->
 	<?php include("../../../layout/styling.php") ?>
