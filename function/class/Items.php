@@ -64,6 +64,13 @@ class Items {
 	}
 
 
+	function ItemChangePicture($item_id, $picture_path) {
+		run_query(
+			"UPDATE item_master SET item_master_picture_path = '$picture_path' WHERE item_master_id = '$item_id'"
+		);
+	}
+
+
 	function ItemGetAll() {
 		return get_data(
 			"SELECT * FROM item_master"

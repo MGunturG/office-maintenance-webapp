@@ -25,7 +25,6 @@ $location = $location['area_master_name'] . " - " . "Lantai " . $location['area_
 
 $item_status = get_single_data("SELECT code_master_label FROM code_master WHERE code_master_code = {$data_item['item_master_status']} AND code_master_category = 'item_status'");
 
-
 // update item data
 if (isset($_POST['update_item_Submit'])) {
 	$_Item->ItemUpdateData(
@@ -38,7 +37,6 @@ if (isset($_POST['update_item_Submit'])) {
 
 	echo "<script>document.location.href = 'item-detail.php?id=$item_id';</script>"; exit;
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -72,7 +70,7 @@ if (isset($_POST['update_item_Submit'])) {
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-4">
-									<img src="https://images.unsplash.com/photo-1633008808000-ce86bff6c1ed?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top img-fluid" alt="singleminded">
+									<img src="<?= $data_item['item_master_picture_path'] ?>" class="card-img-top img-fluid" alt="<?= $data_item['item_master_name'] ?>">
 								</div>
 
 								<div class="col-md-8">
@@ -96,7 +94,7 @@ if (isset($_POST['update_item_Submit'])) {
 									<?php if ($data_item['item_master_status']!="3"): ?>
 									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_item">Perbarui Data</button>
 									<?php endif ?>
-									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form_item">Ganti Gambar</button>
+									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_change_pict_item">Ganti Gambar</button>
 								</div>
 							</div>
 						</div>
@@ -175,8 +173,41 @@ if (isset($_POST['update_item_Submit'])) {
     </div>
 
 	<!-- modal view update item picture -->
+	<div class="modal fade text-left" id="modal_change_pict_item" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ganti Gambar Barang</h5>
+                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
 
-
+                <form method="POST" action="<?= BASE_URL ?>/function/upload-function.php" enctype="multipart/form-data">
+                    <div class="modal-body">
+                    	<div class="form-body">
+                    		<div class="row">
+                    			<div class="col">
+									<div class="form-group">
+										<label>Pilih File</label>
+										<input type="file" class="form-control" name="fileToUpload" required>
+									</div>
+								</div>
+							</div>
+                    	</div>
+                    </div>
+                    <div class="modal-footer">
+                    	<button type="submit" name="upload_Submit" class="btn btn-primary me-1 mb-1">Simpan</button>
+                        <button type="button" class="btn me-1 mb-1" data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                    </div>
+               </form>
+               
+            </div>
+        </div>
+    </div>
 
 	<!-- js -->
 	<?php include("../../layout/javascript.php") ?>
