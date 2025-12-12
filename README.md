@@ -1,6 +1,10 @@
 TODO
 
 1. dashboard tampilin tiket yang : open, in progress, on hold, resolved, dan closed ada berapa
+2. upload gambar, dari kamera
+
+
+[function upload gambar DONE]
 2. add function untuk upload gambar di tiket dan detail barang
 
 buat upload gambar, tetep pake si file upload-function.php

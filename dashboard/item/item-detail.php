@@ -74,7 +74,7 @@ if (isset($_POST['update_item_Submit'])) {
 								</div>
 
 								<div class="col-md-8">
-
+									<br>
 									<div class="form-group">
 										<label>Nama Barang</label>
 										<input type="text" class="form-control" value="<?= $data_item['item_master_name'] ?>">
