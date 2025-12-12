@@ -74,7 +74,7 @@ if (isset($_POST['update_item_Submit'])) {
 								</div>
 
 								<div class="col-md-8">
-									<br>
+
 									<div class="form-group">
 										<label>Nama Barang</label>
 										<input type="text" class="form-control" value="<?= $data_item['item_master_name'] ?>">
@@ -185,6 +185,9 @@ if (isset($_POST['update_item_Submit'])) {
                 </div>
 
                 <form method="POST" action="<?= BASE_URL ?>/function/upload-function.php" enctype="multipart/form-data">
+                	<input type="hidden" name="id" value="<?= $item_id ?>">
+					<input type="hidden" name="action" value="insert_item_picture">
+					
                     <div class="modal-body">
                     	<div class="form-body">
                     		<div class="row">

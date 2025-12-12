@@ -44,6 +44,7 @@ $data_user = $_User->UserGetAll();
 $data_ticket = $_Ticket->TicketDetail($_GET['id']);
 $data_item = $_Item->ItemDetail($data_ticket['ticket_master_item_id']);
 $data_comment = $_Ticket->TicketGetComment($_GET['id']);
+$next_comment_id = $data_comment[0]['ticket_detail_id'];
 
 
 $location = $_Area->AreaDetail($data_item['item_master_area_id']);
@@ -155,9 +156,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													<label>Tanggal Efektif</label>
 													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_effdate'] ?>"readonly="readonly">
 												</div>
-												<?php if ($data_ticket['ticket_master_status'] != '4'): ?>
-												<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress">Update Status Tiket</button>
-												<?php endif ?>
+
 											</div>
 										</div>
 									</div>
@@ -183,6 +182,11 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 										                </div>
 													</div>
 													<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1">Tambah Komentar</button>
+
+													<button id="add_picture_button" type="button" class="btn btn-warning me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_upload_picture">Upload Foto</button>
+
+													<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress">Update Status Tiket</button>
+
 												</form>
 											</div>
 										</div>
@@ -267,6 +271,46 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 	            </div>
 	        </form>
 
+	        <!-- modal upload picture -->
+	        <div class="modal fade text-left" id="modal_upload_picture" tabindex="-1" role="dialog">
+		        <div class="modal-dialog modal-dialog-scrollable" role="document">
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <h5 class="modal-title">Upload Gambar</h5>
+		                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+		                        aria-label="Close">
+		                        <i data-feather="x"></i>
+		                    </button>
+		                </div>
+
+		                <form method="POST" action="<?= BASE_URL ?>/function/upload-function.php" enctype="multipart/form-data">
+							<input type="hidden" name="id" value="-1">
+							<input type="hidden" name="action" value="insert_comment_picture">
+							<input type="hidden" name="ticket_id" value="<?= $_GET['id'] ?>">
+							
+		                    <div class="modal-body">
+		                    	<div class="form-body">
+		                    		<div class="row">
+		                    			<div class="col">
+											<div class="form-group">
+												<label>Pilih File</label>
+												<input type="file" class="form-control" name="fileToUpload" required>
+											</div>
+										</div>
+									</div>
+		                    	</div>
+		                    </div>
+		                    <div class="modal-footer">
+		                    	<button type="submit" name="upload_Submit" class="btn btn-primary me-1 mb-1">Upload</button>
+		                        <button type="button" class="btn me-1 mb-1" data-bs-dismiss="modal">
+		                            Batal
+		                        </button>
+		                    </div>
+		               </form>
+		               
+		            </div>
+		        </div>
+		    </div>
 
             <!-- footer -->
             <?php include("../../layout/footer.php"); ?>
@@ -298,7 +342,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
                     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                     [{ 'color': [] }, { 'background': [] }],
-                    ['link', 'image']
+                    // ['link', 'image']
                 ]
             }
         });

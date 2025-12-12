@@ -58,7 +58,7 @@ class Tickets {
 
 	function TicketGetComment($ticket_id) {
 		return get_data(
-			"SELECT ticket_detail_comment, ticket_detail_commentby, ticket_detail_commenttime FROM ticket_detail WHERE ticket_detail_master_id = '$ticket_id' ORDER BY ticket_detail_commenttime DESC"
+			"SELECT ticket_detail_id, ticket_detail_comment, ticket_detail_commentby, ticket_detail_commenttime FROM ticket_detail WHERE ticket_detail_master_id = '$ticket_id' ORDER BY ticket_detail_commenttime DESC"
 		);
 	}
 
