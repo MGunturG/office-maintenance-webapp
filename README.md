@@ -2,9 +2,10 @@ TODO
 
 1. dashboard tampilin tiket yang : open, in progress, on hold, resolved, dan closed ada berapa
 2. convert gambar yang diupload ke webp
-3. tambah preview gambar sebelum diupload
 
 TODO DONE
+3. tambah preview gambar sebelum diupload
+
 2. upload gambar, dari kamera [some how done, kalo di hp pas pilih select file otomatis buka kamera]
 
 [function upload gambar DONE]
