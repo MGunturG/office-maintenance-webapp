@@ -294,7 +294,11 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 		                    			<div class="col">
 											<div class="form-group">
 												<label>Pilih File</label>
-												<input type="file" class="form-control" name="fileToUpload" required>
+												<input type="file" class="form-control" name="fileToUpload" onchange="showPreview(event);" required>
+											</div>
+
+											<div class="form-group">
+												<img id="file-ip-1-preview" class="card-img-top img-fluid">
 											</div>
 										</div>
 									</div>
@@ -353,6 +357,17 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
         	content.value = quill.root.innerHTML; // then pass value from innerhtml of quill (which is #comment_editor)
         										  // to the input tag
         };
+    </script>
+
+    <script>
+	function showPreview(event){
+	  if(event.target.files.length > 0){
+	    var src = URL.createObjectURL(event.target.files[0]);
+	    var preview = document.getElementById("file-ip-1-preview");
+	    preview.src = src;
+	    preview.style.display = "block";
+	  }
+	}
     </script>
 
     <!-- javascript -->
