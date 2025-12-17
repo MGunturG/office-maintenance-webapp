@@ -329,7 +329,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 		            if (button) {
 		                button.click();
 		            } else {
-		                console.error('Button not found');
+		                // console.error('Button not found');
 		            }
 		        });
 		    </script>";
