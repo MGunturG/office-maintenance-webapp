@@ -143,7 +143,7 @@ if (isset($_POST['create_item_Submit'])) {
 
 											<div class="form-group">
 												<label>lokasi</label>
-												<select name="item_area_id" class="choices form-select">
+												<select name="item_area_id" class="choices form-select" required>
 													<option value="">-- Pilih Lokasi --</option>
 													<?php foreach ($data_area as $area): ?>
 														<option value="<?php echo htmlspecialchars($area['area_master_id']); ?>"><?php echo htmlspecialchars($area['area_master_name'] . " - " . "Lantai " . $area['area_master_floor']); ?></option>
@@ -153,7 +153,7 @@ if (isset($_POST['create_item_Submit'])) {
 
 											<div class="form-group">
 												<label>kategori</label>
-												<select name="item_category" class="choices form-select">
+												<select name="item_category" class="choices form-select" required>
 													<option value="">--- Pilih Kategori ---</option>
 													<?php foreach ($data_item_category as $category): ?>
 														<option value="<?= $category['code_master_code'] ?>"><?= $category['code_master_label'] ?></option>
@@ -163,7 +163,7 @@ if (isset($_POST['create_item_Submit'])) {
 
 											<div class="form-group"	>
 												<label>status</label>
-												<select name="item_status" class="choices form-select">
+												<select name="item_status" class="choices form-select" required>
 													<option value="">--- Pilih Status ---</option>
 													<option value="1" selected>Aktif</option>
 													<option value="0">Non-aktif</option>

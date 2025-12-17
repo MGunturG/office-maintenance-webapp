@@ -33,7 +33,9 @@ $open_ticket = get_data("SELECT * FROM ticket_master WHERE ticket_master_status 
                         <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                             <i class='bi bi-bell bi-sub fs-4'></i>
                             <!-- notification count -->
-                            <span class="badge badge-notification bg-danger"><?= count($open_ticket) ?></span>
+                            <?php if (count($open_ticket)): ?>
+                                <span class="badge badge-notification bg-danger"><?= count($open_ticket) ?></span>
+                            <?php endif ?>
                         </a>
                         <ul class="dropdown-menu dropdown-center  dropdown-menu-sm-end notification-dropdown" aria-labelledby="dropdownMenuButton">
                             <li class="dropdown-header">
@@ -55,7 +57,7 @@ $open_ticket = get_data("SELECT * FROM ticket_master WHERE ticket_master_status 
                             <?php endforeach ?>
 
                             <li>
-                                <p class="text-center py-2 mb-0"><a href="<?php echo BASE_URL; ?>/dashboard/notification.php">See all notification</a></p>
+                                <p class="text-center py-2 mb-0"><a href="<?php echo BASE_URL; ?>/dashboard/notification.php">Lihat semua notifikasi</a></p>
                             </li>
                         </ul>
                     </li>

@@ -123,7 +123,7 @@ if (isset($_POST['create_area_Submit'])) {
 
 											<div class="form-group">
 												<label>Lantai</label>
-												<input type="number" class="form-control" name="area_floor" min="0" max="99" required>
+												<input type="number" inputmode="numeric" class="form-control" name="area_floor" min="0" max="99" required>
 											</div>
 										</div>
 									</div>

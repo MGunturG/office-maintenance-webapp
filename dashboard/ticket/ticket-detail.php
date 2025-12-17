@@ -107,6 +107,17 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 							<div class="card">
 								<div class="card-header">
 									<h4>Detail #TIKET<?= $_GET['id'] ?></h4>
+									<?php if ($data_ticket['ticket_master_status'] == 0): ?>
+										<td><span class="badge bg-success">Open</span></td>
+									<?php elseif ($data_ticket['ticket_master_status'] ==  1): ?>
+										<td><span class="badge bg-info">In Progress</span></td>
+									<?php elseif ($data_ticket['ticket_master_status'] == 2): ?>
+										<td><span class="badge bg-warning">On Hold</span></td>
+									<?php elseif ($data_ticket['ticket_master_status'] == 3): ?>
+										<td><span class="badge bg-primary">Resolved</span></td>
+									<?php elseif ($data_ticket['ticket_master_status'] == 4): ?>
+										<td><span class="badge bg-primary">Closed</span></td>
+									<?php endif ?>
 								</div>
 
 								<div class="card-body">
@@ -115,26 +126,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 											<div class="col">
 												<div class="form-group">
 													<label>PIC (Person-in-Charge)</label>
-													<select class="form-control" disabled>
-														<option value="">--- Pilih PIC ---</option>
-														<?php foreach ($data_user as $user): ?>
-															<option value="<?= $user['user_master_uname'] ?>" 
-																<?php echo ($data_ticket['ticket_master_currentholder'] == $user['user_master_uname']) ? "selected":""; ?>
-																><?= $user['user_master_uname'] ?></option>
-														<?php endforeach ?>
-													</select>
-												</div>
-
-												<div class="form-group">
-													<label>Status</label>
-													<select class="form-control" disabled>
-														<option value="">--- Status Tiket ---</option>
-														<option value="0" <?php echo ($data_ticket['ticket_master_status'] == '0') ? "selected":""; ?>>Open</option>
-														<option value="1" <?php echo ($data_ticket['ticket_master_status'] == '1') ? "selected":""; ?>>In Progress</option>
-														<option value="2" <?php echo ($data_ticket['ticket_master_status'] == '2') ? "selected":""; ?>>On Hold</option>
-														<option value="3" <?php echo ($data_ticket['ticket_master_status'] == '3') ? "selected":""; ?>>Resolved</option>
-														<option value="4" <?php echo ($data_ticket['ticket_master_status'] == '4') ? "selected":""; ?>>Closed</option>
-													</select>
+													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_currentholder'] ?>" readonly>
 												</div>
 
 												<div class="form-group">

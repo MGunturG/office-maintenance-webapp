@@ -124,15 +124,15 @@ if (isset($_POST['form_redraft_Submit'])) {
 										<div class="row">
 											 <div class="col-sm-4">
 				                                <h6>Lokasi</h6>
-				                                <input disabled type="text" class="form-control" readonly="readonly" name="area_name" value="<?= $area_data['area_master_name']. ' - Lantai ' .$area_data['area_master_floor']; ?>">
+				                                <input readonly type="text" class="form-control" readonly="readonly" name="area_name" value="<?= $area_data['area_master_name']. ' - Lantai ' .$area_data['area_master_floor']; ?>">
 				                            </div>
 				                            <div class="col-sm-5">
 				                                <h6>Remark</h6>
-				                                <input disabled type="text" class="form-control" readonly="readonly" name="area_description" value="<?= $form_data['checkingform_master_remark']; ?>">
+				                                <input readonly type="text" class="form-control" readonly="readonly" name="area_description" value="<?= $form_data['checkingform_master_remark']; ?>">
 				                            </div>
 				                            <div class="col-sm-3">
 				                                <h6>Tanggal Pengecekan</h6>
-				                                <input disabled type="text" class="form-control" readonly="readonly" name="area_description" value="<?= $form_data['checkingform_master_effdate']; ?>">
+				                                <input readonly type="text" class="form-control" readonly="readonly" name="area_description" value="<?= $form_data['checkingform_master_effdate']; ?>">
 				                            </div>
 										</div>
 										<form method="POST">
@@ -254,6 +254,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 
 	<script>
 		let dataTable_1 = new DataTable("#forms_table", {
+			columnDefs: [{ width: '5%', targets: 0 }],
 			responsive: {
 				details: {
 					display: DataTable.Responsive.display.childRowImmediate
@@ -262,7 +263,9 @@ if (isset($_POST['form_redraft_Submit'])) {
 			language: {
 				lengthMenu: " _MENU_ per halaman",
 				search: "Cari: ",
-			}
+			},
+			searching: false,
+			paging: false,
 		});
 
 		let dataTable_2 = new DataTable("#forms_item", {
@@ -270,7 +273,8 @@ if (isset($_POST['form_redraft_Submit'])) {
 			language: {
 				lengthMenu: " _MENU_ per halaman",
 				search: "Cari: ",
-			}
+			},
+			paging: false,
 		});
 	</script>
 
