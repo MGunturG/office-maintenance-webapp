@@ -53,18 +53,18 @@
                 <!-- Menu -->
                 <li
                     class="sidebar-item ">
-                    <a href="<?php echo BASE_URL; ?>/dashboard/form/checking-form-page.php" class='sidebar-link'>
-                        <i class="bi bi-clipboard-check-fill"></i>
-                        <span>Formulir Pengecekan</span>
+                    <a href="<?php echo BASE_URL; ?>/dashboard/ticket/ticket-page.php" class='sidebar-link'>
+                        <i class="bi bi-wrench-adjustable"></i>
+                        <span>Tiket Maintenance</span>
                     </a>
                 </li>
 
                 <!-- Menu -->
                 <li
                     class="sidebar-item ">
-                    <a href="<?php echo BASE_URL; ?>/dashboard/ticket/ticket-page.php" class='sidebar-link'>
-                        <i class="bi bi-wrench-adjustable"></i>
-                        <span>Tiket Maintenance</span>
+                    <a href="<?php echo BASE_URL; ?>/dashboard/form/checking-form-page.php" class='sidebar-link'>
+                        <i class="bi bi-clipboard-check-fill"></i>
+                        <span>Formulir Pengecekan</span>
                     </a>
                 </li>
 
