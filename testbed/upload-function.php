@@ -1,53 +1,89 @@
 <?php
-// reference code
+session_start();
+
+require '../config.php';
+require 'db-query.php';
+include_once 'class/Items.php';
+include_once 'class/Tickets.php';
+
+if (!$_SESSION['user_login_status']) {
+  header("location:".BASE_URL."/login.php?status=not_login");
+}
+
+$_Item = new Items;
+$_Ticket = new Tickets;
+
+$upload_action_type = $_POST['action'];
+$sql_id_query = $_POST['id']; // or item id
+$ticket_id = $_POST['ticket_id'];
+
+// reference code for uploading image
 // https://www.w3schools.com/php/php_file_upload.asp
 
+function convert_to_webp($file, $destination, $quality = 80) {
+	if (!isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+		return false;
+	}
 
-$target_dir = BASE_URL."uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+	$image_info = getimagesize($file['tmp_name']);
 
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
+	if ($file(['size']) > > 5000000) {
+		return false;
+	}
+
+	$mime_type = $image_info['mime'];
+	switch ($mime_type) {
+		case 'image/jpg':
+		case 'image/jpeg':
+			$image = imagecreatefromjpeg($file['tmp_name']);
+			break;
+
+		case 'image/png':
+			$image = imagecreatefrompng($file['tmp_name']);
+			break;
+		
+		default:
+			return false;
+	}
+
+	if (!$image) {
+		return false;
+	}
+
+	$result = imagewebp($image, $destination, $quality);
+
+	imagedestroy($image);
+
+	return $result;
 }
 
-// Check if file already exists
-if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
-  $uploadOk = 0;
-}
+$upload_directory = "../assets/uploads/images/";
+$image_filename = uniqid('img_') . '.webp';
+$target_path = $upload_directory . $image_filename;
 
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-  echo "Sorry, your file is too large.";
-  $uploadOk = 0;
-}
+if (convert_to_webp($_FILES['fileToUpload'], $target_path, 80)) {
+	$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
+	$_SESSION['alert_title'] = "Mantap!";
+	$_SESSION['alert_text'] = "Gambar berhasil diupload";
+	$_SESSION['alert_icon'] = "success"; // success, question, error, warning, info
+	$_SESSION['alert_button_text'] = "OK";
 
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-  $uploadOk = 0;
-}
-
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
+	if ($upload_action_type == "insert_item_picture") {
+		$_Item->ItemChangePicture($sql_id_query, BASE_URL.$target_path);
+	    header("location:".BASE_URL."/dashboard/item/item-detail.php?id=".$sql_id_query);
+	} elseif ($upload_action_type == "insert_comment_picture") {
+		$_Ticket->TicketAddComment(
+	        $ticket_id,
+	        '<img src="' . BASE_URL.$target_path . '" class="card-img-top img-fluid">',
+	        $_SESSION['user_uname'] 
+	      );
+	    header("location:".BASE_URL."/dashboard/ticket/ticket-detail.php?id=".$ticket_id);
+	}
 } else {
-  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-  } else {
-    echo "Sorry, there was an error uploading your file.";
-  }
+	$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
+    $_SESSION['alert_title'] = "Oops...";
+    $_SESSION['alert_text'] = "Unknown Error : 0x0001";
+    $_SESSION['alert_icon'] = "error"; // success, question, error, warning, info
+    $_SESSION['alert_button_text'] = "OK";
 }
 ?>
