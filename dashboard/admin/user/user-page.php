@@ -1,4 +1,9 @@
 <?php
+/**
+ * user-page show all users username and roles, can add new user
+ * 
+ */
+
 session_start();
 
 require '../../../config.php';
@@ -17,6 +22,7 @@ $data_user = $_User->UserGetAll(); // get all user on db
 if (isset($_POST['create_new_user_Submit'])) {
 	// insert new data to db
 	$_User->UserCreate($_POST['username'], $_POST['password'], $_POST['role']);
+	echo "<script>document.location.href = 'user-page.php';</script>"; exit;
 }
 ?>
 <!DOCTYPE html>
@@ -134,12 +140,6 @@ if (isset($_POST['create_new_user_Submit'])) {
 		</div>
 	</div>
 
-	<!-- <script>
-		let dataTable = new simpleDatatables.DataTable(
-			  document.getElementById("users_table")
-			);
-	</script> -->
-
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#users_table", {
@@ -156,6 +156,7 @@ if (isset($_POST['create_new_user_Submit'])) {
 			}
 		});
 	</script>
+
 	<!-- js -->
 	<?php include("../../../layout/javascript.php") ?>
 </body>

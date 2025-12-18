@@ -1,4 +1,12 @@
 <?php
+/**
+ * A page showing user's detail such as username, password, and user role
+ * also a page to change or update user password and/or role
+ * 
+ * only admin can change user's role 
+ * 
+ */
+
 session_start();
 
 require '../../../config.php';
@@ -21,12 +29,14 @@ if (isset($_GET['id'])) {
 
 // if update button pressed, either update role, password, or both 
 if (isset($_POST['user_Update'])) {
+
 	if($_POST['user_passw'] == "") { // if password is blank, just update user role
 		$_User->UserRoleUpdate($user_id, $_POST['user_role']);
-		// header("location:user-page.php");
+		echo "<script>document.location.href = 'user-page.php';</script>"; exit;
+
 	} else { // else, update role and password
 		$_User->UserPasswordUpdate($user_id, $_POST['user_role'], $_POST['user_passw']);
-		// header("location:user-page.php");
+		echo "<script>document.location.href = 'user-page.php';</script>"; exit;
 	}
 }
 ?>
@@ -64,12 +74,12 @@ if (isset($_POST['user_Update'])) {
 										<form method="POST">
 											<div class="form-body">
 												<div class="row">
-													<input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>">
+													<input type="hidden" name="user_id" value="<?= $user_id ?>">
 
 													<div class="col-12">
 														<div class="form-group">
 															<label for="username-vertical">Username</label>
-															<input type="text" class="form-control" name="user_uname" value="<?php echo htmlspecialchars($user_uname); ?>" disabled>
+															<input type="text" class="form-control" name="user_uname" value="<?php= $user_uname ?>" disabled>
 														</div>
 													</div>
 
