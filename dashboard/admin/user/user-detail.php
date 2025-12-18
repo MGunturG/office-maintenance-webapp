@@ -79,7 +79,7 @@ if (isset($_POST['user_Update'])) {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="username-vertical">Username</label>
-															<input type="text" class="form-control" name="user_uname" value="<?php= $user_uname ?>" disabled>
+															<input type="text" class="form-control" name="user_uname" value="<?= $user_uname ?>" disabled>
 														</div>
 													</div>
 
