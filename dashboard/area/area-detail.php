@@ -1,4 +1,11 @@
 <?php
+/**
+ * Area Detail Page
+ * * Displays detailed information about a specific location, lists all items 
+ * associated with that area, and provides functionality to add new items.
+ *
+ */
+
 session_start();
 
 require '../../config.php';
@@ -10,6 +17,7 @@ if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
 }
 
+// if no id given, redirect
 if (!$_GET['id']) {
 	header("location:area-page.php");
 }
@@ -31,7 +39,7 @@ $data_item = $_Item->ItemGetAllByAreaId($_GET['id']);
 // get all item category
 $data_item_category = $_Item->ItemGetAllCategory();
 
-// if form create item was submitter, 
+// if form create item was submitted, 
 // insert new data to db table
 if (isset($_POST['create_item_Submit'])) {
 	$submit_data = $_Item->ItemCreate(
@@ -204,12 +212,6 @@ if (isset($_POST['create_item_Submit'])) {
             <?php include("../../layout/footer.php"); ?>
         </div>
     </div>
-
-    <<!-- script>
-		let dataTable = new simpleDatatables.DataTable(
-			  document.getElementById("items_table")
-			);
-	</script> -->
 
 	<!-- datatables -->
 	<script>

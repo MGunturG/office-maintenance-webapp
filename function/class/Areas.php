@@ -1,6 +1,20 @@
 <?php
+/**
+ * Areas Class
+ * * Manages physical location data within the system, including 
+ * creating new areas, fetching specific details, and listing all areas.
+ */
 
 class Areas {
+
+	/**
+     * Creates a new area record after checking for duplicates.
+     *
+     * @param string $area_name        The name of the area.
+     * @param string $area_description A brief description of the location.
+     * @param int    $area_floor       The floor number where the area is located.
+     * * @return bool Returns true if the area was created, false if it already exists.
+     */
 	function AreaCreate($area_name, $area_description, $area_floor) {
 		$create_by = $_SESSION['user_uname'];
 		$create_time = date('Y-m-d H:i:s');
@@ -31,6 +45,12 @@ class Areas {
 	}
 
 
+	/**
+     * Retrieves specific details for a single area.
+     *
+     * @param int|string $area_id The unique identifier of the area.
+     * @return array|null Returns an associative array of area data or null if not found.
+     */
 	function AreaDetail($area_id) {
 		return get_single_data(
 			"SELECT * FROM area_master WHERE area_master_id = '$area_id'"
@@ -38,6 +58,11 @@ class Areas {
 	}
 
 
+	/**
+     * Retrieves all area records ordered by floor level.
+     *
+     * @return array Returns a list of all areas in the database.
+     */
 	function AreaGetAll() {
 		return get_data(
 			"SELECT * FROM area_master ORDER BY area_master_floor ASC"

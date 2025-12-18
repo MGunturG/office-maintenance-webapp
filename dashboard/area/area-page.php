@@ -1,4 +1,11 @@
 <?php
+/**
+ * Area Management Dashboard
+ * * Lists all available physical areas/locations and provides 
+ * a modal interface to create new area records.
+ * 
+ */
+
 session_start();
 
 require '../../config.php';
@@ -11,9 +18,9 @@ if (!$_SESSION['user_login_status']) {
 }
 
 $_Area = new Areas;
-$data_area = $_Area->AreaGetAll(); // query data yang ada di tabel db area
+$data_area = $_Area->AreaGetAll(); // query all area on db
 
-// tambah data ke database
+// add new area to db
 if (isset($_POST['create_area_Submit'])) {
 	$submit_data = $_Area->AreaCreate(
 		$_POST['area_name'],
@@ -21,9 +28,9 @@ if (isset($_POST['create_area_Submit'])) {
 		$_POST['area_floor']
 	);
 
-	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
+	// get last insert table id
+	$insert_id = mysqli_insert_id($db_connection);
 
-	// header("location".BASE_URL."/dashboard/admin/user/user-page.php"); exit;
 	echo "<script>document.location.href = 'area-detail.php?id=$insert_id';</script>"; exit;
 }
 
@@ -144,12 +151,6 @@ if (isset($_POST['create_area_Submit'])) {
 			<?php include("../../layout/footer.php") ?>
 		</div>
 	</div>
-
-	<!-- <script>
-		let dataTable = new simpleDatatables.DataTable(
-			  document.getElementById("areas_table")
-			);
-	</script> -->
 
 	<!-- datatables -->
 	<script>

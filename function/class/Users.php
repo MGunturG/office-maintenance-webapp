@@ -1,5 +1,6 @@
 <?php
 /**
+ * Users Class
  * handles user processing such as creating new user, updating 
  * users detail (role and password), and get all users detail 
  * from database.
