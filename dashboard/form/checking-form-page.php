@@ -124,7 +124,7 @@ if (isset($_POST['create_form_Submit'])) {
 	                <div class="modal-dialog modal-dialog-scrollable" role="document">
 	                    <div class="modal-content">
 	                        <div class="modal-header">
-	                            <h5 class="modal-title">Tambah Lokasi</h5>
+	                            <h5 class="modal-title">Form Pengecekan Baru</h5>
 	                            <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
 	                                aria-label="Close">
 	                                <i data-feather="x"></i>
