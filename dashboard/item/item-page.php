@@ -142,7 +142,7 @@ if (isset($_POST['create_item_Submit'])) {
 											</div>
 
 											<div class="form-group">
-												<label>lokasi</label>
+												<label>Lokasi</label>
 												<select name="item_area_id" class="choices form-select" required>
 													<option value="">-- Pilih Lokasi --</option>
 													<?php foreach ($data_area as $area): ?>
@@ -152,7 +152,7 @@ if (isset($_POST['create_item_Submit'])) {
 											</div>
 
 											<div class="form-group">
-												<label>kategori</label>
+												<label>Kategori</label>
 												<select name="item_category" class="choices form-select" required>
 													<option value="">--- Pilih Kategori ---</option>
 													<?php foreach ($data_item_category as $category): ?>
@@ -162,7 +162,7 @@ if (isset($_POST['create_item_Submit'])) {
 											</div>
 
 											<div class="form-group"	>
-												<label>status</label>
+												<label>Status</label>
 												<select name="item_status" class="choices form-select" required>
 													<option value="">--- Pilih Status ---</option>
 													<option value="1" selected>Aktif</option>
