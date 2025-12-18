@@ -41,9 +41,13 @@ if(isset($_POST["upload_Submit"])) {
 
 // Check if file already exists
 // if exists, delete. upload new one
+
+// update 17-dec-2025
+// if file exists, throw error
 if (file_exists($target_file)) {
-  unlink($target_file);
-  $uploadOk = 1;
+  // unlink($target_file); ==> to delete file
+  $uploadOk = 0;
+  $duplicate_file = 1;
 }
 
 // Check file size
@@ -68,6 +72,13 @@ if ($uploadOk == 0) {
     $_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
     $_SESSION['alert_title'] = "Oops...";
     $_SESSION['alert_text'] = "Ukuran file terlalu besar";
+    $_SESSION['alert_icon'] = "error"; // success, question, error, warning, info
+    $_SESSION['alert_button_text'] = "OK";
+  } elseif ($duplicate_file == 1) {
+    // alert session bad file format
+    $_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
+    $_SESSION['alert_title'] = "Oops...";
+    $_SESSION['alert_text'] = "File sudah ada, mohon input file dengan nama yang unik";
     $_SESSION['alert_icon'] = "error"; // success, question, error, warning, info
     $_SESSION['alert_button_text'] = "OK";
   } elseif ($bad_format == 1) {
