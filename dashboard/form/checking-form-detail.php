@@ -33,7 +33,7 @@ $data_item = $_Item->ItemGetAllByAreaId($form_data['checkingform_master_area_id'
 $area_data = $_Area->AreaDetail($form_data['checkingform_master_area_id']);
 
 
-/*	filter array based on their key [code line : 41-44]
+/*	filter array based on their key [code line : 48-50]
 
 	reference : 
 	[1] https://stackoverflow.com/questions/10328780/how-to-extract-specific-array-keys-and-values-to-another-array
@@ -50,6 +50,7 @@ $not_yet_checked_items = array_filter($data_item, function($item) use ($already_
 	return !(in_array($item['item_master_id'], $already_checked_items));
 });
 
+
 // if form add checked item submitted
 if (isset($_POST['form_add_item_Submit'])) {
 	$items = $_POST['checked'];
@@ -65,14 +66,13 @@ if (isset($_POST['form_add_item_Submit'])) {
 // if form submitted, save form then change form status to 1 (submitted)
 if (isset($_POST['form_Submit'])) {
 	$_Form->FormSave($form_master_id);
-	// header("location:checking-form-page.php");
 	echo "<script>document.location.href = 'checking-form-page.php';</script>"; exit;
 }
+
 
 // if form redraft clicked, change form status to 0 (draft)
 if (isset($_POST['form_redraft_Submit'])) {
 	$_Form->FormRedraft($form_master_id);
-	// header("location:checking-form-detail.php?id=".$form_master_id);
 	echo "<script>document.location.href = 'checking-form-detail.php?id=$form_master_id';</script>"; exit;
 }
 
@@ -233,24 +233,6 @@ if (isset($_POST['form_redraft_Submit'])) {
             <?php include("../../layout/footer.php"); ?>
         </div>
     </div>
-
-	<!-- <script>
-		let dataTable = new simpleDatatables.DataTable(
-			  document.getElementById("forms_table"),
-			  {
-			  	searchable: false,
-			  	paging: false,
-			  }
-			);
-
-		let dataTable_2 = new simpleDatatables.DataTable(
-			  document.getElementById("forms_item"),
-			  {
-			  	searchable: false,
-			  	paging: false,
-			  }
-			);
-	</script> -->
 
 	<script>
 		let dataTable_1 = new DataTable("#forms_table", {
