@@ -122,7 +122,7 @@ if (isset($_POST['create_item_Submit'])) {
 			<!-- modal add new item -->
 			<form method="POST">
 				<div class="modal fade text-left" id="modal_add_item" tabindex="-1" role="dialog">
-	                <div class="modal-dialog modal-dialog-scrollable" role="document">
+	                <div class="modal-dialog" role="document">
 	                    <div class="modal-content">
 	                        <div class="modal-header">
 	                            <h5 class="modal-title">Tambah Barang</h5>
@@ -207,7 +207,7 @@ if (isset($_POST['create_item_Submit'])) {
 				}
 			},
 			rowReorder: {
-				selector: 'td:nth-child(3)'
+				selector: 'td:nth-child(4)'
 			},
 			language: {
 				lengthMenu: " _MENU_ per halaman"

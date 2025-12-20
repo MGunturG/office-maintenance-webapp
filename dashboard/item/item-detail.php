@@ -174,7 +174,7 @@ if (isset($_POST['update_item_Submit'])) {
 
 	<!-- modal view update item picture -->
 	<div class="modal fade text-left" id="modal_change_pict_item" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Ganti Gambar Barang</h5>
