@@ -134,9 +134,11 @@ if (isset($_POST['create_item_Submit'])) {
 															<td><span class="badge bg-danger">Inactive</span></td>
 														<?php elseif ($item['item_master_status'] == "2"): ?>
 															<td><span class="badge bg-warning">Disposed</span></td>
+														<?php elseif ($item['item_master_status'] == "3"): ?>
+															<td><span class="badge bg-warning">Under Maintenance</span></td>
 														<?php endif ?>
 														<td>
-															<a href="<?= BASE_URL."/dashboard/item/item-detail.php?id=".$item['item_master_id'] ?>">Lihat</a>
+															<a href="<?= BASE_URL."/dashboard/item/item-detail.php?id=".$item['item_master_id'] ?>">Lihat Barang</a>
 														</td>
 													</tr>
 													<?php endforeach ?>
@@ -222,7 +224,7 @@ if (isset($_POST['create_item_Submit'])) {
 				}
 			},
 			rowReorder: {
-				selector: 'td:nth-child(3)'
+				selector: 'td:nth-child()'
 			},
 			language: {
 				lengthMenu: " _MENU_ per halaman",
