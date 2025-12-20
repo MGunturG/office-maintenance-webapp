@@ -219,7 +219,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
             <!-- modal update ticket status -->
 			<form method="POST">
 				<div class="modal fade text-left" id="modal_update_ticket_progress" tabindex="-1" role="dialog">
-	                <div class="modal-dialog modal-dialog-scrollable" role="document">
+	                <div class="modal-dialog" role="document">
 	                    <div class="modal-content">
 	                        <div class="modal-header">
 	                            <h5 class="modal-title">Update Status #TIKET<?= $_GET['id'] ?></h5>
@@ -265,7 +265,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 
 	        <!-- modal upload picture -->
 	        <div class="modal fade text-left" id="modal_upload_picture" tabindex="-1" role="dialog">
-		        <div class="modal-dialog modal-dialog-scrollable" role="document">
+		        <div class="modal-dialog" role="document">
 		            <div class="modal-content">
 		                <div class="modal-header">
 		                    <h5 class="modal-title">Upload Gambar</h5>
