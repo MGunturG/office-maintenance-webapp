@@ -106,7 +106,7 @@ if (isset($_POST['update_item_Submit'])) {
 
 	<!-- modal view update item details -->
     <div class="modal fade text-left" id="modal_update_item" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Perbarui Data Barang</h5>
