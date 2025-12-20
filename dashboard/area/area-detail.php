@@ -201,8 +201,7 @@ if (isset($_POST['create_item_Submit'])) {
 	                        <div class="modal-footer">
 	                        	<button type="submit" name="create_item_Submit" class="btn btn-primary me-1 mb-1">Tambah</button>
 	                            <button type="button" class="btn" data-bs-dismiss="modal">
-	                                <i class="bx bx-x d-block d-sm-none"></i>
-	                                <span class="d-none d-sm-block">Tutup</span>
+	                                Tutup
 	                            </button>
 	                        </div>
 	                    </div>
@@ -218,11 +217,7 @@ if (isset($_POST['create_item_Submit'])) {
 	<!-- datatables -->
 	<script>
 		let dataTable = new DataTable("#items_table", {
-			responsive: {
-				details: {
-					display: DataTable.Responsive.display.childRowImmediate
-				}
-			},
+			responsive: true,
 			rowReorder: {
 				selector: 'td:nth-child()'
 			},

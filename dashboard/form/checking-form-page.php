@@ -195,7 +195,7 @@ if (isset($_POST['create_form_Submit'])) {
 				}
 			},
 			rowReorder: {
-				selector: 'td:nth-child(3)'
+				selector: 'td:nth-child(9)'
 			},
 			order: [
 				[5, 'asc'],
