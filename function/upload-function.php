@@ -125,7 +125,7 @@ if ($uploadOk == 0) {
 
       $_Ticket->TicketAddComment(
         $ticket_id,
-        '<img src="' . $image_path . '" class="card-img-top img-fluid">',
+        '<img src="' . $image_path . '" class="card-img-top img-fluid" style="max-width: 50%; height: auto">',
         $_SESSION['user_uname'] 
       );
 

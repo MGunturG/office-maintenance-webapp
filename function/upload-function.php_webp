@@ -74,7 +74,7 @@ if (convert_to_webp($_FILES["fileToUpload"], $target_path, 80)) {
 	} elseif ($upload_action_type == "insert_comment_picture") {
 		$_Ticket->TicketAddComment(
 	        $ticket_id,
-	        '<img src="' . BASE_URL.$target_path . '" class="card-img-top img-fluid">',
+	        '<img src="' . BASE_URL.$target_path . '" class="card-img-top img-fluid" style="max-width: 50%; height: auto">',
 	        $_SESSION['user_uname'] 
 	      );
 	    header("location:".BASE_URL."/dashboard/ticket/ticket-detail.php?id=".$ticket_id);
