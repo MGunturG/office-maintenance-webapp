@@ -5,6 +5,7 @@ require '../../config.php';
 include '../../function/db-query.php';
 include_once '../../function/class/Items.php';
 include_once '../../function/class/Areas.php';
+include_once '../../function/class/Logs.php';
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
@@ -12,6 +13,7 @@ if (!$_SESSION['user_login_status']) {
 
 $_Item = new Items;
 $_Area = new Areas;
+$_Log = new Logs;
 
 // get all item data
 $data_item = $_Item->ItemGetAll();
@@ -32,6 +34,12 @@ if (isset($_POST['create_item_Submit'])) {
 	);
 
 	if ($submit_data) {
+		// get last insert table id
+		$insert_id = mysqli_insert_id($db_connection);
+		
+		// create new log
+		$_Log->LogCreate('Item', $insert_id, 'Add new item: '.$_POST['item_name'], $_SESSION['user_uname']);
+		
 		echo "<script>document.location.href = 'item-page.php';</script>"; exit;
 	} else {
 		echo "insert nok";

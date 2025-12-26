@@ -5,12 +5,15 @@ require '../../config.php';
 include '../../function/db-query.php';
 include_once "../../function/class/Areas.php";
 include_once "../../function/class/Forms.php";
+include_once "../../function/class/Logs.php";
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
 }
 
 $current_date = date('Y-m-d');
+
+$_Log = new Logs;
 
 // get data from db table formchecking
 $_Form = new Forms;
@@ -31,6 +34,10 @@ if (isset($_POST['create_form_Submit'])) {
 
 	// get latest id that just submited
 	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
+
+	// create new log
+	$_Log->LogCreate('Checking Form', $insert_id, 'Created new checking form', $_SESSION['user_uname']);
+
 	header("location:".BASE_URL."/dashboard/form/checking-form-detail.php?id=".$insert_id);
 }
 

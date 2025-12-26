@@ -5,6 +5,7 @@ require '../../config.php';
 include '../../function/db-query.php';
 include_once '../../function/class/Items.php';
 include_once '../../function/class/Areas.php';
+include_once '../../function/class/Logs.php';
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
@@ -12,6 +13,7 @@ if (!$_SESSION['user_login_status']) {
 
 $_Item = new Items;
 $_Area = new Areas;
+$_Log = new Logs;
 
 $data_area = $_Area->AreaGetAll();
 $data_item_category = $_Item->ItemGetAllCategory();
@@ -34,6 +36,28 @@ if (isset($_POST['update_item_Submit'])) {
 		$_POST['new_item_category'],
 		$_POST['new_item_status'],
 	);
+
+	// add log update item name
+	if ($data_item['item_master_name'] != $_POST['new_item_name']) {
+		$_Log->LogCreate('Item', $item_id, 'Updated item name to '.$_POST['new_item_name'], $_SESSION['user_uname']);
+	}
+
+	// add log move item to new area/location
+	if ($data_item['item_master_area_id'] != $_POST['new_item_area_id']) {
+		$new_area_name = $_Area->AreaDetail($_POST['new_item_area_id']);
+		$_Log->LogCreate('Item', $item_id, 'Moved item to '.$new_area_name['area_master_name'], $_SESSION['user_uname']);
+	}
+
+	// add log update item category
+	if ($data_item['item_master_category'] != $_POST['new_item_category']) {
+		$_Log->LogCreate('Item', $item_id, 'Updated item category to '.$_POST['new_item_category'], $_SESSION['user_uname']);
+	}
+
+	// add log update item status
+	if ($data_item['item_master_status'] != $_POST['new_item_status']) {
+		$new_item_status = get_single_data("SELECT code_master_label FROM code_master WHERE code_master_category = 'item_status' AND code_master_code = {$_POST['new_item_status']}");
+		$_Log->LogCreate('Item', $item_id, 'Updated item status to '.$new_item_status['code_master_label'], $_SESSION['user_uname']);
+	}
 
 	echo "<script>document.location.href = 'item-detail.php?id=$item_id';</script>"; exit;
 }
@@ -77,19 +101,19 @@ if (isset($_POST['update_item_Submit'])) {
 									<br>
 									<div class="form-group">
 										<label>Nama Barang</label>
-										<input type="text" class="form-control" value="<?= $data_item['item_master_name'] ?>">
+										<input type="text" class="form-control" value="<?= $data_item['item_master_name'] ?>" readonly="readonly">
 									</div>
 									<div class="form-group">
 										<label>Lokasi Barang</label>
-										<input type="text" class="form-control" value="<?= $location ?>">
+										<input type="text" class="form-control" value="<?= $location ?>" readonly="readonly">
 									</div>
 									<div class="form-group">
 										<label>Kategori</label>
-										<input type="text" class="form-control" value="<?= $data_item['item_master_category'] ?>">
+										<input type="text" class="form-control" value="<?= $data_item['item_master_category'] ?>" readonly="readonly">
 									</div>
 									<div class="form-group">
 										<label>Status</label>
-										<input type="text" class="form-control" value="<?= $item_status['code_master_label'] ?>">
+										<input type="text" class="form-control" value="<?= $item_status['code_master_label'] ?>" readonly="readonly">
 									</div>
 									<?php if ($data_item['item_master_status']!="3"): ?>
 									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_item">Perbarui Data</button>

@@ -12,6 +12,7 @@ require '../../config.php';
 include '../../function/db-query.php';
 include_once '../../function/class/Areas.php';
 include_once '../../function/class/Items.php';
+include_once '../../function/class/Logs.php';
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
@@ -24,6 +25,7 @@ if (!$_GET['id']) {
 
 $_Area = new Areas;
 $_Item = new Items;
+$_Log = new Logs;
 
 // if id not provided, redirect to area-page.php
 if (!isset($_GET['id'])) {
@@ -50,6 +52,12 @@ if (isset($_POST['create_item_Submit'])) {
 	);
 
 	if ($submit_data) {
+		// get last insert table id
+		$insert_id = mysqli_insert_id($db_connection);
+		
+		// create new log
+		$_Log->LogCreate('Item', $insert_id, 'Add new item: '.$_POST['item_name'], $_SESSION['user_uname']);
+		
 		echo "<script>document.location.href = 'area-detail.php?id=$area_id';</script>"; exit;
 	} else {
 		echo "insert nok";

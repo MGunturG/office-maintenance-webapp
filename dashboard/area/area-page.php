@@ -12,10 +12,13 @@ require '../../config.php';
 include '../../function/db-query.php';
 include_once '../../function/class/Items.php';
 include_once '../../function/class/Areas.php';
+include_once '../../function/class/Logs.php';
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
 }
+
+$_Log = new Logs;
 
 $_Area = new Areas;
 $data_area = $_Area->AreaGetAll(); // query all area on db
@@ -30,6 +33,9 @@ if (isset($_POST['create_area_Submit'])) {
 
 	// get last insert table id
 	$insert_id = mysqli_insert_id($db_connection);
+
+	// create new log
+	$_Log->LogCreate('Area', $insert_id, 'Add new area: '.$_POST['area_name'], $_SESSION['user_uname']);
 
 	echo "<script>document.location.href = 'area-detail.php?id=$insert_id';</script>"; exit;
 }

@@ -6,6 +6,7 @@ include '../../function/db-query.php';
 include_once '../../function/class/Areas.php';
 include_once '../../function/class/Items.php';
 include_once '../../function/class/Forms.php';
+include_once '../../function/class/Logs.php';
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
@@ -18,6 +19,7 @@ if (!$_GET['id']) {
 $_Area = new Areas;
 $_Item = new Items;
 $_Form = new Forms;
+$_Log = new Logs;
 
 $form_master_id = $_GET['id'];
 $form_data = $_Form->FormDetail($form_master_id); // get form detail
@@ -66,6 +68,10 @@ if (isset($_POST['form_add_item_Submit'])) {
 // if form submitted, save form then change form status to 1 (submitted)
 if (isset($_POST['form_Submit'])) {
 	$_Form->FormSave($form_master_id);
+
+	// create new log
+	$_Log->LogCreate('Checking Form', $form_master_id, 'Submitted the form', $_SESSION['user_uname']);
+
 	echo "<script>document.location.href = 'checking-form-page.php';</script>"; exit;
 }
 
@@ -73,6 +79,10 @@ if (isset($_POST['form_Submit'])) {
 // if form redraft clicked, change form status to 0 (draft)
 if (isset($_POST['form_redraft_Submit'])) {
 	$_Form->FormRedraft($form_master_id);
+
+	// create new log
+	$_Log->LogCreate('Checking Form', $form_master_id, 'Redraft the form', $_SESSION['user_uname']);
+
 	echo "<script>document.location.href = 'checking-form-detail.php?id=$form_master_id';</script>"; exit;
 }
 
