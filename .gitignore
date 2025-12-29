@@ -1,5 +1,6 @@
 # ignore config file
 config.php
-assets/uploads/
+assets/uploads/*.jpg
+assets/uploads/*.png
 testbed/upload/
 testbed/uploads/
