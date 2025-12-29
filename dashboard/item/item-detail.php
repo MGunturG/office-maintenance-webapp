@@ -39,13 +39,14 @@ if (isset($_POST['update_item_Submit'])) {
 
 	// add log update item name
 	if ($data_item['item_master_name'] != $_POST['new_item_name']) {
-		$_Log->LogCreate('Item', $item_id, 'Updated item name to '.$_POST['new_item_name'], $_SESSION['user_uname']);
+		$_Log->LogCreate('Item', $item_id, 'Updated item name from '.$data_item['item_master_name'].' to '.$_POST['new_item_name'], $_SESSION['user_uname']);
 	}
 
 	// add log move item to new area/location
 	if ($data_item['item_master_area_id'] != $_POST['new_item_area_id']) {
+		$current_area_name = $_Area->AreaDetail($data_item['item_master_area_id']);
 		$new_area_name = $_Area->AreaDetail($_POST['new_item_area_id']);
-		$_Log->LogCreate('Item', $item_id, 'Moved item to '.$new_area_name['area_master_name'], $_SESSION['user_uname']);
+		$_Log->LogCreate('Item', $item_id, 'Moved item from '.$current_area_name['area_master_name'].' to '.$new_area_name['area_master_name'], $_SESSION['user_uname']);
 	}
 
 	// add log update item category

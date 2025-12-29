@@ -7,15 +7,17 @@ include_once "../../function/class/Tickets.php";
 include_once "../../function/class/Items.php";
 include_once "../../function/class/Areas.php";
 include_once "../../function/class/Users.php";
+include_once "../../function/class/Logs.php";
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
 }
 
+$_Log = new Logs;
 $_User = new Users;
-$_Ticket = new Tickets;
 $_Item = new Items;
 $_Area = new Areas;
+$_Ticket = new Tickets;
 
 // get all item data
 $data_item = $_Item->ItemGetAll();
@@ -50,6 +52,8 @@ if (isset($_POST['create_ticket_Submit'])) {
 	// after creating new ticket, the last id will be
 	// from table item status, not the ticket table
 	$ticket_id_that_just_created = mysqli_insert_id($db_connection); 
+
+	$_Log->LogCreate("Ticket", $ticket_id_that_just_created, "Created new ticket and assign ticket to ".$_POST['ticket_pic'], $_SESSION['user_uname']);
 
 	header("location:ticket-detail.php?id=".$ticket_id_that_just_created);
 }

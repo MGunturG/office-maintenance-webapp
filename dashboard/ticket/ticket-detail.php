@@ -7,6 +7,7 @@ include_once '../../function/class/Tickets.php';
 include_once '../../function/class/Users.php';
 include_once '../../function/class/Items.php';
 include_once '../../function/class/Areas.php';
+include_once '../../function/class/Logs.php';
 
 if (!$_SESSION['user_login_status']) {
 	header("location:".BASE_URL."/login.php?status=not_login");
@@ -35,6 +36,7 @@ function name_monograph(string $name) {
 	}
 }
 
+$_Log = new Logs;
 $_Item = new Items;
 $_User = new Users;
 $_Area = new Areas;
@@ -67,10 +69,14 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']); // set ticket status to close
 		$_Item->ItemUpdateStatus($data_item['item_master_id'], "1"); // update item status to active again
 		$_Ticket->TicketAddComment($_GET['id'], "Tiket <b>Closed</b> dengan remaks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		$_Log->LogCreate('Ticket', $_GET['id'], "Ticket closed", $_SESSION['user_uname']);
+
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	} else {
 		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']);
 		$_Ticket->TicketAddComment($_GET['id'], ucfirst($_SESSION['user_uname'])." mengubah status tiket menjadi <b>$status</b> dengan remarks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		$_Log->LogCreate("Ticket", $_GET['id'], "Ticket status changed to $status", $_SESSION['user_uname']);
+
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	}
 }
