@@ -7,7 +7,12 @@ class Logs {
 		);
 	}
 
-
+	function LogFetch(string $entity_type, $entity_id) {
+		get_data(
+			"SELECT * FROM activity_log WHERE activity_log_entity_type = '$entity_type' AND activity_log_entity_id = '$entity_id' ORDER BY ".
+			"activity_log_timestamp DESC"
+		);
+	}
 	
 }
 ?>
