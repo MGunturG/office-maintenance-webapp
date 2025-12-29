@@ -26,14 +26,16 @@ require 'config.php';
 	                </div>
 	                <h1 class="auth-title">Log in</h1>
 	                <!-- <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p> -->
-	                <?php if ($_GET['status'] == "not_login"): ?>
-						<div class="alert alert-light-warning color-warning"><i class="bi bi-exclamation-triangle"></i>
-                            Kamu belum login, coba login dulu ya.</div>
-					<?php elseif ($_GET['status'] == "fail"): ?>
-						<div class="alert alert-light-danger color-danger"><i class="bi bi-exclamation-circle"></i>
-                            Username atau password kamu salah, coba lagi ya.</div>
+	                <?php if (isset($_GET['status'])): ?>
+		                <?php if ($_GET['status'] == "not_login"): ?>
+							<div class="alert alert-light-warning color-warning"><i class="bi bi-exclamation-triangle"></i>
+	                            Kamu belum login, coba login dulu ya.</div>
+						<?php elseif ($_GET['status'] == "fail"): ?>
+							<div class="alert alert-light-danger color-danger"><i class="bi bi-exclamation-circle"></i>
+	                            Username atau password kamu salah, coba lagi ya.</div>
+						<?php endif ?>
 					<?php endif ?>
-
+					
 	                <form method="POST" action="function/login-function.php" autocomplete="off">
 	                    <div class="form-group position-relative has-icon-left mb-4">
 	                        <input type="text" name="username" class="form-control form-control-xl" placeholder="Username">
