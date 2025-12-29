@@ -320,7 +320,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
     </div>
 
     <?php
-	if ($_GET['action']=="respond") {
+	if (isset($_GET['action']) && $_GET['action']=="respond") {
 		echo "<script>
 		        document.addEventListener('DOMContentLoaded', function() {
 		            var button = document.getElementById('update_ticket_button');
