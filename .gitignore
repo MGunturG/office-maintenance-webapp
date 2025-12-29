@@ -1,5 +1,5 @@
 # ignore config file
 config.php
-assets/uploads/**/*.[jJ][pP][gG]
+assets/uploads/
 testbed/upload/
 testbed/uploads/

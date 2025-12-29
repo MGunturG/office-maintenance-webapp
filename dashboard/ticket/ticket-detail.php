@@ -46,7 +46,7 @@ $data_user = $_User->UserGetAll();
 $data_ticket = $_Ticket->TicketDetail($_GET['id']);
 $data_item = $_Item->ItemDetail($data_ticket['ticket_master_item_id']);
 $data_comment = $_Ticket->TicketGetComment($_GET['id']);
-$next_comment_id = $data_comment[0]['ticket_detail_id'];
+// $next_comment_id = $data_comment[0]['ticket_detail_id'];
 
 
 $location = $_Area->AreaDetail($data_item['item_master_area_id']);
