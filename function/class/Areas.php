@@ -34,7 +34,7 @@ class Areas {
 			// sweetalert
 			$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
 			$_SESSION['alert_title'] = "Mantap!";
-			$_SESSION['alert_text'] = "Area Baru Berhasil Dibuat. Silakan masukan data barang di area ini ya";
+			$_SESSION['alert_text'] = "Area baru dibuat! Kamu bisa lanjut masukan data barang di area ini ya";
 			$_SESSION['alert_icon'] = "success"; // success, question, error, warning, info
 			$_SESSION['alert_button_text'] = "OK";
 
