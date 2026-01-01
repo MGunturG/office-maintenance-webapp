@@ -1,4 +1,17 @@
 <?php  
+/**
+ * Maintenance Ticket Detail Handler
+ * * Displays ticket specifications and manages interactions including 
+ * rich-text commenting (Quill.js) and status lifecycle updates.
+ *
+ * @uses Tickets, Users, Items, Areas, Logs
+ * @param int    $_GET['id'] The unique identifier for the maintenance ticket.
+ * @param string $_POST['comment_content'] HTML content from the rich-text editor.
+ * @param int    $_POST['ticket_status_progress'] Target status code (1-4).
+ * @param string $_POST['ticket_status_comment'] Reason/Remarks for status change.
+ * @return void Redirects to refresh the detail page after processing actions.
+ */
+
 session_start();
 
 require '../../config.php';

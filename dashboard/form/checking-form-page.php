@@ -1,4 +1,17 @@
 <?php
+/**
+ * Checking Form Dashboard
+ * * Lists existing inspection forms and provides functionality to initialize 
+ * new forms via a modal interface.
+ *
+ * @uses Forms, Areas, Logs
+ * @param string $_POST['create_form_Submit'] Trigger for new form creation.
+ * @param string $_POST['form_effective_date'] The scheduled date for the check.
+ * @param int    $_POST['form_area_id'] Target location ID from area_master.
+ * @param string $_POST['form_remark'] User-provided notes for the form.
+ * @return void Redirects to checking-form-detail.php upon successful creation.
+ */
+
 session_start();
 
 require '../../config.php';

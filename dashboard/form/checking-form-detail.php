@@ -1,4 +1,17 @@
 <?php
+/**
+ * Checking Form Detail
+ * * Manages the display and lifecycle of a specific checking form, including
+ * item addition, form submission, and redrafting.
+ *
+ * @uses Areas, Items, Forms, Logs
+ * @param int $_GET['id'] The unique identifier for the form master record.
+ * @param array $_POST['checked'] List of item IDs to be added to the form.
+ * @param string $_POST['form_Submit'] Trigger to finalize and submit the form.
+ * @param string $_POST['form_redraft_Submit'] Trigger to revert form to draft.
+ * * @return void Performs header or JS redirection based on the action performed.
+ */
+
 session_start();
 
 require '../../config.php';

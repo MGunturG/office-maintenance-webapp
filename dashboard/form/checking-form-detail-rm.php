@@ -1,4 +1,15 @@
 <?php  
+/**
+ * Item Removal Handler
+ * * Processes the deletion of a specific item from a checking form.
+ * Validates session, executes deletion via the Forms class, 
+ * sets success notifications, and manages redirection.
+ *
+ * @param string $_GET['item_id'] Primary key of the item to delete.
+ * @param string $_GET['form_id'] ID of the parent master form.
+ * @return void Redirects to checking-form-detail.php.
+ */
+
 // rm mean remove
 session_start();
 

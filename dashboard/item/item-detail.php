@@ -1,4 +1,18 @@
 <?php
+/**
+ * Item Detail and Update Manager
+ * * Displays specific item specifications and processes attribute updates.
+ * Implements granular audit logging to track changes in name, location, 
+ * category, and status.
+ *
+ * @uses Items, Areas, Logs
+ * @param int    $_GET['id'] The primary key of the item to be viewed/edited.
+ * @param string $_POST['update_item_Submit'] Trigger for the data update logic.
+ * @param string $_POST['new_item_name'] New name value for audit comparison.
+ * @param int    $_POST['new_item_area_id'] New area ID for location tracking.
+ * @return void Redirects to item-detail.php after processing updates.
+ */
+
 session_start();
 
 require '../../config.php';

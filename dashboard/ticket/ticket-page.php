@@ -1,4 +1,20 @@
 <?php
+/**
+ * Maintenance Ticket Dashboard
+ * * Lists maintenance history and processes new ticket submissions.
+ * Automatically updates the target item's status to 'Maintenance' (3) 
+ * upon ticket creation and initializes system audit logs.
+ *
+ * @uses Tickets, Items, Areas, Users, Logs
+ * @param string $_POST['create_ticket_Submit'] Trigger for new ticket logic.
+ * @param int    $_POST['ticket_itemid'] ID of the asset requiring maintenance.
+ * @param string $_POST['ticket_topic'] Brief title of the issue.
+ * @param string $_POST['ticket_description'] Detailed problem report.
+ * @param string $_POST['ticket_pic'] Assigned Person-in-Charge username.
+ * @param string $_POST['ticket_effdate'] Official reporting date.
+ * @return void Redirects to ticket-detail.php on success.
+ */
+
 session_start();
 
 require '../../config.php';

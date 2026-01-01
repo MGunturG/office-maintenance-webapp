@@ -1,6 +1,19 @@
 <?php
+/**
+ * Forms Logic Controller
+ * * Manages the lifecycle of inspection forms, including master record creation,
+ * item-to-form mapping, status transitions, and data retrieval.
+ */
 
 class Forms{
+
+	/**
+     * Initialize a new checking form master record.
+     * * @param string $effective_date Date of inspection.
+     * @param int    $area_id        Target location ID.
+     * @param string $remark         Additional notes.
+     * @return void
+     */
 	function FormCreate($effective_date, $area_id, $remark) {
 		$create_by = $_SESSION['user_uname'];
 		$create_time = date('Y-m-d H:i:s');
@@ -18,6 +31,11 @@ class Forms{
 	}
 
 
+	/**
+     * Retrieve details for a single master form.
+     * * @param int $form_master_id Primary key of the form.
+     * @return array|null Result set from checkingform_master.
+     */
 	function FormDetail($form_master_id) {
 		return get_single_data(
 			"SELECT * FROM checkingform_master WHERE checkingform_master_id = $form_master_id"
@@ -25,6 +43,13 @@ class Forms{
 	}
 
 
+	/**
+     * Link a specific item to an inspection form.
+     * * @param int    $form_master_id Target form ID.
+     * @param int    $item_id        Target item ID.
+     * @param string $item_status    The condition status of the item.
+     * @return void
+     */
 	function FormAddItem($form_master_id, $item_id, $item_status) {
 		$create_by = $_SESSION['user_uname'];
 		$create_time = date('Y-m-d H:i:s');
@@ -41,6 +66,12 @@ class Forms{
 	}
 
 
+	/**
+     * Finalize form and change status to 'Submitted'.
+     * Sets success session alerts.
+     * * @param int $form_master_id Target form ID.
+     * @return void
+     */
 	function FormSave($form_master_id) {
 		run_query(
 			"UPDATE checkingform_master SET checkingform_master_status = '1' WHERE ".
@@ -56,6 +87,12 @@ class Forms{
 	}
 
 
+	/**
+     * Revert form status to 'Draft'.
+     * Sets info session alerts.
+     * * @param int $form_master_id Target form ID.
+     * @return void
+     */
 	function FormRedraft($form_master_id) {
 		run_query(
 			"UPDATE checkingform_master SET checkingform_master_status = '0' WHERE ".
@@ -71,6 +108,10 @@ class Forms{
 	}
 
 
+	/**
+     * Fetch all existing master checking forms.
+     * * @return array Collection of all forms.
+     */
 	function FormMasterGetAll() {
 		return get_data(
 			"SELECT * FROM checkingform_master"
@@ -78,6 +119,11 @@ class Forms{
 	}
 
 
+	/**
+     * Fetch all items associated with a specific form.
+     * * @param int $form_master_id Target form ID.
+     * @return array Collection of item details.
+     */
 	function FormDetailGetAllItem($form_master_id) {
 		return get_data(
 			"SELECT * FROM checkingform_detail WHERE checkingform_detail_master_id = '$form_master_id'"
@@ -85,6 +131,12 @@ class Forms{
 	}
 
 
+	/**
+     * Remove a specific item from an inspection form.
+     * * @param int $item_id        Target item ID.
+     * @param int $form_master_id Target form ID.
+     * @return void
+     */
 	function FormRemoveItem($item_id, $form_master_id) {
 		run_query(
 			"DELETE FROM checkingform_detail WHERE checkingform_detail_item_id = '$item_id' ".

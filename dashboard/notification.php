@@ -1,4 +1,14 @@
 <?php
+/**
+ * Ticket Notification View
+ * * Filters and displays maintenance tickets with an 'Open' status (0).
+ * Provides a streamlined interface for administrators to quickly identify
+ * and respond to new maintenance requests.
+ *
+ * @uses Tickets
+ * @return void Renders a filtered list of open tickets with a quick-response action.
+ */
+
 session_start();
 
 require '../config.php';

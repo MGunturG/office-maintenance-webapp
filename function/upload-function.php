@@ -1,4 +1,18 @@
 <?php
+/**
+ * Image Upload Logic Controller
+ * * Validates and processes image uploads (JPG, JPEG, PNG) up to 5MB.
+ * Routes files to the appropriate entity (Items or Tickets) based on the 
+ * 'action' parameter and manages user-facing SweetAlert notifications.
+ *
+ * @uses Items, Tickets
+ * @param string $_FILES['fileToUpload'] The image binary data from the form.
+ * @param string $_POST['action'] Determines routing: 'insert_item_picture' or 'insert_comment_picture'.
+ * @param int    $_POST['id'] Target ID for item picture updates.
+ * @param int    $_POST['ticket_id'] Target ID for ticket comment attachments.
+ * @return void Performs header redirection and session-based alert setting.
+ */
+
 session_start();
 
 // alert will always be showed

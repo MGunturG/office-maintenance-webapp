@@ -1,4 +1,18 @@
 <?php
+/**
+ * Item Inventory Management
+ * * Provides an interface to view all master items and a modal to register 
+ * new assets into the system with automated logging.
+ *
+ * @uses Items, Areas, Logs
+ * @param string $_POST['create_item_Submit'] Trigger for new item registration.
+ * @param string $_POST['item_name'] The name of the new asset.
+ * @param int    $_POST['item_area_id'] Target location ID from area_master.
+ * @param string $_POST['item_category'] Category code for the item.
+ * @param int    $_POST['item_status'] Initial status (1:Active, 0:Inactive, etc).
+ * @return void Redirects to item-page.php on successful creation.
+ */
+
 session_start();
 
 require '../../config.php';
