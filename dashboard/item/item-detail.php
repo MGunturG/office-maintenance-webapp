@@ -29,12 +29,12 @@ $_Item = new Items;
 $_Area = new Areas;
 $_Log = new Logs;
 
+$item_id = $_GET['id'];
+$data_item = $_Item->ItemGetById($item_id);
 $data_area = $_Area->AreaGetAll();
 $data_item_category = $_Item->ItemGetAllCategory();
 $data_item_status = $_Item->ItemGetAllStatus();
-
-$item_id = $_GET['id'];
-$data_item = $_Item->ItemGetById($item_id);
+$data_log = $_Log->LogFetch("Item", $item_id);
 
 $location = $_Area->AreaDetail($data_item['item_master_area_id']);
 $location = $location['area_master_name'] . " - " . "Lantai " . $location['area_master_floor'];
@@ -134,6 +134,7 @@ if (isset($_POST['update_item_Submit'])) {
 									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_item">Perbarui Data</button>
 									<?php endif ?>
 									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_change_pict_item">Ganti Gambar</button>
+									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_item">Lihat Log</button>
 								</div>
 							</div>
 						</div>
@@ -255,6 +256,63 @@ if (isset($_POST['update_item_Submit'])) {
             </div>
         </div>
     </div>
+
+    <!-- modal view item's log -->
+	<div class="modal fade text-left" id="modal_logs_item" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Log Aktivitas Barang</h5>
+                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+
+                <?php
+                	
+                ?>
+                <table id="logs_table" class="table table-striped">
+                	<thead>
+                		<tr>
+                			<th>Activity</th>
+                			<th>By User</th>
+                			<th>Date</th>
+                		</tr>
+                	</thead>
+                		<?php foreach ($data_log as $log): ?>
+                		<tr>
+                			<td><?= $log['activity_log_action'] ?></td>
+                			<td><?= $log['activity_log_user'] ?></td>
+                			<td><?= $log['activity_log_timestamp'] ?></td>
+                		</tr>
+                		<?php endforeach ?>
+                	<tbody>
+                	</tbody>
+                </table>
+               <div class="modal-footer">
+	                <button type="button" class="btn me-1 mb-1" data-bs-dismiss="modal">
+	                    Tutup
+	                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+		let dataTable = new DataTable("#logs_table", {
+			responsive: {
+				details: {
+					display: DataTable.Responsive.display.childRowImmediate
+				}
+			},
+			searching: false,
+			ordering: false,
+			language: {
+				lengthMenu: " _MENU_ log per halaman"
+			}
+		});
+	</script>
 
     <script>
 	function showPreview(event){

@@ -60,6 +60,7 @@ $data_ticket = $_Ticket->TicketDetail($_GET['id']);
 $data_item = $_Item->ItemDetail($data_ticket['ticket_master_item_id']);
 $data_comment = $_Ticket->TicketGetComment($_GET['id']);
 // $next_comment_id = $data_comment[0]['ticket_detail_id'];
+$data_log = $_Log->LogFetch("Ticket", $_GET['id']);
 
 
 $location = $_Area->AreaDetail($data_item['item_master_area_id']);
@@ -168,6 +169,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_effdate'] ?>"readonly="readonly">
 												</div>
 
+												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_ticket">Lihat Log</button>
 											</div>
 										</div>
 									</div>
@@ -327,6 +329,48 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 		        </div>
 		    </div>
 
+		    <!-- modal view item's log -->
+			<div class="modal fade text-left" id="modal_logs_ticket" tabindex="-1" role="dialog">
+		        <div class="modal-dialog" role="document">
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <h5 class="modal-title">Log Aktivitas Tiket</h5>
+		                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+		                        aria-label="Close">
+		                        <i data-feather="x"></i>
+		                    </button>
+		                </div>
+
+		                <?php
+		                	
+		                ?>
+		                <table id="logs_table" class="table table-striped">
+		                	<thead>
+		                		<tr>
+		                			<th>Activity</th>
+		                			<th>By User</th>
+		                			<th>Date</th>
+		                		</tr>
+		                	</thead>
+		                		<?php foreach ($data_log as $log): ?>
+		                		<tr>
+		                			<td><?= $log['activity_log_action'] ?></td>
+		                			<td><?= $log['activity_log_user'] ?></td>
+		                			<td><?= $log['activity_log_timestamp'] ?></td>
+		                		</tr>
+		                		<?php endforeach ?>
+		                	<tbody>
+		                	</tbody>
+		                </table>
+		               <div class="modal-footer">
+			                <button type="button" class="btn me-1 mb-1" data-bs-dismiss="modal">
+			                    Tutup
+			                </button>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+
             <!-- footer -->
             <?php include("../../layout/footer.php"); ?>
         </div>
@@ -346,6 +390,21 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 		    </script>";
 	}
 	?>
+
+	<script>
+		let dataTable = new DataTable("#logs_table", {
+			responsive: {
+				details: {
+					display: DataTable.Responsive.display.childRowImmediate
+				}
+			},
+			searching: false,
+			ordering: false,
+			language: {
+				lengthMenu: " _MENU_ log per halaman"
+			}
+		});
+	</script>
 
     <script src="<?php echo BASE_URL; ?>/assets/extensions/quill/quill.min.js"></script>
     <script>

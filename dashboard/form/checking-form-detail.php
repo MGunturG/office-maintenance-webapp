@@ -38,6 +38,8 @@ $form_master_id = $_GET['id'];
 $form_data = $_Form->FormDetail($form_master_id); // get form detail
 $form_status = $form_data['checkingform_master_status'];
 
+$data_log = $_Log->LogFetch("Checking Form", $form_master_id);
+
 // get data items that already checked
 $data_item_form = $_Form->FormDetailGetAllItem($form_master_id);
 
@@ -137,6 +139,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 											<?php if ($form_status != 1): ?>
 												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form_item">Tambah Barang</button>
 											<?php endif; ?>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_log_form">Lihat Log</button>
 										</div>
 									</div>
 								</div>
@@ -252,6 +255,48 @@ if (isset($_POST['form_redraft_Submit'])) {
 	            </div>
 	        </form>
 
+	        <!-- modal view item's log -->
+			<div class="modal fade text-left" id="modal_log_form" tabindex="-1" role="dialog">
+		        <div class="modal-dialog" role="document">
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <h5 class="modal-title">Log Aktivitas Form</h5>
+		                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+		                        aria-label="Close">
+		                        <i data-feather="x"></i>
+		                    </button>
+		                </div>
+
+		                <?php
+		                	
+		                ?>
+		                <table id="logs_table" class="table table-striped">
+		                	<thead>
+		                		<tr>
+		                			<th>Activity</th>
+		                			<th>By User</th>
+		                			<th>Date</th>
+		                		</tr>
+		                	</thead>
+		                		<?php foreach ($data_log as $log): ?>
+		                		<tr>
+		                			<td><?= $log['activity_log_action'] ?></td>
+		                			<td><?= $log['activity_log_user'] ?></td>
+		                			<td><?= $log['activity_log_timestamp'] ?></td>
+		                		</tr>
+		                		<?php endforeach ?>
+		                	<tbody>
+		                	</tbody>
+		                </table>
+		               <div class="modal-footer">
+			                <button type="button" class="btn me-1 mb-1" data-bs-dismiss="modal">
+			                    Tutup
+			                </button>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+
             <!-- footer -->
             <?php include("../../layout/footer.php"); ?>
         </div>
@@ -280,6 +325,22 @@ if (isset($_POST['form_redraft_Submit'])) {
 				search: "Cari: ",
 			},
 			paging: false,
+		});
+
+		let dataTable = new DataTable("#logs_table", {
+			responsive: {
+				details: {
+					display: DataTable.Responsive.display.childRowImmediate
+				}
+			},
+			rowReorder: {
+				selector: 'td:nth-child(9)'
+			},
+			searching: false,
+			ordering: false,
+			language: {
+				lengthMenu: " _MENU_ log per halaman"
+			}
 		});
 	</script>
 
