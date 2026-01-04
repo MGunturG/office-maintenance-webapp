@@ -29,8 +29,8 @@ class Logs {
      * @param int    $entity_id   The specific ID to track.
      * @return array Collection of activity logs.
      */
-	function LogFetch(string $entity_type, $entity_id) {
-		get_data(
+	function LogFetch($entity_type, $entity_id) {
+		return get_data(
 			"SELECT * FROM activity_log WHERE activity_log_entity_type = '$entity_type' AND activity_log_entity_id = '$entity_id' ORDER BY ".
 			"activity_log_timestamp DESC"
 		);
