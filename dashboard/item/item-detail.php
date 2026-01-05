@@ -124,7 +124,7 @@ if (isset($_POST['update_item_Submit'])) {
 									</div>
 									<div class="form-group">
 										<label>Kategori</label>
-										<input type="text" class="form-control" value="<?= $data_item['item_master_category'] ?>" readonly="readonly">
+										<input type="text" class="form-control" value="<?= $_Item->ItemGetCategoryLabel($data_item['item_master_category']) ?>" readonly="readonly">
 									</div>
 									<div class="form-group">
 										<label>Status</label>
@@ -133,8 +133,8 @@ if (isset($_POST['update_item_Submit'])) {
 									<?php if ($data_item['item_master_status']!="3"): ?>
 									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_item">Perbarui Data</button>
 									<?php endif ?>
-									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_change_pict_item">Ganti Gambar</button>
-									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_item">Lihat Log</button>
+									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_change_pict_item"><i class="bi bi-image"></i> Ganti Gambar</button>
+									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_item"><i class="bi bi-list-columns-reverse"></i> Lihat Log</button>
 								</div>
 							</div>
 						</div>

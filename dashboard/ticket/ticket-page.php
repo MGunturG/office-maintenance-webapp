@@ -105,7 +105,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_area">Buat Tiket Baru</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_area"><i class="bi bi-plus-lg"></i> Buat Tiket Baru</button>
 										</div>
 									</div>
 								</div>
@@ -216,7 +216,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 	                        	</div>
 	                        </div>
 	                        <div class="modal-footer">
-	                        	<button type="submit" name="create_ticket_Submit" class="btn btn-primary me-1 mb-1">Submit</button>
+	                        	<button type="submit" name="create_ticket_Submit" class="btn btn-primary me-1 mb-1">Buat Tiket</button>
 	                            <button type="button" class="btn" data-bs-dismiss="modal">
 	                                Tutup
 	                            </button>

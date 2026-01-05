@@ -102,9 +102,9 @@ if (isset($_POST['user_Update'])) {
 													</div>
 
 													<div class="col-12 d-flex justify-content">
-														<button type="submit" name="user_Update" class="btn btn-primary me-1 mb-1">Update Detail</button>
+														<button type="submit" name="user_Update" class="btn btn-primary me-1 mb-1"><i class="bi bi-check2-square"></i> Update Detail</button>
 														<button type="reset"
-													class="btn btn-light-secondary me-1 mb-1">Reset Form</button>
+													class="btn btn-light-secondary me-1 mb-1"><i class="bi bi-arrow-counterclockwise"></i> Reset Form</button>
 												</div>
 											</div>
 										</form>

@@ -137,9 +137,9 @@ if (isset($_POST['form_redraft_Submit'])) {
 
 										<div class="col d-flex justify-content-end">
 											<?php if ($form_status != 1): ?>
-												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form_item">Tambah Barang</button>
+												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form_item"><i class="bi bi-plus-lg"></i> Tambah Barang</button>
 											<?php endif; ?>
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_log_form">Lihat Log</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_log_form"><i class="bi bi-list-columns-reverse"></i> Lihat Log</button>
 										</div>
 									</div>
 								</div>
@@ -183,9 +183,13 @@ if (isset($_POST['form_redraft_Submit'])) {
 												</tbody>
 											</table>
 											<?php if ($form_status != 1): ?>
-												<input type="submit" name="form_Submit" value="Simpan Form" class="btn btn-primary">
+												<button type="submit" name="form_Submit" class="btn btn-success">
+													<i class="bi bi-check2-square"></i> Simpan Form
+												</button>
 												<?php else: ?>
-												<input type="submit" name="form_redraft_Submit" value="Redraft Form" class="btn btn-warning">
+												<button type="submit" name="form_redraft_Submit" class="btn btn-warning">
+													<i class="bi bi-repeat"></i> Re-draft Form
+												</button>
 											<?php endif ?>
 										</form>
 									</div>

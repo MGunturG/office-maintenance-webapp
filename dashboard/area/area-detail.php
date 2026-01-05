@@ -97,7 +97,7 @@ if (isset($_POST['create_item_Submit'])) {
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item">Tambah Barang</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item"><i class="bi bi-plus-lg"></i> Tambah Barang</button>
 										</div>
 									</div>
 								</div>
@@ -135,7 +135,7 @@ if (isset($_POST['create_item_Submit'])) {
 													<?php foreach ($data_item as $item): ?>
 													<tr>
 														<td><?php echo htmlspecialchars($item['item_master_name']); ?></td>
-														<td><?php echo htmlspecialchars($item['item_master_category']); ?></td>
+														<td><?php echo htmlspecialchars($_Item->ItemGetCategoryLabel($item['item_master_category'])); ?></td>
 														<?php if ($item['item_master_status'] == "1"): ?>
 															<td><span class="badge bg-success">Active</span></td>
 														<?php elseif ($item['item_master_status'] == "0"): ?>

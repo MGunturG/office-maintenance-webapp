@@ -97,7 +97,8 @@ if (isset($_POST['create_form_Submit'])) {
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form">Buat Form Baru</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form"><i class="bi bi-plus-lg"></i> Buat Form Baru
+											</button>
 										</div>
 									</div>
 								</div>
@@ -186,7 +187,7 @@ if (isset($_POST['create_form_Submit'])) {
 	                        	</div>
 	                        </div>
 	                        <div class="modal-footer">
-	                        	<button type="submit" name="create_form_Submit" class="btn btn-primary me-1 mb-1">Tambah</button>
+	                        	<button type="submit" name="create_form_Submit" class="btn btn-primary me-1 mb-1">Buat Form</button>
 	                            <button type="button" class="btn me-1 mb-1" data-bs-dismiss="modal">
 	                                Batal
 	                            </button>

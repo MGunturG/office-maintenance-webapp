@@ -169,7 +169,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_effdate'] ?>"readonly="readonly">
 												</div>
 
-												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_ticket">Lihat Log</button>
+												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_ticket"><i class="bi bi-list-columns-reverse"></i> Lihat Log</button>
 											</div>
 										</div>
 									</div>
@@ -194,11 +194,11 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 														<div id="comment_editor">
 										                </div>
 													</div>
-													<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1">Tambah Komentar</button>
+													<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1"><i class="bi bi-chat"></i> Kirim Komentar</button>
 
-													<button id="add_picture_button" type="button" class="btn btn-warning me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_upload_picture">Upload Foto</button>
+													<button id="add_picture_button" type="button" class="btn btn-warning me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_upload_picture"><i class="bi bi-image"></i> Upload Foto</button>
 
-													<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress">Update Status Tiket</button>
+													<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress"><i class="bi bi-tag"></i> Update Status Tiket</button>
 
 												</form>
 											</div>

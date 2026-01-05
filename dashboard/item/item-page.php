@@ -92,7 +92,7 @@ if (isset($_POST['create_item_Submit'])) {
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item">Tambah Barang</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item"><i class="bi bi-plus-lg"></i> Tambah Barang</button>
 										</div>
 									</div>
 								</div>
@@ -119,7 +119,7 @@ if (isset($_POST['create_item_Submit'])) {
 													<tr>
 														<td><a href="<?php echo htmlspecialchars("item-detail.php?id=".$item['item_master_id']) ?>"><?= $item['item_master_name'] ?></a></td>
 														<td><?php echo htmlspecialchars($location); ?></td>
-														<td><?php echo htmlspecialchars($item['item_master_category']); ?></td>
+														<td><?php echo htmlspecialchars($_Item->ItemGetCategoryLabel($item['item_master_category'])); ?></td>
 														<?php if ($item['item_master_status'] == "1"): ?>
 															<td><span class="badge bg-success">Active</span></td>
 														<?php elseif ($item['item_master_status'] == "0"): ?>

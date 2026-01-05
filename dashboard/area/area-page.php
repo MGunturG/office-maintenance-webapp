@@ -72,7 +72,7 @@ if (isset($_POST['create_area_Submit'])) {
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_area">Tambah Lokasi</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_area"><i class="bi bi-plus-lg"></i> Tambah Lokasi</button>
 										</div>
 									</div>
 								</div>
