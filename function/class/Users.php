@@ -14,7 +14,7 @@ class Users {
 	 * @param string	$username a new username want to create
 	 * @param string 	$password a new password for the user
 	 * @param string	$role user role, admin or user (regular user)
-	 * * @return void 	this function only execute sql query
+	 * @return void 	this function only execute sql query
 	 */
 	function UserCreate($username, $password, $role) {
 		$create_by = $_SESSION['user_uname'];
@@ -46,7 +46,7 @@ class Users {
 	/**
 	 * Get all users on current database
 	 * 
-	 * * @return array 	return query as array of users from database
+	 * @return array 	return query as array of users from database
 	 */
 	function UserGetAll() {
 		return get_data(
@@ -59,7 +59,7 @@ class Users {
 	 * Get certain user detail of given user id
 	 * 
 	 * @param int 		$user_id the unique ID of the user
-	 * * @return array 	return array of given user id
+	 * @return array 	return array of given user id
 	 */
 	function UserDetail($user_id) {
 		return get_single_data("SELECT * FROM user_master WHERE user_master_id = '$user_id'");
@@ -71,7 +71,7 @@ class Users {
 	 *
 	 * @param int 		 $user_id   the unique ID of the user to update.
 	 * @param string     $user_role the new role designation (e.g., 'admin', 'user').
-	 * * @return void
+	 * @return void
 	 */
 	function UserRoleUpdate($user_id, $user_role) {
 		run_query(
@@ -82,7 +82,7 @@ class Users {
 		// sweetalert
 		$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
 		$_SESSION['alert_title'] = "Mantap!";
-		$_SESSION['alert_text'] = "Role Akun Berhasil Diperbarui.";
+		$_SESSION['alert_text'] = "Role akun berhasil diperbarui.";
 		$_SESSION['alert_icon'] = "success"; // success, question, error, warning, info
 		$_SESSION['alert_button_text'] = "OK";
 	}
@@ -96,7 +96,7 @@ class Users {
 	 * @param int 		 $user_id       The unique identifier for the user.
 	 * @param string     $user_role     The administrative or access role level.
 	 * @param string     $user_password The plain-text password to be hashed.
-	 * * @return void
+	 * @return void
 	 */
 	function UserPasswordUpdate($user_id, $user_role, $user_password) {
 		$user_password = password_hash($user_password, PASSWORD_DEFAULT);
@@ -119,7 +119,7 @@ class Users {
 	 *
 	 * @param string 	$username The unique username entered by the user.
 	 * @param string 	$password The plain-text password to verify against the hash.
-	 * * @return bool 	Returns true if credentials match and session is set, false otherwise.
+	 * @return bool 	Returns true if credentials match and session is set, false otherwise.
 	 */
 	function UserLogin($username, $password) {
 		// if user and password match on database 

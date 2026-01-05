@@ -142,10 +142,10 @@ class Items {
 
 
 	/**
-     * Fetch all items assigned to a specific location.
+     * Fetch an item assigned to a specific id.
      *
-     * @param int $area_id Target area ID.
-     * @return array Collection of items in the area.
+     * @param int $item_id Target item ID.
+     * @return array Collection of ian tem.
      */
 	function ItemGetById($item_id) {
 		return get_single_data(

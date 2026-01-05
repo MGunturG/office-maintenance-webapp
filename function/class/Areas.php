@@ -8,12 +8,12 @@
 class Areas {
 
 	/**
-     * Creates a new area record after checking for duplicates.
+     * Creates a new area record 
      *
      * @param string $area_name        The name of the area.
      * @param string $area_description A brief description of the location.
      * @param int    $area_floor       The floor number where the area is located.
-     * * @return bool Returns true if the area was created, false if it already exists.
+     * @return bool Returns true if the area was created, false if it already exists.
      */
 	function AreaCreate($area_name, $area_description, $area_floor) {
 		$create_by = $_SESSION['user_uname'];

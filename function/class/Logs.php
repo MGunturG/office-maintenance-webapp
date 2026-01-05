@@ -9,7 +9,7 @@ class Logs {
 
 	/**
      * Create a new activity log entry.
-     * * @param string $entity_type The module/table name (e.g., 'Item', 'Ticket').
+     * @param string $entity_type The module/table name (e.g., 'Item', 'Ticket').
      * @param int    $entity_id   The primary key of the affected record.
      * @param string $action      Description of the change or event.
      * @param string $by_user     Username of the person performing the action.
@@ -25,7 +25,7 @@ class Logs {
 	/**
      * Retrieve chronological history for a specific entity.
      * Results are ordered by the most recent timestamp first.
-     * * @param string $entity_type The module/table name to filter by.
+     * @param string $entity_type The module/table name to filter by.
      * @param int    $entity_id   The specific ID to track.
      * @return array Collection of activity logs.
      */

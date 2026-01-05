@@ -9,7 +9,7 @@ class Forms{
 
 	/**
      * Initialize a new checking form master record.
-     * * @param string $effective_date Date of inspection.
+     * @param string $effective_date Date of inspection.
      * @param int    $area_id        Target location ID.
      * @param string $remark         Additional notes.
      * @return void
@@ -33,7 +33,7 @@ class Forms{
 
 	/**
      * Retrieve details for a single master form.
-     * * @param int $form_master_id Primary key of the form.
+     * @param int $form_master_id Primary key of the form.
      * @return array|null Result set from checkingform_master.
      */
 	function FormDetail($form_master_id) {
@@ -45,7 +45,7 @@ class Forms{
 
 	/**
      * Link a specific item to an inspection form.
-     * * @param int    $form_master_id Target form ID.
+     * @param int    $form_master_id Target form ID.
      * @param int    $item_id        Target item ID.
      * @param string $item_status    The condition status of the item.
      * @return void
@@ -69,7 +69,7 @@ class Forms{
 	/**
      * Finalize form and change status to 'Submitted'.
      * Sets success session alerts.
-     * * @param int $form_master_id Target form ID.
+     * @param int $form_master_id Target form ID.
      * @return void
      */
 	function FormSave($form_master_id) {
@@ -90,7 +90,7 @@ class Forms{
 	/**
      * Revert form status to 'Draft'.
      * Sets info session alerts.
-     * * @param int $form_master_id Target form ID.
+     * @param int $form_master_id Target form ID.
      * @return void
      */
 	function FormRedraft($form_master_id) {
@@ -110,7 +110,7 @@ class Forms{
 
 	/**
      * Fetch all existing master checking forms.
-     * * @return array Collection of all forms.
+     * @return array Collection of all forms.
      */
 	function FormMasterGetAll() {
 		return get_data(
@@ -121,7 +121,7 @@ class Forms{
 
 	/**
      * Fetch all items associated with a specific form.
-     * * @param int $form_master_id Target form ID.
+     * @param int $form_master_id Target form ID.
      * @return array Collection of item details.
      */
 	function FormDetailGetAllItem($form_master_id) {
@@ -133,7 +133,7 @@ class Forms{
 
 	/**
      * Remove a specific item from an inspection form.
-     * * @param int $item_id        Target item ID.
+     * @param int $item_id        Target item ID.
      * @param int $form_master_id Target form ID.
      * @return void
      */

@@ -9,7 +9,7 @@ class Tickets {
 
 	/**
      * Create a new maintenance ticket and initialize an 'Open' status.
-     * * @param string $topic          Brief title of the issue.
+     * @param string $topic          Brief title of the issue.
      * @param string $description    Detailed problem report.
      * @param int    $item_id        ID of the asset needing repair.
      * @param string $effective_date The reporting date.
@@ -51,7 +51,7 @@ class Tickets {
 
 	/**
      * Fetch master details for a single ticket.
-     * * @param int $ticket_id Primary key of the ticket.
+     * @param int $ticket_id Primary key of the ticket.
      * @return array|null Record from ticket_master.
      */
 	function TicketDetail($ticket_id) {
@@ -63,7 +63,7 @@ class Tickets {
 
 	/**
      * Transition a ticket to a new status (Open, Progress, Closed, etc.).
-     * * @param int    $ticket_id   Primary key of the ticket.
+     * @param int    $ticket_id   Primary key of the ticket.
      * @param string $status_code Code corresponding to code_master table.
      * @return bool Execution result.
      */
@@ -76,7 +76,7 @@ class Tickets {
 
 	/**
      * Add a rich-text or plain-text comment to a ticket thread.
-     * * @param int    $ticket_id       Target ticket ID.
+     * @param int    $ticket_id       Target ticket ID.
      * @param string $comment_content The message or HTML content.
      * @param string $comment_by      Username of the commenter.
      * @return void
@@ -91,7 +91,7 @@ class Tickets {
 
 	/**
      * Retrieve the comment history for a specific ticket.
-     * * @param int $ticket_id Target ticket ID.
+     * @param int $ticket_id Target ticket ID.
      * @return array Collection of comments ordered by most recent first.
      */
 	function TicketGetComment($ticket_id) {
@@ -103,7 +103,7 @@ class Tickets {
 
 	/**
      * Fetch all maintenance tickets in the system.
-     * * @return array Collection of all ticket_master records.
+     * @return array Collection of all ticket_master records.
      */
 	function TicketGetAll() {
 		return get_data(
