@@ -36,7 +36,7 @@ class Items {
 			// sweetalert
 			$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
 			$_SESSION['alert_title'] = "Mantap!";
-			$_SESSION['alert_text'] = "Berhasil Menambahkan Barang";
+			$_SESSION['alert_text'] = "Berhasil menambahkan barang";
 			$_SESSION['alert_icon'] = "success"; // success, question, error, warning, info
 			$_SESSION['alert_button_text'] = "OK";
 
@@ -83,7 +83,7 @@ class Items {
 		// sweetalert
 		$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
 		$_SESSION['alert_title'] = "Mantap!";
-		$_SESSION['alert_text'] = "Data Barang Berhasil Diperbarui";
+		$_SESSION['alert_text'] = "Data barang berhasil diperbarui";
 		$_SESSION['alert_icon'] = "success"; // success, question, error, warning, info
 		$_SESSION['alert_button_text'] = "OK";
 	}
@@ -173,6 +173,19 @@ class Items {
 		return get_data(
 			"SELECT * FROM code_master WHERE code_master_category = 'item_status'"
 		);
+	}
+
+
+	/**
+     * Retrieve category labels defined in the code_master table.
+     * @return string Label of item's category.
+     */
+	function ItemGetCategoryLabel($category_code) {
+		$data_category = get_single_data(
+			"SELECT code_master_label FROM code_master WHERE code_master_category = 'item_category' ".
+			"AND code_master_code = '$category_code'"
+		);
+		return $data_category['code_master_label'];
 	}
 }
 ?>
