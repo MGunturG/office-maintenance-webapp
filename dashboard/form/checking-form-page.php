@@ -45,13 +45,21 @@ if (isset($_POST['create_form_Submit'])) {
 		$_POST['form_remark'],
 	);
 
+	// show alert on page redirect
+	$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
+	$_SESSION['alert_title'] = "Mantap!";
+	$_SESSION['alert_text'] = "Draft form pengecekan berhasil dibuat. Silakan masukan barang yang akan dicek dengan tombol : Tambah Barang";
+	$_SESSION['alert_icon'] = "success"; // success, question, error, warning, info
+	$_SESSION['alert_button_text'] = "OK";
+
 	// get latest id that just submited
 	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
 
 	// create new log
 	$_Log->LogCreate('Checking Form', $insert_id, 'Created new checking form', $_SESSION['user_uname']);
 
-	header("location:".BASE_URL."/dashboard/form/checking-form-detail.php?id=".$insert_id);
+	// header("location:".BASE_URL."/dashboard/form/checking-form-detail.php?id=".$insert_id);
+	echo "<script>document.location.href = 'checking-form-detail.php?id=$insert_id';</script>"; exit;
 }
 
 ?>
