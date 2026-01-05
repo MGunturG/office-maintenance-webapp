@@ -93,7 +93,7 @@ if (isset($_POST['create_form_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Data Form Pengecekan</h4>
+											<h4>Form Pengecekan</h4>
 										</div>
 
 										<div class="col d-flex justify-content-end">
@@ -116,6 +116,7 @@ if (isset($_POST['create_form_Submit'])) {
 													<th>Remark</th>
 													<th>Dibuat Oleh</th>
 													<th>Status</th>
+													<th>Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -134,6 +135,7 @@ if (isset($_POST['create_form_Submit'])) {
 													<?php else: ?>
 														<td><span class="badge bg-warning">Draft</span></td>
 													<?php endif ?>
+													<td><a href="<?php echo htmlspecialchars("checking-form-detail.php?id=".$form['checkingform_master_id']) ?>" class="btn btn-sm btn-primary"><i class="bi bi-eye-fill"></i> Lihat Detail</a></td>
 												</tr>
 												<?php $i++; endforeach ?>
 											</tbody>
@@ -226,6 +228,10 @@ if (isset($_POST['create_form_Submit'])) {
 			rowReorder: {
 				selector: 'td:nth-child(9)'
 			},
+			columnDefs: [
+				{ width: '20%', targets: 2 },
+				{ width: '20%', targets: 3 },
+			],
 			order: [
 				[5, 'asc'],
 				[1, 'desc'],

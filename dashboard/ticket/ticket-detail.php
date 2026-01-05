@@ -130,11 +130,11 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 									<?php if ($data_ticket['ticket_master_status'] == 0): ?>
 										<td><span class="badge bg-success">Open</span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] ==  1): ?>
-										<td><span class="badge bg-info">In Progress</span></td>
+										<td><span class="badge bg-info">Dalam Pengerjaan</span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 2): ?>
-										<td><span class="badge bg-warning">On Hold</span></td>
+										<td><span class="badge bg-warning">Ditunda Sementara</span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 3): ?>
-										<td><span class="badge bg-primary">Resolved</span></td>
+										<td><span class="badge bg-primary">Selesai Pengerjaan</span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 4): ?>
 										<td><span class="badge bg-primary">Closed</span></td>
 									<?php endif ?>
@@ -257,10 +257,10 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 												<label>Progress Tiket</label>
 												<select class="form-control" name="ticket_status_progress" required>
 													<option value="">--- Pilih Status Progress ---</option>
-													<option value="1">In Progress</option>
-													<option value="2">On Hold</option>
-													<option value="3">Resolved</option>
-													<option value="4">Closed</option>
+													<option value="1">Dalam Pengerjaan</option>
+													<option value="2">Tunda Sementara</option>
+													<option value="3">Pengerjaan Selesai</option>
+													<option value="4">Tutup Tiket</option>
 												</select>
 											</div>
 

@@ -101,7 +101,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Data Tiket Maintenance</h4>
+											<h4>Tiket Maintenance</h4>
 										</div>
 
 										<div class="col d-flex justify-content-end">
@@ -122,6 +122,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 													<th>Permasalahan</th>
 													<th>Dibuat Oleh</th>
 													<th>Status</th>
+													<th>Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -142,6 +143,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 													<?php elseif ($ticket['ticket_master_status'] == 4): ?>
 														<td><span class="badge bg-primary">Closed</span></td>
 													<?php endif ?>
+													<td><a href="ticket-detail.php?id=<?= $ticket['ticket_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i> Lihat Detail</a></td>
 												</tr>
 												<?php endforeach ?>
 											</tbody>

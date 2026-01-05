@@ -131,7 +131,7 @@ if (isset($_POST['update_item_Submit'])) {
 										<input type="text" class="form-control" value="<?= $item_status['code_master_label'] ?>" readonly="readonly">
 									</div>
 									<?php if ($data_item['item_master_status']!="3"): ?>
-									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_item">Perbarui Data</button>
+									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_item"><i class="bi bi-pencil-square"></i> Edit Data Barang</button>
 									<?php endif ?>
 									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_change_pict_item"><i class="bi bi-image"></i> Ganti Gambar</button>
 									<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_item"><i class="bi bi-list-columns-reverse"></i> Lihat Log</button>

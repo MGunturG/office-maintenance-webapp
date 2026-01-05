@@ -107,6 +107,7 @@ if (isset($_POST['create_item_Submit'])) {
 													<th>Lokasi</th>
 													<th>Kategori</th>
 													<th>Status</th>
+													<th>Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -129,6 +130,7 @@ if (isset($_POST['create_item_Submit'])) {
 														<?php elseif ($item['item_master_status'] == "3"): ?>
 															<td><span class="badge bg-warning">Maintenance</span></td>
 														<?php endif ?>
+														<td><a href="item-detail.php?id=<?= $item['item_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i> Lihat Detail</a></td>
 													</tr>
 												<?php endforeach ?>
 											</tbody>
@@ -239,11 +241,5 @@ if (isset($_POST['create_item_Submit'])) {
 
 	<!-- js -->
 	<?php include("../../layout/javascript.php") ?>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-		    $('.js-example-basic-single').select2();
-		});
-	</script>
 </body>
 </html>

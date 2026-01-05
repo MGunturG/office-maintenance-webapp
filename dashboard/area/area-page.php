@@ -87,6 +87,7 @@ if (isset($_POST['create_area_Submit'])) {
 													<th>Nama Area</th>
 													<th>Lokasi</th>
 													<th>Deskripsi</th>
+													<th>Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -95,6 +96,7 @@ if (isset($_POST['create_area_Submit'])) {
 													<td><a href="area-detail.php?id=<?= $area['area_master_id'] ?>"><?= $area['area_master_name']; ?></a></td>
 													<td><?="Lantai ". $area['area_master_floor']; ?></td>
 													<td><?= $area['area_master_description']; ?></td>
+													<td><a href="area-detail.php?id=<?= $area['area_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i> Lihat Detail</a></td>
 												</tr>
 												<?php endforeach ?>
 											</tbody>
