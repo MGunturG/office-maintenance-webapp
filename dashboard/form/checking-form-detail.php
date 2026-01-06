@@ -84,6 +84,12 @@ if (isset($_POST['form_add_item_Submit'])) {
 if (isset($_POST['form_Submit'])) {
 	$_Form->FormSave($form_master_id);
 
+	$items_on_form = $_Form->FormDetailGetAllItem($form_master_id);
+	foreach ($items_on_form as $item) {
+		// var_dump($item['checkingform_detail_item_id']);
+		$_Log->LogCreate("Item", $item['checkingform_detail_item_id'], "Item has been inspected", $_SESSION['user_uname']);
+	}
+
 	// create new log
 	$_Log->LogCreate('Checking Form', $form_master_id, 'Submitted the form', $_SESSION['user_uname']);
 
@@ -176,7 +182,8 @@ if (isset($_POST['form_redraft_Submit'])) {
 														<?php $item_detail = $_Item->ItemDetail($item_form['checkingform_detail_item_id']) ?>
 														<tr>
 															<td><?= $i ?></td>
-															<td><?= $item_detail['item_master_name'] ?></td>
+															<!-- <td><?= $item_detail['item_master_name'] ?></td> -->
+															<td><a href="<?= BASE_URL ?>/dashboard/item/item-detail.php?id=<?= $item_detail['item_master_id'] ?>"><?= $item_detail['item_master_name'] ?></a></td>
 															<td><a href="checking-form-detail-rm.php?item_id=<?= $item_detail['item_master_id']?>&&form_id=<?= $form_master_id ?>"><?php echo ($form_status!=1) ? "Hapus" : "" ?></a></td>
 														</tr>
 													<?php $i++; endforeach ?>
