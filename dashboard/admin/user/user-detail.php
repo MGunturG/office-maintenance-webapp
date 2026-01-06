@@ -36,7 +36,13 @@ if (isset($_POST['user_Update'])) {
 
 	} else { // else, update role and password
 		$_User->UserPasswordUpdate($user_id, $_POST['user_role'], $_POST['user_passw']);
-		echo "<script>document.location.href = 'user-page.php';</script>"; exit;
+
+		// if current user update their password, logout
+		if ($user_uname == $_SESSION['user_uname']) {
+			header("location:../../../function/logout-function.php");
+		} else {
+			echo "<script>document.location.href = 'user-page.php';</script>"; exit;
+		}
 	}
 }
 ?>
