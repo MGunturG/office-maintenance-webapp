@@ -93,11 +93,11 @@ if (isset($_POST['create_form_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Form Pengecekan</h4>
+											<h3>Form Pengecekan</h3>
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form"><i class="bi bi-plus-lg"></i> Buat Form Baru
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form"><i class="bi bi-plus-lg"></i> <span class="d-none d-lg-inline"> Buat Form Baru</span>
 											</button>
 										</div>
 									</div>
@@ -135,7 +135,7 @@ if (isset($_POST['create_form_Submit'])) {
 													<?php else: ?>
 														<td><span class="badge bg-warning">Draft</span></td>
 													<?php endif ?>
-													<td><a href="<?php echo htmlspecialchars("checking-form-detail.php?id=".$form['checkingform_master_id']) ?>" class="btn btn-sm btn-primary"><i class="bi bi-eye-fill"></i> Lihat Detail</a></td>
+													<td><a href="<?php echo htmlspecialchars("checking-form-detail.php?id=".$form['checkingform_master_id']) ?>" class="btn btn-sm btn-primary"><i class="bi bi-eye-fill"></i><span class="d-none d-lg-inline"> Lihat Detail</span></a></td>
 												</tr>
 												<?php $i++; endforeach ?>
 											</tbody>

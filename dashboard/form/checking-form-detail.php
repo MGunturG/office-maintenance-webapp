@@ -143,9 +143,9 @@ if (isset($_POST['form_redraft_Submit'])) {
 
 										<div class="col d-flex justify-content-end">
 											<?php if ($form_status != 1): ?>
-												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form_item"><i class="bi bi-plus-lg"></i> Tambah Barang</button>
+												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_form_item"><i class="bi bi-plus-lg"></i> <span class="d-none d-lg-inline"> Tambah Barang</span></button>
 											<?php endif; ?>
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_log_form"><i class="bi bi-list-columns-reverse"></i> Lihat Log</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_log_form"><i class="bi bi-list-columns-reverse"></i> <span class="d-none d-lg-inline"> Lihat Log</span></button>
 										</div>
 									</div>
 								</div>

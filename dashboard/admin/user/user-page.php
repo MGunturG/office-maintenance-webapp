@@ -89,9 +89,9 @@ if (isset($_POST['create_new_user_Submit'])) {
 													</div>
 
 													<div class="col-12 d-flex justify-content">
-														<button type="submit" name="create_new_user_Submit" class="btn btn-primary me-1 mb-1"><i class="bi bi-person-plus"></i> Buat</button>
+														<button type="submit" name="create_new_user_Submit" class="btn btn-primary me-1 mb-1"><i class="bi bi-person-plus"></i> <span class="d-none d-lg-inline"> Buat</span></button>
 														<button type="reset"
-													class="btn btn-light-secondary me-1 mb-1"><i class="bi bi-arrow-counterclockwise"></i> Reset Form</button>
+													class="btn btn-light-secondary me-1 mb-1"><i class="bi bi-arrow-counterclockwise"></i> <span class="d-none d-lg-inline"> Reset Form</span></button>
 													</div>
 												</div>
 											</div>

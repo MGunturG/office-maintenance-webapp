@@ -101,11 +101,11 @@ if (isset($_POST['create_ticket_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Tiket Maintenance</h4>
+											<h3>Tiket Maintenance</h3>
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_area"><i class="bi bi-plus-lg"></i> Buat Tiket Baru</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_area"><i class="bi bi-plus-lg"></i> <span class="d-none d-lg-inline"> Buat Tiket Baru</span></button>
 										</div>
 									</div>
 								</div>
@@ -135,15 +135,15 @@ if (isset($_POST['create_ticket_Submit'])) {
 													<?php if ($ticket['ticket_master_status'] == 0): ?>
 														<td><span class="badge bg-success">Open</span></td>
 													<?php elseif ($ticket['ticket_master_status'] == 1): ?>
-														<td><span class="badge bg-info">In Progress</span></td>
+														<td><span class="badge bg-info">Dalam Pengerjaan</span></td>
 													<?php elseif ($ticket['ticket_master_status'] == 2): ?>
-														<td><span class="badge bg-warning">On Hold</span></td>
+														<td><span class="badge bg-warning">Tertunda</span></td>
 													<?php elseif ($ticket['ticket_master_status'] == 3): ?>
-														<td><span class="badge bg-primary">Resolved</span></td>
+														<td><span class="badge bg-primary">Pengerjaan Selesai</span></td>
 													<?php elseif ($ticket['ticket_master_status'] == 4): ?>
 														<td><span class="badge bg-primary">Closed</span></td>
 													<?php endif ?>
-													<td><a href="ticket-detail.php?id=<?= $ticket['ticket_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i> Lihat Detail</a></td>
+													<td><a href="ticket-detail.php?id=<?= $ticket['ticket_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i> <span class="d-none d-lg-inline"> Lihat Detail</span></a></td>
 												</tr>
 												<?php endforeach ?>
 											</tbody>

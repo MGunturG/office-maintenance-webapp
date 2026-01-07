@@ -7,6 +7,7 @@
  */
 
 session_start();
+var_dump($_SESSION['alert_title']);
 
 require '../../config.php';
 include '../../function/db-query.php';
@@ -58,7 +59,7 @@ if (isset($_POST['create_item_Submit'])) {
 		// create new log
 		$_Log->LogCreate('Item', $insert_id, 'Add new item: '.$_POST['item_name'], $_SESSION['user_uname']);
 		
-		echo "<script>document.location.href = 'area-detail.php?id=$area_id';</script>"; exit;
+		header("location: area-detail.php?id=".$area_id); exit();
 	} else {
 		echo "insert nok";
 	}
@@ -93,11 +94,11 @@ if (isset($_POST['create_item_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Detail Lokasi</h4>
+											<h3>Detail Lokasi</h3>
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item"><i class="bi bi-plus-lg"></i> Tambah Barang</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item"><i class="bi bi-plus-lg"></i> <span class="d-none d-lg-inline"> Tambah Barang</span></button>
 										</div>
 									</div>
 								</div>
@@ -146,7 +147,7 @@ if (isset($_POST['create_item_Submit'])) {
 															<td><span class="badge bg-warning">Under Maintenance</span></td>
 														<?php endif ?>
 														<td>
-															<a href="<?= BASE_URL."/dashboard/item/item-detail.php?id=".$item['item_master_id'] ?>">Lihat Barang</a>
+															<a href="<?= BASE_URL."/dashboard/item/item-detail.php?id=".$item['item_master_id'] ?>"class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i><span class="d-none d-md-inline"> Lihat Detail</span></a>
 														</td>
 													</tr>
 													<?php endforeach ?>

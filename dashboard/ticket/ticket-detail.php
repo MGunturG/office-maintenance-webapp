@@ -132,7 +132,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 									<?php elseif ($data_ticket['ticket_master_status'] ==  1): ?>
 										<td><span class="badge bg-info">Dalam Pengerjaan</span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 2): ?>
-										<td><span class="badge bg-warning">Ditunda Sementara</span></td>
+										<td><span class="badge bg-warning">Tertunda</span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 3): ?>
 										<td><span class="badge bg-primary">Selesai Pengerjaan</span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 4): ?>
@@ -169,7 +169,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													<input type="text" class="form-control" value="<?= $data_ticket['ticket_master_effdate'] ?>"readonly="readonly">
 												</div>
 
-												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_ticket"><i class="bi bi-list-columns-reverse"></i> Lihat Log</button>
+												<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_logs_ticket"><i class="bi bi-list-columns-reverse"></i> <span class="d-none d-md-inline"> Lihat Log</span></button>
 											</div>
 										</div>
 									</div>
@@ -196,9 +196,9 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													</div>
 													<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1"><i class="bi bi-chat"></i> Kirim Komentar</button>
 
-													<button id="add_picture_button" type="button" class="btn btn-warning me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_upload_picture"><i class="bi bi-image"></i> Upload Foto</button>
+													<button id="add_picture_button" type="button" class="btn btn-warning me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_upload_picture"><i class="bi bi-image"></i> <span class="d-none d-md-inline"> Upload Foto</span></button>
 
-													<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress"><i class="bi bi-tag"></i> Update Status Tiket</button>
+													<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress"><i class="bi bi-tag"></i> <span class="d-none d-md-inline"> Update Status Tiket</span></button>
 
 												</form>
 											</div>

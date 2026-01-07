@@ -68,11 +68,11 @@ if (isset($_POST['create_area_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Data Lokasi</h4>
+											<h3>Data Lokasi</h3>
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_area"><i class="bi bi-plus-lg"></i> Tambah Lokasi</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_area"><i class="bi bi-plus-lg"></i> <span class="d-none d-lg-inline"> Tambah Lokasi</span></button>
 										</div>
 									</div>
 								</div>
@@ -96,7 +96,7 @@ if (isset($_POST['create_area_Submit'])) {
 													<td><a href="area-detail.php?id=<?= $area['area_master_id'] ?>"><?= $area['area_master_name']; ?></a></td>
 													<td><?="Lantai ". $area['area_master_floor']; ?></td>
 													<td><?= $area['area_master_description']; ?></td>
-													<td><a href="area-detail.php?id=<?= $area['area_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i> Lihat Detail</a></td>
+													<td><a href="area-detail.php?id=<?= $area['area_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i><span class="d-none d-lg-inline"> Lihat Detail</span></a></td>
 												</tr>
 												<?php endforeach ?>
 											</tbody>

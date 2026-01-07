@@ -75,7 +75,7 @@ $data_ticket = $_Ticket->TicketGetAll();
 														<td><?= $ticket['ticket_master_effdate'] ?></td>
 														<td><?= $ticket['ticket_master_topic'] ?></td>
 														<td><?= $ticket['ticket_master_createby'] ?></td>
-														<td><a href="<?= BASE_URL.'/dashboard/ticket/ticket-detail.php?id='.$ticket['ticket_master_id']."&&action=respond" ?>" class="btn icon btn-success"><i class="bi bi-send"></i> Respon</a></td>
+														<td><a href="<?= BASE_URL.'/dashboard/ticket/ticket-detail.php?id='.$ticket['ticket_master_id']."&&action=respond" ?>" class="btn icon btn-success"><i class="bi bi-send"></i> <span class="d-none d-md-inline"> Respon</span></a></td>
 													</tr>
 													<?php endif ?>
 												<?php endforeach ?>

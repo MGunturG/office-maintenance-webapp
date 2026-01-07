@@ -88,11 +88,11 @@ if (isset($_POST['create_item_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Data Barang</h4>
+											<h3>Data Barang</h3>
 										</div>
 
 										<div class="col d-flex justify-content-end">
-											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item"><i class="bi bi-plus-lg"></i> Tambah Barang</button>
+											<button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item"><i class="bi bi-plus-lg"></i> <span class="d-none d-md-inline"> Tambah Barang</span></button>
 										</div>
 									</div>
 								</div>
@@ -130,7 +130,7 @@ if (isset($_POST['create_item_Submit'])) {
 														<?php elseif ($item['item_master_status'] == "3"): ?>
 															<td><span class="badge bg-warning">Maintenance</span></td>
 														<?php endif ?>
-														<td><a href="item-detail.php?id=<?= $item['item_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i> Lihat Detail</a></td>
+														<td><a href="item-detail.php?id=<?= $item['item_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i><span class="d-none d-md-inline"> Lihat Detail</span></a></td>
 													</tr>
 												<?php endforeach ?>
 											</tbody>
