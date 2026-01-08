@@ -47,8 +47,8 @@ if (isset($_POST['create_form_Submit'])) {
 
 	// show alert on page redirect
 	$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
-	$_SESSION['alert_title'] = "Mantap!";
-	$_SESSION['alert_text'] = "Draft form pengecekan berhasil dibuat. Silakan masukan barang yang akan dicek dengan tombol : Tambah Barang";
+	$_SESSION['alert_title'] = "Draft Form Pengecekan Dibuat!";
+	$_SESSION['alert_text'] = "Silakan masukan barang yang akan dicek dengan tombol : Tambah Barang";
 	$_SESSION['alert_icon'] = "success"; // success, question, error, warning, info
 	$_SESSION['alert_button_text'] = "OK";
 
@@ -58,8 +58,8 @@ if (isset($_POST['create_form_Submit'])) {
 	// create new log
 	$_Log->LogCreate('Checking Form', $insert_id, 'Created new checking form', $_SESSION['user_uname']);
 
-	// header("location:".BASE_URL."/dashboard/form/checking-form-detail.php?id=".$insert_id);
-	echo "<script>document.location.href = 'checking-form-detail.php?id=$insert_id';</script>"; exit;
+	header("location:".BASE_URL."/dashboard/form/checking-form-detail.php?id=".$insert_id); exit;
+	// echo "<script>document.location.href = 'checking-form-detail.php?id=$insert_id';</script>"; exit;
 }
 
 ?>

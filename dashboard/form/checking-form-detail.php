@@ -76,7 +76,7 @@ if (isset($_POST['form_add_item_Submit'])) {
 	}
 
 	// refresh page, to refresh current data
-	header("location:checking-form-detail.php?id=".$form_master_id);
+	header("location:checking-form-detail.php?id=".$form_master_id); exit();
 }
 
 
@@ -189,6 +189,9 @@ if (isset($_POST['form_redraft_Submit'])) {
 													<?php $i++; endforeach ?>
 												</tbody>
 											</table>
+											<a href="<?= BASE_URL ?>/dashboard/form/checking-form-page.php" class="btn btn-secondary">
+												<i class="bi bi-arrow-left"></i> Kembali
+											</a>
 											<?php if ($form_status != 1): ?>
 												<button type="submit" name="form_Submit" class="btn btn-success">
 													<i class="bi bi-check2-square"></i> Simpan Form
