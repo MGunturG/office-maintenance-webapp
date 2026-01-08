@@ -92,6 +92,31 @@
                         
                     </ul>
                 </li>
+
+                <!-- Menu -->
+                <li
+                    class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-bar-graph-fill"></i>
+                        <!-- Menu Name -->
+                        <span>Report</span>
+                    </a>
+
+                    <!-- sub menu  -->
+                    <ul class="submenu ">
+                        <!-- Sub Menu Item -->
+                        <li class="submenu-item  ">
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Report A</a>
+                            
+                        </li>
+                        
+                        <li class="submenu-item  ">
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Report B</a>
+                            
+                        </li>
+                        
+                    </ul>
+                </li>
                 
                 <!-- Menu -->
                 <?php if ($_SESSION['user_role'] == "admin"): ?>

@@ -148,9 +148,6 @@ if (isset($_POST['create_new_user_Submit'])) {
 					display: DataTable.Responsive.display.childRowImmediate
 				}
 			},
-			rowReorder: {
-				selector: 'td:nth-child(3)'
-			},
 			language: {
 				lengthMenu: " _MENU_ per halaman"
 			}

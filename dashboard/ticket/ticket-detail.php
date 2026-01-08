@@ -70,7 +70,7 @@ $location = $location['area_master_name'] . " - " . "Lantai " . $location['area_
 // comment submit
 if (isset($_POST['comment_Submit'])) {
 	$_Ticket->TicketAddComment($_GET['id'], $_POST['comment_content'], $_SESSION['user_uname']);
-	header("location:ticket-detail.php?id=".$_GET['id']);
+	header("location:ticket-detail.php?id=".$_GET['id']); exit;
 }
 
 // update ticket status
@@ -194,12 +194,22 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 														<div id="comment_editor">
 										                </div>
 													</div>
-													<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1"><i class="bi bi-chat"></i> Kirim Komentar</button>
 
-													<button id="add_picture_button" type="button" class="btn btn-warning me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_upload_picture"><i class="bi bi-image"></i> <span class="d-none d-md-inline"> Upload Foto</span></button>
+													<div class="row match-height">
+														<div class="col d-flex justify-content">
+															<a href="<?= BASE_URL ?>/dashboard/ticket/ticket-page.php" class="btn btn-secondary me-1 mb-1">
+																<i class="bi bi-arrow-left"></i> Kembali
+															</a>
 
-													<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress"><i class="bi bi-tag"></i> <span class="d-none d-md-inline"> Update Status Tiket</span></button>
+															<button id="add_picture_button" type="button" class="btn btn-warning me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_upload_picture"><i class="bi bi-image"></i> <span class="d-none d-md-inline"> Upload Foto</span></button>
 
+															<button id="update_ticket_button" type="button" class="btn btn-success me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_update_ticket_progress"><i class="bi bi-tag"></i> <span class="d-none d-md-inline"> Update Status Tiket</span></button>
+														</div>
+
+														<div class="col d-flex justify-content-end">
+															<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1"><i class="bi bi-chat"></i> Kirim Komentar</button>
+														</div>
+													</div>
 												</form>
 											</div>
 										</div>
