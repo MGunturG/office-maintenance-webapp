@@ -83,13 +83,13 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']); // set ticket status to close
 		$_Item->ItemUpdateStatus($data_item['item_master_id'], "1"); // update item status to active again
 		$_Ticket->TicketAddComment($_GET['id'], "Tiket <b>Closed</b> dengan remaks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
-		$_Log->LogCreate('Ticket', $_GET['id'], "Ticket closed", $_SESSION['user_uname']);
+		$_Log->LogCreate('Ticket', $_GET['id'], "Ticket closed : ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	} else {
 		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']);
 		$_Ticket->TicketAddComment($_GET['id'], ucfirst($_SESSION['user_uname'])." mengubah status tiket menjadi <b>$status</b> dengan remarks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
-		$_Log->LogCreate("Ticket", $_GET['id'], "Ticket status changed to $status", $_SESSION['user_uname']);
+		$_Log->LogCreate("Ticket", $_GET['id'], "Ticket status changed to $status : ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	}
@@ -183,7 +183,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 									<h4>Komentar</h4>
 								</div>
 
-								<?php if ($data_ticket['ticket_master_status'] != '4'): ?>
+								<?php if ($data_ticket['ticket_master_status'] != '4') { ?>
 								<div class="card-body">
 									<div class="form-body">
 										<div class="row">
@@ -215,7 +215,23 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 										</div>
 									</div>
 								</div>
-								<?php endif ?>
+								<?php } else { ?>
+									<div class="card-body">
+										<div class="form-body">
+											<div class="row">
+												<div class="col">
+													<div class="row match-height">
+														<div class="col d-flex justify-content">
+															<a href="<?= BASE_URL ?>/dashboard/ticket/ticket-page.php" class="btn btn-secondary me-1 mb-1">
+																<i class="bi bi-arrow-left"></i> Kembali
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								<?php } ?>
 
 								<!-- loop comment di sini -->
 								<?php foreach ($data_comment as $comment): ?>
