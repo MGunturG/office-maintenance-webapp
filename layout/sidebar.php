@@ -94,6 +94,7 @@
                 </li>
 
                 <!-- Menu -->
+                <?php if ($_SESSION['user_role'] == "admin"): ?>
                 <li
                     class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
@@ -106,12 +107,17 @@
                     <ul class="submenu ">
                         <!-- Sub Menu Item -->
                         <li class="submenu-item  ">
-                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Report A</a>
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Report Tiket</a>
                             
                         </li>
                         
                         <li class="submenu-item  ">
-                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Report B</a>
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Report Pengecekan</a>
+                            
+                        </li>
+
+                        <li class="submenu-item  ">
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Summary</a>
                             
                         </li>
                         
@@ -119,7 +125,7 @@
                 </li>
                 
                 <!-- Menu -->
-                <?php if ($_SESSION['user_role'] == "admin"): ?>
+                
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-android"></i>
