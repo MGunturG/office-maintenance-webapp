@@ -133,15 +133,15 @@ if (isset($_POST['create_ticket_Submit'])) {
 													<td><?= $ticket['ticket_master_topic'] ?></td>
 													<td><?= $ticket['ticket_master_createby'] ?></td>
 													<?php if ($ticket['ticket_master_status'] == 0): ?>
-														<td><span class="badge bg-success">Open</span></td>
+														<td><span class="badge bg-success"><?= $_Ticket->TicketGetStatus($ticket['ticket_master_status']) ?></span></td>
 													<?php elseif ($ticket['ticket_master_status'] == 1): ?>
-														<td><span class="badge bg-info">Dalam Pengerjaan</span></td>
+														<td><span class="badge bg-info"><?= $_Ticket->TicketGetStatus($ticket['ticket_master_status']) ?></span></td>
 													<?php elseif ($ticket['ticket_master_status'] == 2): ?>
-														<td><span class="badge bg-warning">Tertunda</span></td>
+														<td><span class="badge bg-warning"><?= $_Ticket->TicketGetStatus($ticket['ticket_master_status']) ?></span></td>
 													<?php elseif ($ticket['ticket_master_status'] == 3): ?>
-														<td><span class="badge bg-primary">Pengerjaan Selesai</span></td>
+														<td><span class="badge bg-primary"><?= $_Ticket->TicketGetStatus($ticket['ticket_master_status']) ?></span></td>
 													<?php elseif ($ticket['ticket_master_status'] == 4): ?>
-														<td><span class="badge bg-primary">Closed</span></td>
+														<td><span class="badge bg-primary"><?= $_Ticket->TicketGetStatus($ticket['ticket_master_status']) ?></span></td>
 													<?php endif ?>
 													<td><a href="ticket-detail.php?id=<?= $ticket['ticket_master_id'] ?>" class="btn btn-sm icon btn-primary"><i class="bi bi-eye-fill"></i> <span class="d-none d-lg-inline"> Lihat Detail</span></a></td>
 												</tr>
@@ -249,9 +249,6 @@ if (isset($_POST['create_ticket_Submit'])) {
 				details: {
 					display: DataTable.Responsive.display.childRowImmediate
 				}
-			},
-			rowReorder: {
-				selector: 'td:nth-child(3)'
 			},
 			order: [
 				[4, 'desc'],

@@ -128,15 +128,15 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 								<div class="card-header">
 									<h4>Detail #TIKET<?= $_GET['id'] ?></h4>
 									<?php if ($data_ticket['ticket_master_status'] == 0): ?>
-										<td><span class="badge bg-success">Open</span></td>
+										<td><span class="badge bg-success"><?= $_Ticket->TicketGetStatus($data_ticket['ticket_master_status']) ?></span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] ==  1): ?>
-										<td><span class="badge bg-info">Dalam Pengerjaan</span></td>
+										<td><span class="badge bg-info"><?= $_Ticket->TicketGetStatus($tdata_icket['ticket_master_status']) ?></span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 2): ?>
-										<td><span class="badge bg-warning">Tertunda</span></td>
+										<td><span class="badge bg-warning"><?= $_Ticket->TicketGetStatus($data_ticket['ticket_master_status']) ?></span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 3): ?>
-										<td><span class="badge bg-primary">Selesai Pengerjaan</span></td>
+										<td><span class="badge bg-primary"><?= $_Ticket->TicketGetStatus($data_ticket['ticket_master_status']) ?></span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 4): ?>
-										<td><span class="badge bg-primary">Closed</span></td>
+										<td><span class="badge bg-primary"><?= $_Ticket->TicketGetStatus($data_ticket['ticket_master_status']) ?></span></td>
 									<?php endif ?>
 								</div>
 

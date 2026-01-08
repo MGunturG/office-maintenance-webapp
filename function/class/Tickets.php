@@ -61,6 +61,15 @@ class Tickets {
 	}
 
 
+	function TicketGetStatus($status_code) {
+		$data = get_single_data(
+			"SELECT code_master_label FROM code_master WHERE code_master_category = 'ticket_status' AND ".
+			"code_master_code = '$status_code'"
+		);
+		return $data['code_master_label'];
+	}
+
+
 	/**
      * Transition a ticket to a new status (Open, Progress, Closed, etc.).
      * @param int    $ticket_id   Primary key of the ticket.
