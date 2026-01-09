@@ -80,6 +80,7 @@ if (isset($_POST['create_item_Submit'])) {
 		<div id="main" class="layout-navbar navbar-fixed">
 			<!-- navbar -->
 			<?php include("../../layout/navbar.php"); ?>
+			
 			<div id="main-content">
 				<section id="basic-vertical-layouts">
 					<div class="row match-height">

@@ -107,12 +107,12 @@
                     <ul class="submenu ">
                         <!-- Sub Menu Item -->
                         <li class="submenu-item  ">
-                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Report Tiket</a>
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/report-ticket.php" class="submenu-link">Report Tiket</a>
                             
                         </li>
                         
                         <li class="submenu-item  ">
-                            <a href="<?php echo BASE_URL; ?>/dashboard/report/" class="submenu-link">Report Pengecekan</a>
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/report-checkingform.php" class="submenu-link">Report Pengecekan</a>
                             
                         </li>
 

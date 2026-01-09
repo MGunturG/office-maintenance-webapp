@@ -40,11 +40,14 @@ if (isset($_SESSION['toastalert_icon'])) {
   <!-- <script src="<?php echo BASE_URL; ?>/assets/extensions/simple-datatables/umd/simple-datatables.js"></script> -->
 
   <!-- datatables -->
-  <link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.6/css/dataTables.dataTables.min.css" >
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.6/css/dataTables.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.6.3/css/dataTables.dateTime.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/3.0.7/css/responsive.dataTables.css">
-  <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.3.6/js/dataTables.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+  <script src="https://cdn.datatables.net/datetime/1.6.3/js/dataTables.dateTime.min.js"></script>
   <script src="https://cdn.datatables.net/rowreorder/1.5.0/js/dataTables.rowReorder.js"></script>
   <script src="https://cdn.datatables.net/rowreorder/1.5.0/js/rowReorder.dataTables.js"></script>
   <script src="https://cdn.datatables.net/responsive/3.0.7/js/dataTables.responsive.js"></script>
