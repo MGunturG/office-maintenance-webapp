@@ -125,7 +125,7 @@ if (isset($_POST['create_form_Submit'])) {
 													<?php $location = $_Area->AreaDetail($form['checkingform_master_area_id']); ?>
 												<tr>
 													<!-- <td><?= $i ?></td> -->
-													<td><a href="<?php echo htmlspecialchars("checking-form-detail.php?id=".$form['checkingform_master_id']) ?>">CHECKFORM<?= $form['checkingform_master_id'] ?></a></td>
+													<td><a href="<?php echo htmlspecialchars("checking-form-detail.php?id=".$form['checkingform_master_id']) ?>">#CHECKFORM-<?= $form['checkingform_master_id'] ?></a></td>
 													<td><?php echo htmlspecialchars($form['checkingform_master_effdate']) ?></td>
 													<td><?php echo htmlspecialchars('Lantai '.$location['area_master_floor']. ' - ' .$location['area_master_name']) ?></td>
 													<td><?php echo htmlspecialchars($form['checkingform_master_remark']) ?></td>

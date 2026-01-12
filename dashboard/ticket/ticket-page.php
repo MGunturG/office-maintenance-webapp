@@ -70,6 +70,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 	$ticket_id_that_just_created = mysqli_insert_id($db_connection); 
 
 	$_Log->LogCreate("Ticket", $ticket_id_that_just_created, "Created new ticket and assign ticket to ".$_POST['ticket_pic'], $_SESSION['user_uname']);
+	$_Log->LogCreate("Item", $_POST['ticket_itemid'], "Sent item for maintenance", $_SESSION['user_uname']);
 
 	header("location:ticket-detail.php?id=".$ticket_id_that_just_created);
 }
@@ -128,7 +129,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 											<tbody>
 												<?php foreach ($data_ticket as $ticket): ?>
 												<tr>
-													<td><a href="ticket-detail.php?id=<?= $ticket['ticket_master_id'] ?>"><?= 'TICKET'.$ticket['ticket_master_id'] ?></a></td>
+													<td><a href="ticket-detail.php?id=<?= $ticket['ticket_master_id'] ?>"><?= '#TICKET-'.$ticket['ticket_master_id'] ?></a></td>
 													<td><?= $ticket['ticket_master_effdate'] ?></td>
 													<td><?= $ticket['ticket_master_topic'] ?></td>
 													<td><?= $ticket['ticket_master_createby'] ?></td>
@@ -189,13 +190,13 @@ if (isset($_POST['create_ticket_Submit'])) {
 											<div class="form-group">
 												<label>Permasalahan</label>
 												<input type="text" class="form-control"
-												name="ticket_topic" placeholder="" required>
+												name="ticket_topic" placeholder="Misal: bocor, konsleting, patah, ..." required>
 											</div>
 
 											<div class="form-group">
-												<label>Detail Masalah</label>
+												<label>Detail</label>
 												<textarea class="form-control" name="ticket_description" 
-												placeholder="Alasan detail mengapa perlu dibuatkan tiket maintenance untuk barang tersebut" required></textarea>
+												placeholder="Detail pembuatan tiket maintenance" required></textarea>
 											</div>
 
 											<div class="form-group">

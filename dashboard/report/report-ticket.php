@@ -56,7 +56,7 @@ $data_ticket = get_data($query);
                                 <div class="card-header">
                                     <div class="row match-height">
                                         <div class="col d-flex justify-content">
-                                            <!-- <h3>Data Barang</h3> -->
+                                            <h3>Report Tiket Maintenance</h3>
                                         </div>
 
                                         <div class="col d-flex justify-content-end">
@@ -71,16 +71,45 @@ $data_ticket = get_data($query);
                                         <div class="row match-height">
 
                                             <div class="col d-flex justify-content">
-                                                Start: 
+                                                <div class="form-group">
+                                                    <label>Start Date</label>
                                                 <input type="text" id="min" name="min" class="form-control">
-                                            </div>
-                                            <div class="col d-flex justify-content">
-                                                End: 
-                                                <input type="text" id="max" name="max" class="form-control">
+                                                </div>
                                             </div>
 
                                             <div class="col d-flex justify-content">
-                                                Status: <input type="text" id="search-status" class="form-control" placeholder="Search Status">
+                                                <div class="form-group">
+                                                    <label>End Date</label>
+                                                    <input type="text" id="max" name="max" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col d-flex justify-content">
+                                                <div>
+                                                    <label>Barang</label>
+                                                    <input type="text" id="search-item" class="form-control" placeholder="">
+                                                </div> 
+                                            </div>
+
+                                            <div class="col d-flex justify-content">
+                                                <div>
+                                                    <label>Area/Lokasi</label>
+                                                    <input type="text" id="search-area" class="form-control" placeholder="">
+                                                </div> 
+                                            </div>
+
+                                            <div class="col d-flex justify-content">
+                                                <div>
+                                                    <label>Status</label>
+                                                    <input type="text" id="search-status" class="form-control" placeholder="">
+                                                </div> 
+                                            </div>
+
+                                            <div class="col d-flex justify-content">
+                                                <div>
+                                                    <label>Assignee</label>
+                                                    <input type="text" id="search-assignee" class="form-control" placeholder="">
+                                                </div> 
                                             </div>
                                         </div>
 
@@ -90,7 +119,7 @@ $data_ticket = get_data($query);
                                                     <th>Ticket ID</th>
                                                     <th>Tanggal Lapor</th>
                                                     <th>Permasalahan</th>
-                                                    <th>Nama Barang</th>
+                                                    <th>Barang</th>
                                                     <th>Lokasi</th>
                                                     <th>Status</th>
                                                     <th>Assignee</th>
@@ -163,6 +192,13 @@ $data_ticket = get_data($query);
             language: {
                 lengthMenu: " _MENU_ per halaman"
             },
+            columnDefs: [{
+                targets: [1],
+                type: 'date',
+            }],
+            order: [
+                [1, 'desc']
+            ],
             paging: false,
         });
 
@@ -171,9 +207,24 @@ $data_ticket = get_data($query);
             el.addEventListener('change', () => dataTable.draw());
         });
 
-        // Bind "Status" input to Column 2
+        // Search Item
+        document.querySelector('#search-item').addEventListener('keyup', function() {
+            dataTable.column(3).search(this.value).draw();
+        });
+
+        // Search Item
+        document.querySelector('#search-area').addEventListener('keyup', function() {
+            dataTable.column(4).search(this.value).draw();
+        });
+
+        // Search Status
         document.querySelector('#search-status').addEventListener('keyup', function() {
             dataTable.column(5).search(this.value).draw();
+        });
+
+        // Search Assignee
+        document.querySelector('#search-assignee').addEventListener('keyup', function() {
+            dataTable.column(6).search(this.value).draw();
         });
     </script>
 

@@ -7,7 +7,6 @@
  */
 
 session_start();
-var_dump($_SESSION['alert_title']);
 
 require '../../config.php';
 include '../../function/db-query.php';

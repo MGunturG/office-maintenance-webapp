@@ -37,7 +37,7 @@ $data_item_status = $_Item->ItemGetAllStatus();
 $data_log = $_Log->LogFetch("Item", $item_id);
 
 $location = $_Area->AreaDetail($data_item['item_master_area_id']);
-$location = $location['area_master_name'] . " - " . "Lantai " . $location['area_master_floor'];
+$location = "[".$location['area_master_name'] . " - " . "Lantai " . $location['area_master_floor']."]";
 
 $item_status = get_single_data("SELECT code_master_label FROM code_master WHERE code_master_code = {$data_item['item_master_status']} AND code_master_category = 'item_status'");
 
@@ -103,7 +103,7 @@ if (isset($_POST['update_item_Submit'])) {
 				<section class="section">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title"><?= $data_item['item_master_name']." ".$location ?></h4>
+							<h3><?= $data_item['item_master_name']." ".$location ?></h3>
 						</div>
 
 						<div class="card-body">

@@ -113,7 +113,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Form Pengecekan : CHECKFORM<?= $form_master_id ?></title>
+	<title>Form Pengecekan : #CHECKFORM-<?= $form_master_id ?></title>
 
 	<!-- styling -->
     <?php include("../../layout/styling.php"); ?>
@@ -138,7 +138,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Form Pengecekan : CHECKFORM<?= $form_master_id ?></h4>
+											<h4>Form Pengecekan : #CHECKFORM-<?= $form_master_id ?></h4>
 										</div>
 
 										<div class="col d-flex justify-content-end">

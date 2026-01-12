@@ -84,12 +84,13 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 		$_Item->ItemUpdateStatus($data_item['item_master_id'], "1"); // update item status to active again
 		$_Ticket->TicketAddComment($_GET['id'], "Tiket <b>Closed</b> dengan remaks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 		$_Log->LogCreate('Ticket', $_GET['id'], "Ticket closed : ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		$_Log->LogCreate('Item', $data_ticket['ticket_master_item_id'], "Done maintenance", $_SESSION['user_uname']);
 
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	} else {
 		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']);
 		$_Ticket->TicketAddComment($_GET['id'], ucfirst($_SESSION['user_uname'])." mengubah status tiket menjadi <b>$status</b> dengan remarks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
-		$_Log->LogCreate("Ticket", $_GET['id'], "Ticket status changed to $status : ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		$_Log->LogCreate("Ticket", $data_ticket['ticket_master_item_id'], "Ticket status changed to $status : ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	}
@@ -101,7 +102,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Tiket Maintenance : #TICKET<?= $_GET['id'] ?></title>
+	<title>Tiket Maintenance : #TICKET-<?= $_GET['id'] ?></title>
 
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/extensions/quill/quill.snow.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/extensions/quill/quill.bubble.css">
@@ -126,7 +127,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 						<div class="col-12 col-lg-3">
 							<div class="card">
 								<div class="card-header">
-									<h4>Detail #TIKET<?= $_GET['id'] ?></h4>
+									<h4>Detail #TIKET-<?= $_GET['id'] ?></h4>
 									<?php if ($data_ticket['ticket_master_status'] == 0): ?>
 										<td><span class="badge bg-success"><?= $_Ticket->TicketGetStatus($data_ticket['ticket_master_status']) ?></span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] ==  1): ?>

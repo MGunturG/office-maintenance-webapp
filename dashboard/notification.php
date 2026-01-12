@@ -52,7 +52,7 @@ $data_ticket = $_Ticket->TicketGetAll();
 						<div class="col">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title">Notifikasi Tiket</h4>
+									<h3>Notifikasi Tiket</h3>
 								</div>
 
 								<div class="card-content">
