@@ -502,9 +502,6 @@ CREATE TABLE `user_master` (
 INSERT INTO `user_master` (`user_master_id`, `user_master_uname`, `user_master_passw`, `user_master_role`, `user_master_createby`, `user_master_createtime`) VALUES
 (1, 'admin', '$2y$10$tq5Ry7BywiBbo7ycialzHe9TMyYYz4rToOMrz7CRQHWdrXrEHi5WW', 'admin', NULL, NULL),
 (2, 'user', '$2y$10$K7QuO3wFj3F5LtiA.wvN4eednMvcUDCZlGtb8mTDxuWMwbKieno4K', 'user', 'admin', '2025-12-20 06:33:54'),
-(3, 'guntur', '$2y$10$DTlR7HQVWqAbFjH93X1lLev149fz.GeECM330cC9Bo46z4TPpVv0a', 'user', 'admin', '2026-01-05 08:09:15'),
-(4, 'bela', '$2y$10$lL1DTMCpFbqAf5RyzS4BIubKZU2bnjnjCaFMtSNisGFhERM0uFQ1y', 'user', 'admin', '2026-01-05 12:13:07'),
-(5, 'dara', '$2y$10$QEo1/QGgeDTFtwAQbxoMIermRQ2o.Ho/s5RIkKKbNRu3XVe573zba', 'user', 'admin', '2026-01-05 12:13:18');
 
 --
 -- Indexes for dumped tables
