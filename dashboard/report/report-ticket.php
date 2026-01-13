@@ -84,76 +84,81 @@ $data_ticket = get_data($query);
                                 <!-- tabel -->
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <div class="row match-height">
+                                        <div class="accordion" id="accordionFiltering">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingOne">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                    Show Data Filtering
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionFiltering">
+                                                    <div class="accordion-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Start Date</label>
+                                                                    <input type="text" id="min" name="min" class="form-control">
+                                                                </div>
 
-                                            <div class="col justify-content">
-                                                <div class="form-group">
-                                                    <label>Start Date</label>
-                                                    <input type="text" id="min" name="min" class="form-control">
+                                                                <div class="form-group">
+                                                                    <label>Barang</label>
+                                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
+                                                                    <select name="search-item" id="search-item" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Barang ---</option>
+                                                                        <?php foreach ($data_item as $item): ?>
+                                                                            <option value="<?= $item['item_master_name'] ?>"><?= $item['item_master_name'] ?></option>
+                                                                        <?php endforeach ?>
+                                                                    </select>
+                                                                </div> 
+
+                                                                <div class="form-group">
+                                                                    <label>Lokasi Area</label>
+                                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
+                                                                    <select name="search-area" id="search-area" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Area ---</option>
+                                                                        <?php foreach ($data_area as $area): ?>
+                                                                            <option value="<?= $area['area_master_name'] ?>"><?= $area['area_master_name'] ?></option>
+                                                                        <?php endforeach ?>
+                                                                    </select>
+                                                                </div> 
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>End Date</label>
+                                                                    <input type="text" id="max" name="max" class="form-control">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Status</label>
+                                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
+                                                                    <select name="search-status" id="search-status" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Status ---</option>
+                                                                        <option value=" Open ">Open</option>
+                                                                        <option value=" Dalam Pengerjaan ">Dalam Pengerjaan</option>
+                                                                        <option value=" Tertunda ">Tertunda</option>
+                                                                        <option value=" Selesai Pengerjaan ">Selesai Pengerjaan</option>
+                                                                        <option value=" Close ">Close</option>
+                                                                    </select>
+                                                                </div> 
+
+                                                                <div class="form-group">
+                                                                    <label>Assignee</label>
+                                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
+                                                                    <select name="search-assignee" id="search-assignee" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Assignee ---</option>
+                                                                        <?php foreach ($data_user as $user): ?>
+                                                                            <option value="<?= $user['user_master_uname'] ?>"><?= $user['user_master_uname'] ?></option>
+                                                                        <?php endforeach ?>
+                                                                    </select>
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col justify-content">
-                                                <div class="form-group">
-                                                    <label>End Date</label>
-                                                    <input type="text" id="max" name="max" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col justify-content">
-                                                <div class="form-group">
-                                                    <label>Barang</label>
-                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
-                                                    <select name="search-item" id="search-item" class="choices form-select multiple-remove" multiple="multiple">
-                                                        <option value="">--- Pilih Barang ---</option>
-                                                        <?php foreach ($data_item as $item): ?>
-                                                            <option value="<?= $item['item_master_name'] ?>"><?= $item['item_master_name'] ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </div> 
-                                            </div>
-
-                                            <div class="col justify-content">
-                                                <div class="form-group">
-                                                    <label>Lokasi Area</label>
-                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
-                                                    <select name="search-area" id="search-area" class="choices form-select multiple-remove" multiple="multiple">
-                                                        <option value="">--- Pilih Area ---</option>
-                                                        <?php foreach ($data_area as $area): ?>
-                                                            <option value="<?= $area['area_master_name'] ?>"><?= $area['area_master_name'] ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </div> 
-                                            </div>
-
-                                            <div class="col justify-content">
-                                                <div class="form-group">
-                                                    <label>Status</label>
-                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
-                                                    <select name="search-status" id="search-status" class="choices form-select multiple-remove" multiple="multiple">
-                                                        <option value="">--- Pilih Status ---</option>
-                                                        <option value=" Open ">Open</option>
-                                                        <option value=" Dalam Pengerjaan ">Dalam Pengerjaan</option>
-                                                        <option value=" Tertunda ">Tertunda</option>
-                                                        <option value=" Selesai Pengerjaan ">Selesai Pengerjaan</option>
-                                                        <option value=" Close ">Close</option>
-                                                    </select>
-                                                </div> 
-                                            </div>
-
-                                            <div class="col justify-content">
-                                                <div class="form-group">
-                                                    <label>Assignee</label>
-                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
-                                                    <select name="search-assignee" id="search-assignee" class="choices form-select multiple-remove" multiple="multiple">
-                                                        <option value="">--- Pilih Assignee ---</option>
-                                                        <?php foreach ($data_user as $user): ?>
-                                                            <option value="<?= $user['user_master_uname'] ?>"><?= $user['user_master_uname'] ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </div> 
-                                            </div>
-                                        </div>
+                                        </div>                      
+                                                        
 
                                         <table id="tickets_table" class="table table-striped">
                                             <thead>
@@ -227,10 +232,10 @@ $data_ticket = get_data($query);
         let dataTable = new DataTable("#tickets_table", {
             
             layout: {
-                topStart: {
+                topEnd: {
                     buttons: ['copy', 'excel', 'pdf', 'print']
                 },
-                topEnd: null,
+                topStart: 'pageLength',
             },
             responsive: {
                 details: {
@@ -238,7 +243,7 @@ $data_ticket = get_data($query);
                 }
             },
             language: {
-                lengthMenu: " _MENU_ per halaman"
+                lengthMenu: " _MENU_ per page"
             },
             columnDefs: [{
                 targets: [1],
@@ -247,7 +252,7 @@ $data_ticket = get_data($query);
             order: [
                 [1, 'desc']
             ],
-            paging: false,
+            // paging: false,
         });
 
         // Refilter the table
