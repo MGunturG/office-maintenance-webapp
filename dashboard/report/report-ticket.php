@@ -88,7 +88,7 @@ $data_ticket = get_data($query);
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="headingOne">
                                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                    Show Data Filtering
+                                                    Data Filtering Menu
                                                     </button>
                                                 </h2>
                                                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionFiltering">
@@ -101,6 +101,11 @@ $data_ticket = get_data($query);
                                                                 </div>
 
                                                                 <div class="form-group">
+                                                                    <label>End Date</label>
+                                                                    <input type="text" id="max" name="max" class="form-control">
+                                                                </div>
+
+                                                                <div class="form-group">
                                                                     <label>Barang</label>
                                                                     <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
                                                                     <select name="search-item" id="search-item" class="choices form-select multiple-remove" multiple="multiple">
@@ -110,7 +115,9 @@ $data_ticket = get_data($query);
                                                                         <?php endforeach ?>
                                                                     </select>
                                                                 </div> 
+                                                            </div>
 
+                                                            <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label>Lokasi Area</label>
                                                                     <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
@@ -121,13 +128,6 @@ $data_ticket = get_data($query);
                                                                         <?php endforeach ?>
                                                                     </select>
                                                                 </div> 
-                                                            </div>
-
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>End Date</label>
-                                                                    <input type="text" id="max" name="max" class="form-control">
-                                                                </div>
 
                                                                 <div class="form-group">
                                                                     <label>Status</label>

@@ -199,7 +199,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													<div class="row match-height">
 														<div class="col d-flex justify-content">
 															<a href="<?= BASE_URL ?>/dashboard/ticket/ticket-page.php" class="btn btn-secondary me-1 mb-1">
-																<i class="bi bi-arrow-left"></i> Kembali
+																<i class="bi bi-arrow-left"></i> <span class="d-none d-md-inline"> Kembali</span>
 															</a>
 
 															<button id="add_picture_button" type="button" class="btn btn-warning me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_upload_picture"><i class="bi bi-image"></i> <span class="d-none d-md-inline"> Upload Foto</span></button>
@@ -208,7 +208,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 														</div>
 
 														<div class="col d-flex justify-content-end">
-															<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1"><i class="bi bi-chat"></i> Kirim Komentar</button>
+															<button type="submit" name="comment_Submit" class="btn btn-primary me-1 mb-1"><i class="bi bi-chat"></i> <span class="d-none d-md-inline"> Kirim Komentar</span></button>
 														</div>
 													</div>
 												</form>
@@ -224,7 +224,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													<div class="row match-height">
 														<div class="col d-flex justify-content">
 															<a href="<?= BASE_URL ?>/dashboard/ticket/ticket-page.php" class="btn btn-secondary me-1 mb-1">
-																<i class="bi bi-arrow-left"></i> Kembali
+																<i class="bi bi-arrow-left"></i> <span class="d-none d-md-inline"> Kembali</span>
 															</a>
 														</div>
 													</div>
