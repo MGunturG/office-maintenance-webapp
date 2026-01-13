@@ -3,6 +3,22 @@ session_start();
 
 require '../../config.php';
 include '../../function/db-query.php';
+include_once "../../function/class/Items.php";
+include_once "../../function/class/Areas.php";
+include_once "../../function/class/Users.php";
+
+$_Item = new Items;
+$_Area = new Areas;
+$_User = new Users;
+
+// get all item data
+$data_item = $_Item->ItemGetAll();
+
+// get all area data
+$data_area = $_Area->AreaGetAll();
+
+// get all area data
+$data_user = $_User->UserGetAll();
 
 $query = "
     SELECT 
@@ -70,45 +86,71 @@ $data_ticket = get_data($query);
                                     <div class="card-body">
                                         <div class="row match-height">
 
-                                            <div class="col d-flex justify-content">
+                                            <div class="col justify-content">
                                                 <div class="form-group">
                                                     <label>Start Date</label>
-                                                <input type="text" id="min" name="min" class="form-control">
+                                                    <input type="text" id="min" name="min" class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col d-flex justify-content">
+                                            <div class="col justify-content">
                                                 <div class="form-group">
                                                     <label>End Date</label>
                                                     <input type="text" id="max" name="max" class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col d-flex justify-content">
-                                                <div>
+                                            <div class="col justify-content">
+                                                <div class="form-group">
                                                     <label>Barang</label>
-                                                    <input type="text" id="search-item" class="form-control" placeholder="">
+                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
+                                                    <select name="search-item" id="search-item" class="choices form-select multiple-remove" multiple="multiple">
+                                                        <option value="">--- Pilih Barang ---</option>
+                                                        <?php foreach ($data_item as $item): ?>
+                                                            <option value="<?= $item['item_master_name'] ?>"><?= $item['item_master_name'] ?></option>
+                                                        <?php endforeach ?>
+                                                    </select>
                                                 </div> 
                                             </div>
 
-                                            <div class="col d-flex justify-content">
-                                                <div>
-                                                    <label>Area/Lokasi</label>
-                                                    <input type="text" id="search-area" class="form-control" placeholder="">
+                                            <div class="col justify-content">
+                                                <div class="form-group">
+                                                    <label>Lokasi Area</label>
+                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
+                                                    <select name="search-area" id="search-area" class="choices form-select multiple-remove" multiple="multiple">
+                                                        <option value="">--- Pilih Area ---</option>
+                                                        <?php foreach ($data_area as $area): ?>
+                                                            <option value="<?= $area['area_master_name'] ?>"><?= $area['area_master_name'] ?></option>
+                                                        <?php endforeach ?>
+                                                    </select>
                                                 </div> 
                                             </div>
 
-                                            <div class="col d-flex justify-content">
-                                                <div>
+                                            <div class="col justify-content">
+                                                <div class="form-group">
                                                     <label>Status</label>
-                                                    <input type="text" id="search-status" class="form-control" placeholder="">
+                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
+                                                    <select name="search-status" id="search-status" class="choices form-select multiple-remove" multiple="multiple">
+                                                        <option value="">--- Pilih Status ---</option>
+                                                        <option value=" Open ">Open</option>
+                                                        <option value=" Dalam Pengerjaan ">Dalam Pengerjaan</option>
+                                                        <option value=" Tertunda ">Tertunda</option>
+                                                        <option value=" Selesai Pengerjaan ">Selesai Pengerjaan</option>
+                                                        <option value=" Close ">Close</option>
+                                                    </select>
                                                 </div> 
                                             </div>
 
-                                            <div class="col d-flex justify-content">
-                                                <div>
+                                            <div class="col justify-content">
+                                                <div class="form-group">
                                                     <label>Assignee</label>
-                                                    <input type="text" id="search-assignee" class="form-control" placeholder="">
+                                                    <!-- <input type="text" id="search-item" class="form-control" placeholder=""> -->
+                                                    <select name="search-assignee" id="search-assignee" class="choices form-select multiple-remove" multiple="multiple">
+                                                        <option value="">--- Pilih Assignee ---</option>
+                                                        <?php foreach ($data_user as $user): ?>
+                                                            <option value="<?= $user['user_master_uname'] ?>"><?= $user['user_master_uname'] ?></option>
+                                                        <?php endforeach ?>
+                                                    </select>
                                                 </div> 
                                             </div>
                                         </div>
@@ -128,7 +170,7 @@ $data_ticket = get_data($query);
                                             <tbody>
                                                 <?php foreach($data_ticket as $data): ?>
                                                 <tr>
-                                                    <td><?= "#".$data['Ticket_ID'] ?></td>
+                                                    <td><?= "#TICKET-".$data['Ticket_ID'] ?></td>
                                                     <td><?= $data['Date_Reported'] ?></td>
                                                     <td><?= $data['Issue'] ?></td>
                                                     <td><?= $data['Asset'] ?></td>
@@ -183,7 +225,13 @@ $data_ticket = get_data($query);
         });
 
         let dataTable = new DataTable("#tickets_table", {
-            dom:"lrtip",
+            
+            layout: {
+                topStart: {
+                    buttons: ['copy', 'excel', 'pdf', 'print']
+                },
+                topEnd: null,
+            },
             responsive: {
                 details: {
                     display: DataTable.Responsive.display.childRowImmediate
@@ -208,23 +256,42 @@ $data_ticket = get_data($query);
         });
 
         // Search Item
-        document.querySelector('#search-item').addEventListener('keyup', function() {
-            dataTable.column(3).search(this.value).draw();
+        document.querySelector('#search-item').addEventListener('change', function() {
+            // 1. Get all selected options into an array
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+
+            // 2. Join them with the '|' symbol (Regex for OR)
+            // Example result: "Item A|Item B"
+            let searchString = selectedValues.join('|');
+
+            // console.log("Searching for:", searchString);
+
+            // 3. Apply search. The second parameter 'true' enables Regex support.
+            dataTable.column(3).search(searchString, true, false).draw();
         });
 
-        // Search Item
-        document.querySelector('#search-area').addEventListener('keyup', function() {
-            dataTable.column(4).search(this.value).draw();
+        // Search Area
+        document.querySelector('#search-area').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(4).search(searchString, true, false).draw();
         });
 
-        // Search Status
-        document.querySelector('#search-status').addEventListener('keyup', function() {
-            dataTable.column(5).search(this.value).draw();
+        // Search Area
+        document.querySelector('#search-status').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(5).search(searchString, true, false).draw();
         });
 
         // Search Assignee
-        document.querySelector('#search-assignee').addEventListener('keyup', function() {
-            dataTable.column(6).search(this.value).draw();
+        document.querySelector('#search-assignee').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(6).search(searchString, true, false).draw();
         });
     </script>
 

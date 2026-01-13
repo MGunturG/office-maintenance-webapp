@@ -45,6 +45,7 @@ if (isset($_SESSION['toastalert_icon'])) {
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.6.3/css/dataTables.dateTime.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/3.0.7/css/responsive.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.2.6/css/buttons.dataTables.css">
   <script src="https://cdn.datatables.net/2.3.6/js/dataTables.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
   <script src="https://cdn.datatables.net/datetime/1.6.3/js/dataTables.dateTime.min.js"></script>
@@ -52,8 +53,15 @@ if (isset($_SESSION['toastalert_icon'])) {
   <script src="https://cdn.datatables.net/rowreorder/1.5.0/js/rowReorder.dataTables.js"></script>
   <script src="https://cdn.datatables.net/responsive/3.0.7/js/dataTables.responsive.js"></script>
   <script src="https://cdn.datatables.net/responsive/3.0.7/js/responsive.dataTables.js"></script>
-
-  <!-- styling for select2 -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/3.2.6/js/dataTables.buttons.js"></script>
+  <script src="https://cdn.datatables.net/buttons/3.2.6/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/3.2.6/js/buttons.print.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/3.2.6/js/buttons.dataTables.js"></script>
+      <!-- styling for select2 -->
   <!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/compiled/css/select2.min.css"> -->
 
   <!-- styling for choice -->
