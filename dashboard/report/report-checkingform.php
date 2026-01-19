@@ -3,6 +3,15 @@ session_start();
 
 require '../../config.php';
 include '../../function/db-query.php';
+include_once '../../function/class/Forms.php';
+include_once '../../function/class/Items.php';
+include_once '../../function/class/Areas.php';
+
+$_Form = new Forms;
+$_Item = new Items;
+$_Area = new Areas;
+
+$data_floor = $_Area->AreaGetFloor();
 ?>
 
 <!DOCTYPE html>
@@ -11,42 +20,253 @@ include '../../function/db-query.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- edit page title -->
     <title>Report Pengecekan</title>
 
     <!-- styling -->
-    <!-- edit this code below depending on current file path towards needed file -->
     <?php include("../../layout/styling.php"); ?>
 </head>
 
 <body>
-    <!-- edit this code below depending on current file path towards needed file -->
     <?php include("../../layout/body-theme.php"); ?>
 
     <div id="app">
         <!-- sidebar -->
-        <!-- edit this code below depending on current file path towards needed file -->
         <?php include("../../layout/sidebar.php"); ?>
 
         <div id="main" class='layout-navbar navbar-fixed'>
             <!-- navbar -->
-            <!-- edit this code below depending on current file path towards needed file -->
             <?php include("../../layout/navbar.php"); ?>
 
             <!-- main content -->
             <div id="main-content">
-                <!-- you can add main content here -->
-                <p>Hello</p>
+                <section id="basic-vertical-layouts">
+                    <div class="row match-height">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row match-height">
+                                        <div class="col d-flex justify-content">
+                                            <h3>Report Pengecekan</h3>
+                                        </div>
+
+                                        <div class="col d-flex justify-content-end">
+                                            <!-- <button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#modal_add_item"><i class="bi bi-plus-lg"></i> <span class="d-none d-md-inline"> Tambah Barang</span></button> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- tabel -->
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="accordion" id="accordionFiltering">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingOne">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                    Data Filtering Menu
+                                                    </button>
+                                                </h2>
+                                                <!-- TODOOOOOO -->
+                                                <!-- Fetch data dari db buat list di option buat filtering -->
+                                                <!-- hari selasa kelarin yaaaa -->
+                                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionFiltering">
+                                                    <div class="accordion-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Start Date</label>
+                                                                    <input type="text" id="min" name="min" class="form-control">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>End Date</label>
+                                                                    <input type="text" id="max" name="max" class="form-control">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Pembuat</label>
+                                                                    <select name="search-user" id="search-user" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih User ---</option>
+                                                                        
+                                                                    </select>
+                                                                </div> 
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Lantai</label>
+                                                                    <select name="search-floor" id="search-floor" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Lantai ---</option>
+                                                                        
+                                                                    </select>
+                                                                </div> 
+
+                                                                <div class="form-group">
+                                                                    <label>Area</label>
+                                                                    <select name="search-area" id="search-area" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Area ---</option>
+                                                                        
+                                                                    </select>
+                                                                </div> 
+
+                                                                <div class="form-group">
+                                                                    <label>Status</label>
+                                                                    <select name="search-status" id="search-status" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Status ---</option>
+                                                                        
+                                                                    </select>
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                      
+                                                        
+
+                                        <table id="forms_table" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Form ID</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Lantai</th>
+                                                    <th>Area</th>
+                                                    <th>Remark</th>
+                                                    <th>Dibuat Oleh</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                           <!--  <tbody>
+                                                <?php foreach($data_form as $data): ?>
+                                                <tr>
+                                                    <td><?= $data['checkingform_id'] ?></td>
+                                                    <td><?= $data['date'] ?></td>
+                                                    <td><?= $data['floor'] ?></td>
+                                                    <td><?= $data['area'] ?></td>
+                                                    <td><?= $data['remark'] ?></td>
+                                                    <td><?= $data['user'] ?></td>
+                                                    <td><?= $data['status'] ?></td>
+                                                    <td><a href="#" class="btn btn-sm btn-primary"><i class="bi bi-eye-fill"></i><span class="d-none d-lg-inline"> Lihat Detail</span></a></td>
+                                                    <td>
+                                                        k
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach ?>
+                                            </tbody> -->
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <!-- footer -->
-            <!-- edit this code below depending on current file path towards needed file -->
             <?php include("../../layout/footer.php"); ?>
         </div>
     </div>
 
     <!-- javascript -->
-    <!-- edit this code below depending on current file path towards needed file -->
+    <script>
+        let minDate, maxDate;
+         
+        // Custom filtering function which will search data in column four between two values
+        DataTable.ext.search.push(function (settings, data, dataIndex) {
+            let min = minDate.val();
+            let max = maxDate.val();
+            let date = new Date(data[1]);
+         
+            if (
+                (min === null && max === null) ||
+                (min === null && date <= max) ||
+                (min <= date && max === null) ||
+                (min <= date && date <= max)
+            ) {
+                return true;
+            }
+            return false;
+        });
+         
+        // Create date inputs
+        minDate = new DateTime('#min', {
+            format: 'Do MMMM YYYY'
+        });
+        maxDate = new DateTime('#max', {
+            format: 'Do MMMM YYYY'
+        });
+
+        let dataTable = new DataTable("#forms_table", {
+            ajax: {
+                'url': 'getcheckingform.php',
+                'method': 'GET',
+                'contentType': 'application/json'
+            },
+            columns:[
+                {
+                    className: 'dt-control',
+                    orderable: false,
+                    data: null,
+                    defaultContent: ''
+                },
+                { data: 'checkingform_id' },
+                { data: 'date' },
+                { data: 'floor' },
+                { data: 'area' },
+                { data: 'remark' },
+                { data: 'user' },
+                { data: 'status' },
+            ],
+            layout: {
+                topEnd: {
+                    buttons: ['copy', 'excel', 'pdf', 'print']
+                },
+                topStart: 'pageLength',
+            },
+            responsive: {
+                details: {
+                    display: DataTable.Responsive.display.childRowImmediate
+                }
+            },
+            language: {
+                lengthMenu: " _MENU_ per page"
+            },
+            columnDefs: [{
+                targets: [1],
+                type: 'date',
+            }],
+            order: [
+                [1, 'desc']
+            ],
+            // paging: false,
+        });
+
+        function format(data) {
+            return (
+                '<dl>' +
+                '<dt>Item yang dicek:</dt>' +
+                '<dd>' + data.items_checked + '</dd>' +
+                '</dl>'
+                );
+        }
+
+        dataTable.on('click', 'tbody td.dt-control', function(e) {
+            let tr = e.target.closest('tr');
+            let row = dataTable.row(tr);
+
+            if (row.child.isShown()) {
+                row.child.hide();
+            } else {
+                row.child(format(row.data())).show();
+            }
+        });
+
+        // Refilter the table
+        document.querySelectorAll('#min, #max').forEach((el) => {
+            el.addEventListener('change', () => dataTable.draw());
+        });
+    </script>
+
     <?php include("../../layout/javascript.php"); ?>
 </body>
 

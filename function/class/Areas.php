@@ -68,5 +68,13 @@ class Areas {
 			"SELECT * FROM area_master ORDER BY area_master_floor ASC"
 		);
 	}
+
+
+	function AreaGetFloor() {
+		// get every floor on table
+		return get_data(
+			"SELECT DISTINCT area_master_floor FROM area_master"
+		);
+	}
 }
 ?>
