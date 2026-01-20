@@ -12,6 +12,43 @@ $_Item = new Items;
 $_Area = new Areas;
 
 $data_floor = $_Area->AreaGetFloor();
+
+$query = "
+SELECT
+    cm.checkingform_master_effdate     AS effdate,
+    cd.checkingform_detail_master_id   AS checkingform_id,
+    im.item_master_name                AS item_name,
+    cat.code_master_label              AS item_cat,
+    co.code_master_label               AS item_status,
+    am.area_master_name                AS area_name,
+    am.area_master_floor               AS floor,
+    cm.checkingform_master_createby    AS check_by
+
+FROM checkingform_detail AS cd
+
+JOIN checkingform_master AS cm
+  ON cd.checkingform_detail_master_id = cm.checkingform_master_id
+
+LEFT JOIN item_master AS im
+  ON cd.checkingform_detail_item_id = im.item_master_id
+
+LEFT JOIN area_master AS am
+  ON cm.checkingform_master_area_id = am.area_master_id
+
+LEFT JOIN code_master as co
+  ON cd.checkingform_detail_item_status = co.code_master_code
+  AND co.code_master_category = 'form_item_status'
+
+LEFT JOIN code_master as cat
+  ON im.item_master_category = cat.code_master_code
+  AND cat.code_master_category = 'item_category'
+
+GROUP BY
+    cd.checkingform_detail_id;
+";
+
+$data_checkingform = get_data($query);
+
 ?>
 
 <!DOCTYPE html>
@@ -126,33 +163,28 @@ $data_floor = $_Area->AreaGetFloor();
                                         <table id="forms_table" class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th></th>
-                                                    <th>Form ID</th>
-                                                    <th>Tanggal</th>
-                                                    <th>Lantai</th>
-                                                    <th>Area</th>
-                                                    <th>Remark</th>
-                                                    <th>Dibuat Oleh</th>
+                                                    <th>Tanggal Cek</th>
+                                                    <th>Barang</th>
+                                                    <th>Kategori</th>
                                                     <th>Status</th>
+                                                    <th>Area</th>
+                                                    <th>Lantai</th>
+                                                    <th>Dicek Oleh</th>
                                                 </tr>
                                             </thead>
-                                           <!--  <tbody>
-                                                <?php foreach($data_form as $data): ?>
+                                            <tbody>
+                                                <?php foreach($data_checkingform as $data): ?>
                                                 <tr>
-                                                    <td><?= $data['checkingform_id'] ?></td>
-                                                    <td><?= $data['date'] ?></td>
-                                                    <td><?= $data['floor'] ?></td>
-                                                    <td><?= $data['area'] ?></td>
-                                                    <td><?= $data['remark'] ?></td>
-                                                    <td><?= $data['user'] ?></td>
-                                                    <td><?= $data['status'] ?></td>
-                                                    <td><a href="#" class="btn btn-sm btn-primary"><i class="bi bi-eye-fill"></i><span class="d-none d-lg-inline"> Lihat Detail</span></a></td>
-                                                    <td>
-                                                        k
-                                                    </td>
+                                                    <td><?= $data['effdate'] ?></td>
+                                                    <td><?= $data['item_name'] ?></td>
+                                                    <td><?= $data['item_cat'] ?></td>
+                                                    <td><?= $data['item_status'] ?></td>
+                                                    <td><?= $data['area_name'] ?></td>
+                                                    <td><?= "Lantai ".$data['floor'] ?></td>
+                                                    <td><?= $data['check_by'] ?></td>
                                                 </tr>
                                                 <?php endforeach ?>
-                                            </tbody> -->
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -197,26 +229,6 @@ $data_floor = $_Area->AreaGetFloor();
         });
 
         let dataTable = new DataTable("#forms_table", {
-            ajax: {
-                'url': 'getcheckingform.php',
-                'method': 'GET',
-                'contentType': 'application/json'
-            },
-            columns:[
-                {
-                    className: 'dt-control',
-                    orderable: false,
-                    data: null,
-                    defaultContent: ''
-                },
-                { data: 'checkingform_id' },
-                { data: 'date' },
-                { data: 'floor' },
-                { data: 'area' },
-                { data: 'remark' },
-                { data: 'user' },
-                { data: 'status' },
-            ],
             layout: {
                 topEnd: {
                     buttons: ['copy', 'excel', 'pdf', 'print']
@@ -232,33 +244,13 @@ $data_floor = $_Area->AreaGetFloor();
                 lengthMenu: " _MENU_ per page"
             },
             columnDefs: [{
-                targets: [1],
+                targets: [0],
                 type: 'date',
             }],
             order: [
-                [1, 'desc']
+                [0, 'desc']
             ],
             // paging: false,
-        });
-
-        function format(data) {
-            return (
-                '<dl>' +
-                '<dt>Item yang dicek:</dt>' +
-                '<dd>' + data.items_checked + '</dd>' +
-                '</dl>'
-                );
-        }
-
-        dataTable.on('click', 'tbody td.dt-control', function(e) {
-            let tr = e.target.closest('tr');
-            let row = dataTable.row(tr);
-
-            if (row.child.isShown()) {
-                row.child.hide();
-            } else {
-                row.child(format(row.data())).show();
-            }
         });
 
         // Refilter the table
