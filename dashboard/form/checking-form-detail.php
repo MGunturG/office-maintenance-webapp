@@ -67,12 +67,20 @@ $not_yet_checked_items = array_filter($data_item, function($item) use ($already_
 	return !(in_array($item['item_master_id'], $already_checked_items));
 });
 
-
+// var_dump($_REQUEST['form_add_item_Submit']);
 // if form add checked item submitted
 if (isset($_POST['form_add_item_Submit'])) {
 	$items = $_POST['checked'];
+	$broken_items = $_POST['broken'];
+
 	foreach ($items as $item_id => $checkbox_value) {
-		$_Form->FormAddItem($form_master_id, $item_id, '0');
+		if ($broken_items[$item_id] == "on") {
+			// echo "item ".$item_id." is broken";
+			$_Form->FormAddItem($form_master_id, $item_id, '1');
+		} else {
+			// echo "item ".$item_id." is good";
+			$_Form->FormAddItem($form_master_id, $item_id, '0');
+		}
 	}
 
 	// refresh page, to refresh current data
@@ -138,7 +146,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 								<div class="card-header">
 									<div class="row match-height">
 										<div class="col d-flex justify-content">
-											<h4>Form Pengecekan : #CHECKFORM-<?= $form_master_id ?></h4>
+											<h4>#CHECKFORM-<?= $form_master_id ?></h4>
 										</div>
 
 										<div class="col d-flex justify-content-end">
@@ -173,6 +181,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 													<tr>
 														<th>No</th>
 														<th>Nama Barang</th>
+														<th>Kondisi</th>
 														<th>Aksi</th>
 													</tr>
 												</thead>
@@ -184,6 +193,11 @@ if (isset($_POST['form_redraft_Submit'])) {
 															<td><?= $i ?></td>
 															<!-- <td><?= $item_detail['item_master_name'] ?></td> -->
 															<td><a href="<?= BASE_URL ?>/dashboard/item/item-detail.php?id=<?= $item_detail['item_master_id'] ?>"><?= $item_detail['item_master_name'] ?></a></td>
+															<?php if($item_form['checkingform_detail_item_status'] == "1"): ?>
+																<td><span class="badge bg-danger">Rusak</span></td>
+															<?php else: ?>
+																<td><span class="badge bg-success">OK</span></td>
+															<?php endif; ?>
 															<td><a href="checking-form-detail-rm.php?item_id=<?= $item_detail['item_master_id']?>&&form_id=<?= $form_master_id ?>"><?php echo ($form_status!=1) ? "Hapus" : "" ?></a></td>
 														</tr>
 													<?php $i++; endforeach ?>
@@ -236,6 +250,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 															<!-- <th>Lantai</th> -->
 															<!-- <th>Area</th> -->
 															<th>Sudah dicek?</th>
+															<th>Barang rusak?</th>
 														</tr>
 													</thead>
 
@@ -248,6 +263,7 @@ if (isset($_POST['form_redraft_Submit'])) {
 																<!-- <td><?= $location['area_master_floor']; ?></td> -->
 																<!-- <td><?= $location['area_master_name']; ?></td> -->
 																<td><input type="checkbox" class="form-check-input form-check-success" name="checked[<?= $item['item_master_id']; ?>]"></td>
+																<td><input type="checkbox" class="form-check-input form-check-danger" name="broken[<?= $item['item_master_id']; ?>]"></td>
 															</tr>
 															<?php endif ?>
 														<?php endforeach ?>
