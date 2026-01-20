@@ -1,0 +1,38 @@
+<?php
+header('Content-Type: application/json');
+
+session_start();
+require '../../config.php';
+include '../../function/db-query.php';
+
+$query = "
+    SELECT
+        cm.checkingform_master_effdate     AS effdate,
+        cd.checkingform_detail_master_id   AS checkingform_id,
+        im.item_master_name                AS item_name,
+        im.item_master_category            AS item_cat,
+        co.code_master_label               AS item_status,
+        cm.checkingform_master_createby    AS check_by
+
+    FROM checkingform_detail AS cd
+
+    JOIN checkingform_master AS cm
+      ON cd.checkingform_detail_master_id = cm.checkingform_master_id
+
+    LEFT JOIN item_master AS im
+      ON cd.checkingform_detail_item_id = im.item_master_id
+
+    LEFT JOIN area_master AS am
+      ON cm.checkingform_master_area_id = am.area_master_id
+
+    LEFT JOIN code_master as co
+      ON cd.checkingform_detail_item_status = co.code_master_code
+      AND co.code_master_category = 'form_item_status'
+
+    GROUP BY
+        cd.checkingform_detail_id;
+";
+
+$data_form = get_data($query);
+echo json_encode(["data" => $data_form]);
+?>
