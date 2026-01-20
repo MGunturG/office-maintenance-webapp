@@ -130,8 +130,8 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 									<h4>Detail #TIKET-<?= $_GET['id'] ?></h4>
 									<?php if ($data_ticket['ticket_master_status'] == 0): ?>
 										<td><span class="badge bg-success"><?= $_Ticket->TicketGetStatus($data_ticket['ticket_master_status']) ?></span></td>
-									<?php elseif ($data_ticket['ticket_master_status'] ==  1): ?>
-										<td><span class="badge bg-info"><?= $_Ticket->TicketGetStatus($tdata_icket['ticket_master_status']) ?></span></td>
+									<?php elseif ($data_ticket['ticket_master_status'] == 1): ?>
+										<td><span class="badge bg-info"><?= $_Ticket->TicketGetStatus($data_ticket['ticket_master_status']) ?></span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 2): ?>
 										<td><span class="badge bg-warning"><?= $_Ticket->TicketGetStatus($data_ticket['ticket_master_status']) ?></span></td>
 									<?php elseif ($data_ticket['ticket_master_status'] == 3): ?>
