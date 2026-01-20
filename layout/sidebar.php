@@ -49,16 +49,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
-                <!-- Menu -->
-                <li
-                    class="sidebar-item ">
-                    <a href="<?php echo BASE_URL; ?>/dashboard/ticket/ticket-page.php" class='sidebar-link'>
-                        <i class="bi bi-wrench-adjustable"></i>
-                        <span>Tiket Maintenance</span>
-                    </a>
-                </li>
-
+                
                 <!-- Menu -->
                 <li
                     class="sidebar-item ">
@@ -70,28 +61,13 @@
 
                 <!-- Menu -->
                 <li
-                    class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-archive-fill"></i>
-                        <!-- Menu Name -->
-                        <span>Pusat Data</span>
+                    class="sidebar-item ">
+                    <a href="<?php echo BASE_URL; ?>/dashboard/ticket/ticket-page.php" class='sidebar-link'>
+                        <i class="bi bi-wrench-adjustable"></i>
+                        <span>Tiket Maintenance</span>
                     </a>
-
-                    <!-- sub menu  -->
-                    <ul class="submenu ">
-                        <!-- Sub Menu Item -->
-                        <li class="submenu-item  ">
-                            <a href="<?php echo BASE_URL; ?>/dashboard/area/area-page.php" class="submenu-link">Data Lokasi</a>
-                            
-                        </li>
-                        
-                        <li class="submenu-item  ">
-                            <a href="<?php echo BASE_URL; ?>/dashboard/item/item-page.php" class="submenu-link">Data Barang</a>
-                            
-                        </li>
-                        
-                    </ul>
                 </li>
+
 
                 <!-- Menu -->
                 <?php if ($_SESSION['user_role'] == "admin"): ?>
@@ -123,9 +99,33 @@
                         
                     </ul>
                 </li>
+
+                <!-- Menu -->
+                <li
+                    class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-archive-fill"></i>
+                        <!-- Menu Name -->
+                        <span>Pusat Data</span>
+                    </a>
+
+                    <!-- sub menu  -->
+                    <ul class="submenu ">
+                        <!-- Sub Menu Item -->
+                        <li class="submenu-item  ">
+                            <a href="<?php echo BASE_URL; ?>/dashboard/area/area-page.php" class="submenu-link">Data Lokasi</a>
+                            
+                        </li>
+                        
+                        <li class="submenu-item  ">
+                            <a href="<?php echo BASE_URL; ?>/dashboard/item/item-page.php" class="submenu-link">Data Barang</a>
+                            
+                        </li>
+                        
+                    </ul>
+                </li>
                 
                 <!-- Menu -->
-                
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-android"></i>
