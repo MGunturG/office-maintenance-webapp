@@ -187,5 +187,12 @@ class Items {
 		);
 		return $data_category['code_master_label'];
 	}
+
+
+	function ItemGetAllName() {
+		return get_data(
+			"SELECT DISTINCT item_master_name FROM item_master ORDER BY item_master_name ASC"
+		);
+	}
 }
 ?>
