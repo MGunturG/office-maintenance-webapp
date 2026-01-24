@@ -12,7 +12,7 @@ $_Area = new Areas;
 $_User = new Users;
 
 // get all item data
-$data_item = $_Item->ItemGetAll();
+$data_item = $_Item->ItemGetAllName();
 
 // get all area data
 $data_area = $_Area->AreaGetAll();
