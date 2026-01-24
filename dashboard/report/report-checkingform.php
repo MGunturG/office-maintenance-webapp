@@ -6,12 +6,17 @@ include '../../function/db-query.php';
 include_once '../../function/class/Forms.php';
 include_once '../../function/class/Items.php';
 include_once '../../function/class/Areas.php';
+include_once "../../function/class/Users.php";
 
 $_Form = new Forms;
 $_Item = new Items;
 $_Area = new Areas;
+$_User = new Users;
 
 $data_floor = $_Area->AreaGetFloor();
+$data_item = $_Item->ItemGetAllName();
+$data_area = $_Area->AreaGetAll();
+$data_user = $_User->UserGetAll();
 
 $query = "
 SELECT
@@ -123,17 +128,40 @@ $data_checkingform = get_data($query);
                                                                     <label>Pembuat</label>
                                                                     <select name="search-user" id="search-user" class="choices form-select multiple-remove" multiple="multiple">
                                                                         <option value="">--- Pilih User ---</option>
-                                                                        
+                                                                        <?php foreach ($data_user as $user): ?>
+                                                                            <option value="<?= $user['user_master_uname'] ?>"><?= $user['user_master_uname'] ?></option>
+                                                                        <?php endforeach ?>
                                                                     </select>
-                                                                </div> 
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Status</label>
+                                                                    <select name="search-status" id="search-status" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Status ---</option>
+                                                                        <option value="OK">OK</option>
+                                                                        <option value="Rusak">Rusak</option>
+                                                                    </select>
+                                                                </div>  
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
+                                                                    <label>Barang</label>
+                                                                    <select name="search-item" id="search-item" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Barang ---</option>
+                                                                        <?php foreach ($data_item as $item): ?>
+                                                                            <option value="<?= $item['item_master_name'] ?>"><?= $item['item_master_name'] ?></option>
+                                                                        <?php endforeach ?>
+                                                                    </select>
+                                                                </div> 
+
+                                                                <div class="form-group">
                                                                     <label>Lantai</label>
                                                                     <select name="search-floor" id="search-floor" class="choices form-select multiple-remove" multiple="multiple">
                                                                         <option value="">--- Pilih Lantai ---</option>
-                                                                        
+                                                                        <?php foreach($data_floor as $floor): ?>
+                                                                            <option value="Lantai <?= $floor['area_master_floor'] ?>">Lantai <?= $floor['area_master_floor'] ?></option>
+                                                                        <?php endforeach ?>
                                                                     </select>
                                                                 </div> 
 
@@ -141,15 +169,9 @@ $data_checkingform = get_data($query);
                                                                     <label>Area</label>
                                                                     <select name="search-area" id="search-area" class="choices form-select multiple-remove" multiple="multiple">
                                                                         <option value="">--- Pilih Area ---</option>
-                                                                        
-                                                                    </select>
-                                                                </div> 
-
-                                                                <div class="form-group">
-                                                                    <label>Status</label>
-                                                                    <select name="search-status" id="search-status" class="choices form-select multiple-remove" multiple="multiple">
-                                                                        <option value="">--- Pilih Status ---</option>
-                                                                        
+                                                                        <?php foreach ($data_area as $area): ?>
+                                                                            <option value="<?= $area['area_master_name'] ?>"><?= $area['area_master_name'] ?></option>
+                                                                        <?php endforeach ?>
                                                                     </select>
                                                                 </div> 
                                                             </div>
