@@ -287,7 +287,9 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 													<option value="1">Dalam Pengerjaan</option>
 													<option value="2">Tunda Sementara</option>
 													<option value="3">Pengerjaan Selesai</option>
+													<?php if($_SESSION['user_uname']=="admin"): ?>
 													<option value="4">Tutup Tiket</option>
+													<?php endif; ?>
 												</select>
 											</div>
 
