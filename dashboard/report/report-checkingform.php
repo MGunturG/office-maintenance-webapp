@@ -18,6 +18,8 @@ $data_item = $_Item->ItemGetAllName();
 $data_area = $_Area->AreaGetAll();
 $data_user = $_User->UserGetAll();
 
+$data_category = get_data("SELECT code_master_label FROM code_master WHERE code_master_category = 'item_category'");
+
 $query = "
 SELECT
     cm.checkingform_master_effdate     AS effdate,
@@ -146,6 +148,16 @@ $data_checkingform = get_data($query);
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
+                                                                    <label>Kategori Barang</label>
+                                                                    <select name="search-category" id="search-category" class="choices form-select multiple-remove" multiple="multiple">
+                                                                        <option value="">--- Pilih Kategori Barang ---</option>
+                                                                        <?php foreach ($data_category as $category): ?>
+                                                                            <option value="<?= $category['code_master_label'] ?>"><?= $category['code_master_label'] ?></option>
+                                                                        <?php endforeach ?>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
                                                                     <label>Barang</label>
                                                                     <select name="search-item" id="search-item" class="choices form-select multiple-remove" multiple="multiple">
                                                                         <option value="">--- Pilih Barang ---</option>
@@ -229,7 +241,7 @@ $data_checkingform = get_data($query);
         DataTable.ext.search.push(function (settings, data, dataIndex) {
             let min = minDate.val();
             let max = maxDate.val();
-            let date = new Date(data[1]);
+            let date = new Date(data[0]);
          
             if (
                 (min === null && max === null) ||
@@ -278,6 +290,54 @@ $data_checkingform = get_data($query);
         // Refilter the table
         document.querySelectorAll('#min, #max').forEach((el) => {
             el.addEventListener('change', () => dataTable.draw());
+        });
+
+        // Search Item
+        document.querySelector('#search-item').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(1).search(searchString, true, false).draw();
+        });
+
+        // Search Category
+        document.querySelector('#search-category').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(2).search(searchString, true, false).draw();
+        });
+
+        // Search Status
+        document.querySelector('#search-status').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(3).search(searchString, true, false).draw();
+        });
+
+        // Search Area
+        document.querySelector('#search-area').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(4).search(searchString, true, false).draw();
+        });
+
+        // Search Floor
+        document.querySelector('#search-floor').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(5).search(searchString, true, false).draw();
+        });
+
+        // Search User
+        document.querySelector('#search-user').addEventListener('change', function() {
+            let selectedValues = Array.from(this.selectedOptions).map(option => option.value.trim());
+            let searchString = selectedValues.join('|');
+            // console.log("Searching for:", searchString);
+            dataTable.column(6).search(searchString, true, false).draw();
         });
     </script>
 
