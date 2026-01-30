@@ -8,6 +8,10 @@ include_once '../../function/class/Items.php';
 include_once '../../function/class/Areas.php';
 include_once "../../function/class/Users.php";
 
+if (!$_SESSION['user_login_status']) {
+    header("location:".BASE_URL."/login.php?status=not_login");
+}
+
 $_Form = new Forms;
 $_Item = new Items;
 $_Area = new Areas;

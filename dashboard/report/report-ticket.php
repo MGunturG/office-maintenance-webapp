@@ -7,6 +7,10 @@ include_once "../../function/class/Items.php";
 include_once "../../function/class/Areas.php";
 include_once "../../function/class/Users.php";
 
+if (!$_SESSION['user_login_status']) {
+    header("location:".BASE_URL."/login.php?status=not_login");
+}
+
 $_Item = new Items;
 $_Area = new Areas;
 $_User = new Users;
@@ -175,7 +179,9 @@ $data_ticket = get_data($query);
                                             <tbody>
                                                 <?php foreach($data_ticket as $data): ?>
                                                 <tr>
-                                                    <td><?= "#TICKET-".$data['Ticket_ID'] ?></td>
+                                                    <td><a target="_blank" rel="noopener noreferrer" 
+                                                        href="<?= BASE_URL.'/dashboard/ticket/ticket-detail.php?id='.$data['Ticket_ID'] ?>"
+                                                        ><?= "#TICKET-".$data['Ticket_ID'] ?></a></td>
                                                     <td><?= $data['Date_Reported'] ?></td>
                                                     <td><?= $data['Issue'] ?></td>
                                                     <td><?= $data['Asset'] ?></td>

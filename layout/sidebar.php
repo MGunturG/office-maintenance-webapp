@@ -83,12 +83,12 @@
                     <ul class="submenu ">
                         <!-- Sub Menu Item -->
                         <li class="submenu-item  ">
-                            <a href="<?php echo BASE_URL; ?>/dashboard/report/report-ticket.php" class="submenu-link">Report Tiket Maintenance</a>
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/report-checkingform.php" class="submenu-link">Report Pengecekan</a>
                             
                         </li>
-                        
+
                         <li class="submenu-item  ">
-                            <a href="<?php echo BASE_URL; ?>/dashboard/report/report-checkingform.php" class="submenu-link">Report Pengecekan</a>
+                            <a href="<?php echo BASE_URL; ?>/dashboard/report/report-ticket.php" class="submenu-link">Report Maintenance</a>
                             
                         </li>
 
