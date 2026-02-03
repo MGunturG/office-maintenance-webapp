@@ -53,7 +53,8 @@ if (isset($_POST['create_form_Submit'])) {
 	$_SESSION['alert_button_text'] = "OK";
 
 	// get latest id that just submited
-	$insert_id = mysqli_insert_id($db_connection); // get last insert table id
+	// $insert_id = mysqli_insert_id($db_connection); // get last insert table id
+	$insert_id = $db_connection->lastInsertId();
 
 	// create new log
 	$_Log->LogCreate('Checking Form', $insert_id, 'Created new checking form', $_SESSION['user_uname']);

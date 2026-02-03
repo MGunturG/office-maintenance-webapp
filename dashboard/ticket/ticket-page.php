@@ -67,7 +67,7 @@ if (isset($_POST['create_ticket_Submit'])) {
 	// ticket. sooooo, if running update item status
 	// after creating new ticket, the last id will be
 	// from table item status, not the ticket table
-	$ticket_id_that_just_created = mysqli_insert_id($db_connection); 
+	$ticket_id_that_just_created = $db_connection->lastInsertId();
 
 	$_Log->LogCreate("Ticket", $ticket_id_that_just_created, "Created new ticket and assign ticket to ".$_POST['ticket_pic'], $_SESSION['user_uname']);
 	$_Log->LogCreate("Item", $_POST['ticket_itemid'], "Sent item for maintenance", $_SESSION['user_uname']);

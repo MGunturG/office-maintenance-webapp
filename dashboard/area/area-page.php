@@ -32,7 +32,8 @@ if (isset($_POST['create_area_Submit'])) {
 	);
 
 	// get last insert table id
-	$insert_id = mysqli_insert_id($db_connection);
+	// $insert_id = mysqli_insert_id($db_connection);
+	$insert_id = $db_connection->lastInsertId();
 
 	// create new log
 	$_Log->LogCreate('Area', $insert_id, 'Add new area: '.$_POST['area_name'], $_SESSION['user_uname']);

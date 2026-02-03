@@ -11,27 +11,39 @@ class Users {
 	/**
 	 * Creating new user
 	 * 
-	 * @param string	$username a new username want to create
-	 * @param string 	$password a new password for the user
-	 * @param string	$role user role, admin or user (regular user)
-	 * @return void 	this function only execute sql query
+	 * @param string    $username a new username want to create
+	 * @param string    $password a new password for the user
+	 * @param string    $role user role, admin or user (regular user)
+	 * @return void     this function only execute sql query
 	 */
 	function UserCreate($username, $password, $role) {
 		$create_by = $_SESSION['user_uname'];
 		$create_time = date('Y-m-d H:i:s');
 
 		// check duplicate
-		$current_data = get_single_data(
-			"SELECT * FROM user_master WHERE user_master_uname = '$username'"
-		);
+		// $current_data = get_single_data(
+		//     "SELECT * FROM user_master WHERE user_master_uname = '$username'"
+		// );
+		$query_current_data = "SELECT * FROM user_master WHERE user_master_uname = :username";
+		$param_current_data = ["username" => $username];
+		$current_data = get_single_data($query_current_data, $param_current_data);
 
 		if ($current_data == null) { // if there is no duplicate, continue
 			$password = password_hash($password, PASSWORD_DEFAULT);
 
-			run_query(
-				"INSERT INTO user_master (user_master_uname, user_master_passw, user_master_role, user_master_createby, user_master_createtime) ".
-				"VALUES ('$username', '$password', '$role', '$create_by', '$create_time')"
-			);
+			// run_query(
+			// 	"INSERT INTO user_master (user_master_uname, user_master_passw, user_master_role, user_master_createby, user_master_createtime) ".
+			// 	"VALUES ('$username', '$password', '$role', '$create_by', '$create_time')"
+			// );
+			$query_insert_data = "INSERT INTO user_master (user_master_uname, user_master_passw, user_master_role, user_master_createby, user_master_createtime) VALUES (:username, :password, :role, :create_by, :create_time)";
+			$param_insert_data = [
+				"username" => $username,
+				"password" => $password,
+				"role" => $role,
+				"create_by" => $create_by,
+				"create_time" => $create_time
+			];
+			run_query($query_insert_data, $param_insert_data);
 
 			// sweetalert
 			$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
@@ -46,38 +58,50 @@ class Users {
 	/**
 	 * Get all users on current database
 	 * 
-	 * @return array 	return query as array of users from database
+	 * @return array    return query as array of users from database
 	 */
 	function UserGetAll() {
-		return get_data(
-			"SELECT * FROM user_master"
-		);
+		// return get_data(
+		// 	"SELECT * FROM user_master"
+		// );
+		$query = "SELECT * FROM user_master";
+		$param = [];
+		return get_data($query, $param);
 	}
 
 
 	/**
 	 * Get certain user detail of given user id
 	 * 
-	 * @param int 		$user_id the unique ID of the user
-	 * @return array 	return array of given user id
+	 * @param int       $user_id the unique ID of the user
+	 * @return array    return array of given user id
 	 */
 	function UserDetail($user_id) {
-		return get_single_data("SELECT * FROM user_master WHERE user_master_id = '$user_id'");
+		// return get_single_data("SELECT * FROM user_master WHERE user_master_id = '$user_id'");
+		$query = "SELECT * FROM user_master WHERE user_master_id = :user_id";
+		$param = ["user_id" => $user_id];
+		return get_single_data($query, $param);
 	}
 
 
 	/**
 	 * Updates the role of a specific user and sets session alerts for the UI.
 	 *
-	 * @param int 		 $user_id   the unique ID of the user to update.
+	 * @param int        $user_id   the unique ID of the user to update.
 	 * @param string     $user_role the new role designation (e.g., 'admin', 'user').
 	 * @return void
 	 */
 	function UserRoleUpdate($user_id, $user_role) {
-		run_query(
-			"UPDATE user_master SET user_master_role = '$user_role' ".
-			"WHERE user_master_id = '$user_id'"
-		);
+		// run_query(
+		// 	"UPDATE user_master SET user_master_role = '$user_role' ".
+		// 	"WHERE user_master_id = '$user_id'"
+		// );
+		$query = "UPDATE user_master SET user_master_role = :user_role WHERE user_master_id = :user_id";
+		$param = [
+			"user_role" => $user_role,
+			"user_id" => $user_id
+		];
+		run_query($query, $param);
 
 		// sweetalert
 		$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
@@ -93,17 +117,23 @@ class Users {
 	 * * This function handles both the role update and the password re-hashing
 	 * before triggering a SweetAlert success notification via the session.
 	 *
-	 * @param int 		 $user_id       The unique identifier for the user.
+	 * @param int        $user_id       The unique identifier for the user.
 	 * @param string     $user_role     The administrative or access role level.
 	 * @param string     $user_password The plain-text password to be hashed.
 	 * @return void
 	 */
 	function UserPasswordUpdate($user_id, $user_role, $user_password) {
 		$user_password = password_hash($user_password, PASSWORD_DEFAULT);
-		run_query(
-			"UPDATE user_master SET user_master_role = '$user_role', user_master_passw = '$user_password' ".
-			"WHERE user_master_id = '$user_id'"
-		);
+		// run_query(
+		// 	"UPDATE user_master SET user_master_role = '$user_role', user_master_passw = '$user_password' ".
+		// 	"WHERE user_master_id = '$user_id'"
+		// );
+		$query = "UPDATE user_master SET user_master_role = :user_role, user_master_passw = :user_password WHERE user_master_id = :user_id";
+		$param = [
+			"user_role" => $user_role,
+			"user_password" => $user_password,
+			"user_id" => $user_id
+		];
 
 		// sweetalert
 			$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
@@ -117,14 +147,17 @@ class Users {
 	/**
 	 * Verifies user credentials and initializes a session upon success.
 	 *
-	 * @param string 	$username The unique username entered by the user.
-	 * @param string 	$password The plain-text password to verify against the hash.
-	 * @return bool 	Returns true if credentials match and session is set, false otherwise.
+	 * @param string    $username The unique username entered by the user.
+	 * @param string    $password The plain-text password to verify against the hash.
+	 * @return bool     Returns true if credentials match and session is set, false otherwise.
 	 */
 	function UserLogin($username, $password) {
 		// if user and password match on database 
 		// return boolean true, else false
-		$current_data = get_single_data("SELECT * FROM user_master WHERE user_master_uname = '$username'");
+		// $current_data = get_single_data("SELECT * FROM user_master WHERE user_master_uname = '$username'");
+		$query = "SELECT * FROM user_master WHERE user_master_uname = :username";
+		$param = ["username" => $username];
+		$current_data = get_single_data($query, $param);
 		
 		$hashed_password = $current_data['user_master_passw'];
 

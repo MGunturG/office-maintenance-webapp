@@ -16,9 +16,17 @@ class Logs {
      * @return void
      */
 	function LogCreate($entity_type, $entity_id, $action, $by_user) {
-		run_query(
-			"INSERT INTO activity_log (activity_log_entity_type, activity_log_entity_id, activity_log_action, activity_log_user) VALUES ('$entity_type', '$entity_id', '$action', '$by_user')"
-		);
+		// run_query(
+		// 	"INSERT INTO activity_log (activity_log_entity_type, activity_log_entity_id, activity_log_action, activity_log_user) VALUES ('$entity_type', '$entity_id', '$action', '$by_user')"
+		// );
+		$query = "INSERT INTO activity_log (activity_log_entity_type, activity_log_entity_id, activity_log_action, activity_log_user) VALUES (:entity_type, :entity_id, :action, :by_user)";
+		$param = [
+			"entity_type" => $entity_type,
+			"entity_id" => $entity_id,
+			"action" => $action,
+			"by_user" => $by_user
+		];
+		run_query($query, $param);
 	}
 
 
@@ -30,10 +38,16 @@ class Logs {
      * @return array Collection of activity logs.
      */
 	function LogFetch($entity_type, $entity_id) {
-		return get_data(
-			"SELECT * FROM activity_log WHERE activity_log_entity_type = '$entity_type' AND activity_log_entity_id = '$entity_id' ORDER BY ".
-			"activity_log_timestamp DESC"
-		);
+		// return get_data(
+		// 	"SELECT * FROM activity_log WHERE activity_log_entity_type = '$entity_type' AND activity_log_entity_id = '$entity_id' ORDER BY ".
+		// 	"activity_log_timestamp DESC"
+		// );
+		$query = "SELECT * FROM activity_log WHERE activity_log_entity_type = :entity_type AND activity_log_entity_id = :entity_id ORDER BY activity_log_timestamp DESC";
+		$param = [
+			"entity_type" => $entity_type,
+			"entity_id" => $entity_id
+		];
+		return get_data($query, $param);
 	}
 	
 }

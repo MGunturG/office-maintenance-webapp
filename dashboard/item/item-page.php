@@ -49,7 +49,8 @@ if (isset($_POST['create_item_Submit'])) {
 
 	if ($submit_data) {
 		// get last insert table id
-		$insert_id = mysqli_insert_id($db_connection);
+		// $insert_id = mysqli_insert_id($db_connection);
+		$insert_id = $db_connection->lastInsertId();
 		
 		// create new log
 		$_Log->LogCreate('Item', $insert_id, 'Add new item: '.$_POST['item_name'], $_SESSION['user_uname']);

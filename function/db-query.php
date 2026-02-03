@@ -6,17 +6,24 @@
  * @param string $sql The SQL query string to execute.
  * @return array An array containing all fetched rows.
  */
-function get_data($sql) {
+// function get_data($sql) {
+// 	global $db_connection;
+
+// 	$query_result = mysqli_query($db_connection, $sql);
+// 	$rows_of_data = [];
+
+// 	while ($data = mysqli_fetch_assoc($query_result)) {
+// 		$rows_of_data[] = $data;
+// 	}
+
+// 	return $rows_of_data;
+// }
+function get_data($sql_query, $params = []) {
 	global $db_connection;
-
-	$query_result = mysqli_query($db_connection, $sql);
-	$rows_of_data = [];
-
-	while ($data = mysqli_fetch_assoc($query_result)) {
-		$rows_of_data[] = $data;
-	}
-
-	return $rows_of_data;
+	$statement = $db_connection->prepare($sql_query);
+	$statement->execute($params);
+	$results = $statement->fetchAll(PDO::FETCH_ASSOC);
+	return $results;
 }
 
 /**
@@ -25,9 +32,14 @@ function get_data($sql) {
  * @param string $sql The SQL query string to execute.
  * @return mysqli_result|bool The result object or true/false on success/failure.
  */
-function run_query($sql) {
+// function run_query($sql) {
+// 	global $db_connection;
+// 	return mysqli_query($db_connection, $sql);
+// }
+function run_query($sql_query, $params = []) {
 	global $db_connection;
-	return mysqli_query($db_connection, $sql);
+	$statement = $db_connection->prepare($sql_query);
+	$statement->execute($params);
 }
 
 /**
@@ -36,14 +48,21 @@ function run_query($sql) {
  * @param string $sql The SQL query string to execute.
  * @return array<string, mixed>|null The associative array representing the row, or null if no results.
  */
-function get_single_data($sql) {
+// function get_single_data($sql) {
+// 	global $db_connection;
+// 	return(
+// 		mysqli_fetch_assoc(
+// 			mysqli_query(
+// 				$db_connection, $sql
+// 			)
+// 		)
+// 	);
+// }
+function get_single_data($sql_query, $params = []) {
 	global $db_connection;
-	return(
-		mysqli_fetch_assoc(
-			mysqli_query(
-				$db_connection, $sql
-			)
-		)
-	);
+	$statement = $db_connection->prepare($sql_query);
+	$statement->execute($params);
+	$result = $statement->fetch(PDO::FETCH_ASSOC);
+	return $result;
 }
 ?>

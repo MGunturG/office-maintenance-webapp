@@ -27,18 +27,39 @@ class Tickets {
 
 		$status = 0; // 0 mean open, check code_master on database
 
-		run_query(
-			"INSERT INTO ticket_master (".
-				"ticket_master_topic, ".
-				"ticket_master_description, ".
-				"ticket_master_item_id, ".
-				"ticket_master_effdate, ".
-				"ticket_master_status, ".
-				"ticket_master_currentholder, ".
-				"ticket_master_createby, ".
-				"ticket_master_createtime ".
-			") VALUES ('$topic', '$description', '$item_id', '$effective_date', '$status', '$pic', '$create_by', '$create_time')"
-		);
+		// run_query(
+		// 	"INSERT INTO ticket_master (".
+		// 		"ticket_master_topic, ".
+		// 		"ticket_master_description, ".
+		// 		"ticket_master_item_id, ".
+		// 		"ticket_master_effdate, ".
+		// 		"ticket_master_status, ".
+		// 		"ticket_master_currentholder, ".
+		// 		"ticket_master_createby, ".
+		// 		"ticket_master_createtime ".
+		// 	") VALUES ('$topic', '$description', '$item_id', '$effective_date', '$status', '$pic', '$create_by', '$create_time')"
+		// );
+		$query = "INSERT INTO ticket_master (".
+			"ticket_master_topic, ".
+			"ticket_master_description, ".
+			"ticket_master_item_id, ".
+			"ticket_master_effdate, ".
+			"ticket_master_status, ".
+			"ticket_master_currentholder, ".
+			"ticket_master_createby, ".
+			"ticket_master_createtime ".
+			") VALUES (:topic, :description, :item_id, :effective_date, :status, :pic, :create_by, :create_time)";
+		$param = [
+			"topic" => $topic,
+			"description" => $description,
+			"item_id" => $item_id,
+			"effective_date" => $effective_date,
+			"status" => $status,
+			"pic" => $pic,
+			"create_by" => $create_by,
+			"create_time" => $create_by
+		];
+		run_query($query, $param);
 
 		// sweetalert
 		$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
@@ -55,18 +76,26 @@ class Tickets {
      * @return array|null Record from ticket_master.
      */
 	function TicketDetail($ticket_id) {
-		return get_single_data(
-			"SELECT * FROM ticket_master WHERE ticket_master_id = '$ticket_id'"
-		);
+		// return get_single_data(
+		// 	"SELECT * FROM ticket_master WHERE ticket_master_id = '$ticket_id'"
+		// );
+		$query = "SELECT * FROM ticket_master WHERE ticket_master_id = :ticket_id";
+		$param = ["ticket_id" => $ticket_id];
+		return get_single_data($query, $param);
 	}
 
 
 	function TicketGetStatus($status_code) {
-		$data = get_single_data(
-			"SELECT code_master_label FROM code_master WHERE code_master_category = 'ticket_status' AND ".
-			"code_master_code = '$status_code'"
-		);
-		return $data['code_master_label'];
+		// $data = get_single_data(
+		// 	"SELECT code_master_label FROM code_master WHERE code_master_category = 'ticket_status' AND ".
+		// 	"code_master_code = '$status_code'"
+		// );
+		// return $data['code_master_label'];
+		$query = "SELECT code_master_label FROM code_master WHERE code_master_category = 'ticket_status' AND code_master_code = :status_code";
+		$param = [
+			"status_code" => $status_code
+		];
+		return get_single_data($query, $param);
 	}
 
 
@@ -77,9 +106,15 @@ class Tickets {
      * @return bool Execution result.
      */
 	function TicketUpdateStatus($ticket_id, $status_code) {
-		return run_query(
-			"UPDATE ticket_master SET ticket_master_status = '$status_code' WHERE ticket_master_id = '$ticket_id'"
-		);
+		// return run_query(
+		// 	"UPDATE ticket_master SET ticket_master_status = '$status_code' WHERE ticket_master_id = '$ticket_id'"
+		// );
+		$query = "UPDATE ticket_master SET ticket_master_status = :status_code WHERE ticket_master_id = :ticket_id";
+		$param = [
+			"status_code" => $status_code,
+			"ticket_id" => $ticket_id
+		];
+		return run_query($query, $param);
 	}
 
 
@@ -95,6 +130,13 @@ class Tickets {
 			"INSERT INTO ticket_detail (ticket_detail_master_id, ticket_detail_comment, ticket_detail_commentby) ".
 			"VALUES ('$ticket_id', '$comment_content', '$comment_by')"
 		);
+		$query = "INSERT INTO ticket_detail (ticket_detail_master_id, ticket_detail_comment, ticket_detail_commentby) VALUES (:ticket_id, :comment_content, :comment_by)";
+		$param = [
+			"ticket_id" => $ticket_id,
+			"comment_content" => $comment_content,
+			"comment_by" => $comment_by
+		];
+		run_query($query, $param);
 	}
 
 
@@ -104,9 +146,12 @@ class Tickets {
      * @return array Collection of comments ordered by most recent first.
      */
 	function TicketGetComment($ticket_id) {
-		return get_data(
-			"SELECT ticket_detail_id, ticket_detail_comment, ticket_detail_commentby, ticket_detail_commenttime FROM ticket_detail WHERE ticket_detail_master_id = '$ticket_id' ORDER BY ticket_detail_commenttime DESC"
-		);
+		// return get_data(
+		// 	"SELECT ticket_detail_id, ticket_detail_comment, ticket_detail_commentby, ticket_detail_commenttime FROM ticket_detail WHERE ticket_detail_master_id = '$ticket_id' ORDER BY ticket_detail_commenttime DESC"
+		// );
+		$query = "SELECT ticket_detail_id, ticket_detail_comment, ticket_detail_commentby, ticket_detail_commenttime FROM ticket_detail WHERE ticket_detail_master_id = :ticket_id ORDER BY ticket_detail_commenttime DESC";
+		$param = ["ticket_id" => $ticket_id];
+		return get_data($query, $param);
 	}
 
 
@@ -118,6 +163,8 @@ class Tickets {
 		return get_data(
 			"SELECT * FROM ticket_master"
 		);
+		$query = "SELECT * FROM ticket_master";
+		return get_data($query, []);
 	}
 }
 

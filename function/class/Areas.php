@@ -8,28 +8,43 @@
 class Areas {
 
 	/**
-     * Creates a new area record 
-     *
-     * @param string $area_name        The name of the area.
-     * @param string $area_description A brief description of the location.
-     * @param int    $area_floor       The floor number where the area is located.
-     * @return bool Returns true if the area was created, false if it already exists.
-     */
+	 * Creates a new area record 
+	 *
+	 * @param string $area_name        The name of the area.
+	 * @param string $area_description A brief description of the location.
+	 * @param int    $area_floor       The floor number where the area is located.
+	 * @return bool Returns true if the area was created, false if it already exists.
+	 */
 	function AreaCreate($area_name, $area_description, $area_floor) {
 		$create_by = $_SESSION['user_uname'];
 		$create_time = date('Y-m-d H:i:s');
 
 		// check duplicate
-		$current_data = get_single_data(
-			"SELECT * FROM area_master WHERE area_master_name = '$area_name' AND area_master_floor = '$area_floor'"
-		);
+		// $current_data = get_single_data(
+		//  "SELECT * FROM area_master WHERE area_master_name = '$area_name' AND area_master_floor = '$area_floor'"
+		// );
+		$query_current_data = "SELECT * FROM area_master WHERE area_master_name = :area_name AND area_master_floor = :area_floor";
+		$param_current_data = [
+			"area_name" => $area_name,
+			"area_floor" => $area_floor
+		];
+		$current_data = get_single_data($query_current_data, $param_current_data);
 
 		// add new data to database
 		if ($current_data == null) {
-			run_query(
-				"INSERT INTO area_master (area_master_name, area_master_description, area_master_floor, area_master_createby, area_master_createtime) ".
-				"VALUES ('$area_name', '$area_description', '$area_floor', '$create_by', '$create_time')"
-			);
+			// run_query(
+			//  "INSERT INTO area_master (area_master_name, area_master_description, area_master_floor, area_master_createby, area_master_createtime) ".
+			//  "VALUES ('$area_name', '$area_description', '$area_floor', '$create_by', '$create_time')"
+			// );
+			$query_insert_data = "INSERT INTO area_master (area_master_name, area_master_description, area_master_floor, area_master_createby, area_master_createtime) VALUES (:area_name, :area_description, :area_floor, :create_by, :create_time)";
+			$param_insert_data = [
+				"area_name" => $area_name,
+				"area_description" => $area_description,
+				"area_floor" => $area_floor,
+				"create_by" => $create_by,
+				"create_time" => $create_time
+			];
+			run_query($query_insert_data, $param_insert_data);
 
 			// sweetalert
 			$_SESSION['alert_value'] = "show"; // put any value, if null, alert not showing
@@ -46,35 +61,44 @@ class Areas {
 
 
 	/**
-     * Retrieves specific details for a single area.
-     *
-     * @param int|string $area_id The unique identifier of the area.
-     * @return array|null Returns an associative array of area data or null if not found.
-     */
+	 * Retrieves specific details for a single area.
+	 *
+	 * @param int|string $area_id The unique identifier of the area.
+	 * @return array|null Returns an associative array of area data or null if not found.
+	 */
 	function AreaDetail($area_id) {
-		return get_single_data(
-			"SELECT * FROM area_master WHERE area_master_id = '$area_id'"
-		);
+		// return get_single_data(
+		//  "SELECT * FROM area_master WHERE area_master_id = '$area_id'"
+		// );
+		$query = "SELECT * FROM area_master WHERE area_master_id = :area_id";
+		$param = ["area_id" => $area_id];
+		return get_single_data($query, $param);
 	}
 
 
 	/**
-     * Retrieves all area records ordered by floor level.
-     *
-     * @return array Returns a list of all areas in the database.
-     */
+	 * Retrieves all area records ordered by floor level.
+	 *
+	 * @return array Returns a list of all areas in the database.
+	 */
 	function AreaGetAll() {
-		return get_data(
-			"SELECT * FROM area_master ORDER BY area_master_floor ASC"
-		);
+		// return get_data(
+		//  "SELECT * FROM area_master ORDER BY area_master_floor ASC"
+		// );
+		$query = "SELECT * FROM area_master ORDER BY area_master_floor ASC";
+		$param = [];
+		return get_data($query, $param);
 	}
 
 
 	function AreaGetFloor() {
 		// get every floor on table
-		return get_data(
-			"SELECT DISTINCT area_master_floor FROM area_master ORDER BY area_master_floor ASC"
-		);
+		// return get_data(
+		//  "SELECT DISTINCT area_master_floor FROM area_master ORDER BY area_master_floor ASC"
+		// );
+		$query = "SELECT DISTINCT area_master_floor FROM area_master ORDER BY area_master_floor ASC";
+		$param = [];
+		return get_data($query, $param);
 	}
 }
 ?>
