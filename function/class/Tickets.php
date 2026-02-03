@@ -57,7 +57,7 @@ class Tickets {
 			"status" => $status,
 			"pic" => $pic,
 			"create_by" => $create_by,
-			"create_time" => $create_by
+			"create_time" => $create_time
 		];
 		run_query($query, $param);
 
@@ -127,10 +127,10 @@ class Tickets {
      * @return void
      */
 	function TicketAddComment($ticket_id, $comment_content, $comment_by) {
-		run_query(
-			"INSERT INTO ticket_detail (ticket_detail_master_id, ticket_detail_comment, ticket_detail_commentby) ".
-			"VALUES ('$ticket_id', '$comment_content', '$comment_by')"
-		);
+		// run_query(
+		// 	"INSERT INTO ticket_detail (ticket_detail_master_id, ticket_detail_comment, ticket_detail_commentby) ".
+		// 	"VALUES ('$ticket_id', '$comment_content', '$comment_by')"
+		// );
 		$query = "INSERT INTO ticket_detail (ticket_detail_master_id, ticket_detail_comment, ticket_detail_commentby) VALUES (:ticket_id, :comment_content, :comment_by)";
 		$param = [
 			"ticket_id" => $ticket_id,

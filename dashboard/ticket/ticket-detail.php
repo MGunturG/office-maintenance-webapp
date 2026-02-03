@@ -90,7 +90,7 @@ if (isset($_POST['update_ticket_progress_Submit'])) {
 	} else {
 		$_Ticket->TicketUpdateStatus($_GET['id'], $_POST['ticket_status_progress']);
 		$_Ticket->TicketAddComment($_GET['id'], ucfirst($_SESSION['user_uname'])." mengubah status tiket menjadi <b>$status</b> dengan remarks: ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
-		$_Log->LogCreate("Ticket", $data_ticket['ticket_master_item_id'], "Ticket status changed to $status : ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
+		$_Log->LogCreate("Ticket", $_GET['id'], "Ticket status changed to $status : ".$_POST['ticket_status_comment'], $_SESSION['user_uname']);
 
 		header("location:ticket-detail.php?id=".$_GET['id']);
 	}
