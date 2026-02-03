@@ -95,7 +95,8 @@ class Tickets {
 		$param = [
 			"status_code" => $status_code
 		];
-		return get_single_data($query, $param);
+		$data = get_single_data($query, $param);
+		return $data['code_master_label'];
 	}
 
 
